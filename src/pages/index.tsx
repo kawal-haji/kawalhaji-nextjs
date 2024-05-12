@@ -1,13 +1,14 @@
 import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "./_app";
 import AppLayout from "@/components/layout/AppLayout";
+import LandingPageMain from "@/components/landing_page/LandingPageMain";
 
-const Page: NextPageWithLayout = () => {
-  return <p>hello world</p>;
+const LandingPage: NextPageWithLayout = () => {
+  return <LandingPageMain />;
 };
 
-Page.getLayout = function getLayout(page: ReactElement) {
+LandingPage.getLayout = function getLayout(page: ReactElement) {
   return <AppLayout>{page}</AppLayout>;
 };
 
-export default Page;
+export default LandingPage;

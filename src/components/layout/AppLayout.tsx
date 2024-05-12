@@ -6,21 +6,23 @@ export interface AppLayoutProps {
   pageTitle?: string;
 }
 
-const AppLayout: React.FC<AppLayoutProps> = ({
-  children,
-  pageTitle = "Kawal Haji",
-}) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ children, pageTitle }) => {
   const pageTitleFormatted = pageTitle
     ? `${pageTitle} | Kawal Haji`
-    : pageTitle;
+    : "Kawal Haji";
 
   return (
-    <main>
+    <>
       <Head>
         <title>{pageTitleFormatted}</title>
       </Head>
-      <main>{children}</main>
-    </main>
+
+      <div className="h-fit w-full flex bg-gray-100">
+        <main className="max-w-xl mx-auto bg-spot-pallate w-full h-screen">
+          {children}
+        </main>
+      </div>
+    </>
   );
 };
 
