@@ -1,12 +1,16 @@
+import NavBar from "@/components/layout/components/NavBar";
 import Head from "next/head";
 import * as React from "react";
 
-export interface AppLayoutProps {
+export interface AuthAppLayoutProps {
   children: React.ReactNode;
   pageTitle?: string;
 }
 
-const AppLayout: React.FC<AppLayoutProps> = ({ children, pageTitle }) => {
+const AuthAppLayout: React.FC<AuthAppLayoutProps> = ({
+  children,
+  pageTitle,
+}) => {
   const pageTitleFormatted = pageTitle
     ? `${pageTitle} | Kawal Haji`
     : "Kawal Haji";
@@ -18,10 +22,13 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, pageTitle }) => {
       </Head>
 
       <main>
-        <div className="bg-spot-pallate">{children}</div>
+        <div className="w-full h-[calc(100vh-80px)] bg-spot-pallate">
+          {children}
+        </div>
+        <NavBar />
       </main>
     </>
   );
 };
 
-export default AppLayout;
+export default AuthAppLayout;

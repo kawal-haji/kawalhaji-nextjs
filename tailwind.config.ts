@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -12,6 +12,10 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        primary: "#00C9B5",
+        "spot-pallate": "#F9F6EA",
       },
     },
   },

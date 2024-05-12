@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import * as React from "react";
 
 export interface LandingPageMainProps {}
@@ -7,21 +7,17 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
   return (
     <>
       <div className="w-full h-screen bg-[#F9F6EA] relative">
-        <Image
+        <img
           src="/images/background_splash_screen.png"
           className="w-full h-screen object-cover"
           alt="splash screen"
-          width={1920}
-          height={1080}
         />
         <div className="absolute top-0 left-0 w-full h-screen px-8 z-50">
           <div className="mt-[calc(25vh)]">
-            <Image
+            <img
               src="/images/logo_with_text.png"
               className="mx-auto"
               alt="logo"
-              width={220}
-              height={220}
             />
             <div className="pt-16 pb-4 text-center font-bold">Masuk Akun</div>
             <div className="flex flex-col gap-2">
