@@ -17,11 +17,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, pageTitle }) => {
         <title>{pageTitleFormatted}</title>
       </Head>
 
-      <div className="h-fit w-full flex bg-gray-100">
-        <main className="max-w-xl mx-auto bg-spot-pallate w-full h-screen">
-          {children}
-        </main>
-      </div>
+      <main>{children}</main>
     </>
   );
 };
