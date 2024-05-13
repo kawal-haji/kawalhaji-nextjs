@@ -6,7 +6,7 @@ export interface LaporanSayaListProps {}
 const LaporanSayaList: React.FC<LaporanSayaListProps> = ({}) => {
   return (
     <>
-      <div>
+      <div className="mx-[16px]">
         <div className="mb-2">
           <div className="font-medium text-[14px]">Pantau Laporan Saya</div>
           <div className="text-[12px] text-gray-500">

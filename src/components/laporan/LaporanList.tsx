@@ -7,7 +7,7 @@ export interface LaporanListProps {}
 const LaporanList: React.FC<LaporanListProps> = ({}) => {
   return (
     <>
-      <div>
+      <div className="mx-[16px]">
         <div className="mb-2">
           <div className="font-medium text-[14px]">Laporan Teratas</div>
           <div className="text-[12px] text-gray-500">

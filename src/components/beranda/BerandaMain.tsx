@@ -32,7 +32,7 @@ const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
         </div>
         <BerandaMenu />
         <div className="overflow-y-auto h-[calc(100vh-260px)]">
-          <div className="pt-[12px] mx-[16px] pb-[0px] flex flex-col gap-4">
+          <div className="pt-[12px] pb-[0px] flex flex-col gap-4">
             <LaporanSayaList />
             <LaporanList />
           </div>
