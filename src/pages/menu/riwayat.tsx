@@ -8,7 +8,7 @@ const RiwayatPage: NextPageWithLayout = () => {
 };
 
 RiwayatPage.getLayout = function getLayout(page: ReactElement) {
-  return <AuthAppLayout pageTitle="Cari Laporan">{page}</AuthAppLayout>;
+  return <AuthAppLayout pageTitle="Riwayat Laporan">{page}</AuthAppLayout>;
 };
 
 export default RiwayatPage;
