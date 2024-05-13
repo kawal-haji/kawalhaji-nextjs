@@ -5,11 +5,13 @@ import * as React from "react";
 export interface AuthAppLayoutProps {
   children: React.ReactNode;
   pageTitle?: string;
+  showNavBar?: boolean;
 }
 
 const AuthAppLayout: React.FC<AuthAppLayoutProps> = ({
   children,
   pageTitle,
+  showNavBar,
 }) => {
   const pageTitleFormatted = pageTitle
     ? `${pageTitle} | Kawal Haji`
@@ -22,10 +24,8 @@ const AuthAppLayout: React.FC<AuthAppLayoutProps> = ({
       </Head>
 
       <main>
-        <div className="w-full h-[calc(100vh-80px)] bg-spot-pallate">
-          {children}
-        </div>
-        <NavBar />
+        <div className="w-full h-screen bg-spot-pallate">{children}</div>
+        {(showNavBar === true || showNavBar === undefined) && <NavBar />}
       </main>
     </>
   );

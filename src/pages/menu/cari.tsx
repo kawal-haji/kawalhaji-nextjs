@@ -8,7 +8,7 @@ const CariPage: NextPageWithLayout = () => {
 };
 
 CariPage.getLayout = function getLayout(page: ReactElement) {
-  return <AuthAppLayout>{page}</AuthAppLayout>;
+  return <AuthAppLayout pageTitle="Cari Laporan">{page}</AuthAppLayout>;
 };
 
 export default CariPage;
