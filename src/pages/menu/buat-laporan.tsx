@@ -3,11 +3,11 @@ import AuthAppLayout from "@/components/layout/AuthAppLayout";
 import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "../_app";
 
-const BerandaPage: NextPageWithLayout = () => {
+const BuatLaporanPage: NextPageWithLayout = () => {
   return <BuatLaporanMain />;
 };
 
-BerandaPage.getLayout = function getLayout(page: ReactElement) {
+BuatLaporanPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <AuthAppLayout pageTitle="Buat Laporan" showNavBar={false}>
       {page}
@@ -15,4 +15,4 @@ BerandaPage.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export default BerandaPage;
+export default BuatLaporanPage;

@@ -1,5 +1,6 @@
 import BerandaMenu from "@/components/beranda/BerandaMenu";
 import LaporanList from "@/components/laporan/LaporanList";
+import LaporanTidakAda from "@/components/laporan/LaporanTidakAda";
 import LaporanSayaList from "@/components/laporan_saya/LaporanSayaList";
 import Link from "next/link";
 import * as React from "react";
@@ -34,7 +35,11 @@ const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
         <div className="overflow-y-auto h-[calc(100vh-260px)]">
           <div className="pt-[12px] pb-[0px] flex flex-col gap-4">
             <LaporanSayaList />
-            <LaporanList />
+            <LaporanTidakAda />
+            <LaporanList
+              title="Laporan Teratas"
+              description="Permasalahan yang populer"
+            />
           </div>
         </div>
       </div>

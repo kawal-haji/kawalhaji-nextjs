@@ -1,21 +1,30 @@
 import LaporanListDetail from "@/components/laporan/LaporanListDetail";
-import LaporanTidakAda from "@/components/laporan/LaporanTidakAda";
 import * as React from "react";
 
-export interface LaporanListProps {}
+export interface LaporanListProps {
+  title?: string;
+  description?: string;
+}
 
-const LaporanList: React.FC<LaporanListProps> = ({}) => {
+const LaporanList: React.FC<LaporanListProps> = (props: LaporanListProps) => {
   return (
     <>
       <div className="mx-[16px]">
-        <div className="mb-2">
-          <div className="font-medium text-[14px]">Laporan Teratas</div>
-          <div className="text-[12px] text-gray-500">
-            Permasalahan yang populer
-          </div>
-        </div>
+        {(props.title || props.description) && (
+          <>
+            <div className="mb-2">
+              {props.title && (
+                <div className="font-medium text-[14px]">{props.title}</div>
+              )}
+              {props.description && (
+                <div className="text-[14px] text-gray-500">
+                  {props.description}
+                </div>
+              )}
+            </div>
+          </>
+        )}
         <div className="pb-[32px] flex flex-col gap-2">
-          <LaporanTidakAda />
           <LaporanListDetail />
           <LaporanListDetail />
           <LaporanListDetail />
