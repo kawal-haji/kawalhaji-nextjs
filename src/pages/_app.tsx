@@ -1,7 +1,9 @@
-import type { ReactElement, ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { NextPage } from "next";
+import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import type { ReactElement, ReactNode } from "react";
 import "./globals.css";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -39,13 +41,22 @@ const AppHead = () => {
   );
 };
 
-export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
+
+  const queryClient = new QueryClient();
 
   return (
     <>
       <AppHead />
-      {getLayout(<Component {...pageProps} />)}
+      <SessionProvider session={session}>
+        <QueryClientProvider client={queryClient}>
+          {getLayout(<Component {...pageProps} />)}
+        </QueryClientProvider>
+      </SessionProvider>
     </>
   );
 }
