@@ -1,3 +1,4 @@
+import AuthWrapper from "@/lib/AuthWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import { SessionProvider } from "next-auth/react";
@@ -52,11 +53,11 @@ export default function MyApp({
   return (
     <>
       <AppHead />
-      <SessionProvider session={session}>
-        <QueryClientProvider client={queryClient}>
-          {getLayout(<Component {...pageProps} />)}
-        </QueryClientProvider>
-      </SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={session}>
+          <AuthWrapper>{getLayout(<Component {...pageProps} />)}</AuthWrapper>
+        </SessionProvider>
+      </QueryClientProvider>
     </>
   );
 }
