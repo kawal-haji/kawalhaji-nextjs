@@ -73,8 +73,6 @@ export const authOptions: NextAuthOptions = {
               ? await loginAsGuest()
               : await loginAsGoogle(credentials?.code ?? "");
 
-          console.log("loginAnonResponse", loginResponse.data.data);
-
           const token =
             loginResponse.data.data?.session?.token ??
             loginResponse.data.data?.accessSession?.token ??
