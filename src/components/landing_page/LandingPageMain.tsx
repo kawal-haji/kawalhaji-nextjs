@@ -1,8 +1,43 @@
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 export interface LandingPageMainProps {}
 
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const session = await getServerSession(context.req, context.res, authOptions);
+
+//   if (session) {
+//     return {
+//       redirect: {
+//         destination: "/menu/beranda",
+//         permanent: false,
+//       },
+//     };
+//   }
+
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// };
+
 const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
+  const router = useRouter();
+
+  const handleLoginAsGuest = async () => {
+    const response = await signIn("credentials", {});
+
+    if (response?.error) {
+      console.error(response.error);
+    } else {
+      location.href = "/menu/beranda";
+    }
+  };
+
   return (
     <>
       <div className="w-full h-screen bg-[#F9F6EA] relative">
@@ -26,7 +61,10 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
               >
                 Masuk dengan Google
               </a>
-              <button className="btn bg-black text-white">
+              <button
+                className="btn bg-black text-white"
+                onClick={handleLoginAsGuest}
+              >
                 Masuk sebagai tamu
               </button>
             </div>

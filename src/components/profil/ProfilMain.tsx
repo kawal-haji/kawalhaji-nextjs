@@ -1,9 +1,16 @@
 import ProfilMenu from "@/components/profil/ProfilMenu";
+import { signOut } from "next-auth/react";
 import * as React from "react";
 
 export interface ProfilMainProps {}
 
 const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
+  const refModalLogout = React.useRef<HTMLDialogElement>(null);
+
+  const handleLogout = async () => {
+    await signOut();
+  };
+
   return (
     <div className="h-screen relative bg-white">
       <img
@@ -41,19 +48,30 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
         </div>
         <ProfilMenu />
         <div className="px-[16px]">
-          <button className="btn btn-outline w-full btn-sm text-[13px]">
+          <button
+            className="btn btn-outline w-full btn-sm text-[13px]"
+            onClick={() => refModalLogout.current?.showModal()}
+          >
             Logout
           </button>
         </div>
-        <dialog id="logout_modal" className="modal">
+        <dialog ref={refModalLogout} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Konfirmasi Logout</h3>
             <p className="py-4">Anda yakin ingin melakukan logout?</p>
             <div className="modal-action">
-              <button className="btn bg-gray-100 text-primary">
+              <button
+                className="btn bg-gray-100 text-primary"
+                onClick={() => refModalLogout.current?.close()}
+              >
                 Tidak, Kembali
               </button>
-              <button className="btn bg-primary text-white">Ya, Logout</button>
+              <button
+                className="btn bg-primary text-white"
+                onClick={handleLogout}
+              >
+                Ya, Logout
+              </button>
             </div>
           </div>
         </dialog>

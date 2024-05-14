@@ -1,6 +1,14 @@
-import { API_URL } from "@/lib/constants";
+import { API_CLIENT_ID, API_CLIENT_SECRET, API_URL } from "@/lib/constants";
 import axios, { AxiosInstance, isAxiosError } from "axios";
 import { signOut } from "next-auth/react";
+
+interface ApiClientOptions {
+  baseURL: string;
+  basicAuth?: {
+    username: string;
+    password: string;
+  };
+}
 
 /**
  * Create an Axios instance with baseURL
@@ -9,8 +17,11 @@ import { signOut } from "next-auth/react";
  * @param {string} param0.baseURL
  * @returns {AxiosInstance}
  */
-const ApiClient = ({ baseURL }: { baseURL: string }): AxiosInstance => {
-  const instance = axios.create({ baseURL });
+const ApiClient = (options: ApiClientOptions): AxiosInstance => {
+  const instance = axios.create({
+    baseURL: options.baseURL,
+    auth: options.basicAuth,
+  });
 
   instance.interceptors.response.use(
     (response) => {
@@ -58,6 +69,10 @@ const setClientToken = (instance: AxiosInstance, token: string) => {
 
 const apiClient = ApiClient({
   baseURL: API_URL ?? "",
+  basicAuth: {
+    username: API_CLIENT_ID ?? "",
+    password: API_CLIENT_SECRET ?? "",
+  },
 });
 
 export { apiClient, setClientToken };

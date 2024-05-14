@@ -5,11 +5,7 @@ export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     const url = request.nextUrl.clone();
 
-    if (url.pathname === "/") {
-      return NextResponse.next();
-    }
-
-    if (request.nextauth.token === null) {
+    if (!request.nextauth.token?.token) {
       url.pathname = "/";
       return NextResponse.redirect(url);
     }
@@ -30,7 +26,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon|images|icons|template|access-denied).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon|images|icons).*)"],
 };

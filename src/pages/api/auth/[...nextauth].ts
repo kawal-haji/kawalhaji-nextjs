@@ -1,7 +1,8 @@
 import { apiClient } from "@/apis/api-client";
+import { Response } from "@/types/Response";
 import { Alert } from "@/types/alert";
-import { LoginResponse } from "@/types/auth/LoginResponse";
-import { AxiosError, AxiosResponse } from "axios";
+import { LoginAnonResponse, LoginResponseNextAuth } from "@/types/auth";
+import { AxiosError } from "axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -23,26 +24,17 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
+      credentials: {},
       async authorize(credentials) {
-        const args: LoginArgs = {
-          email: credentials?.email ?? "",
-          password: credentials?.password ?? "",
-        };
-
         try {
-          const loginResponse: AxiosResponse<LoginResponse> =
-            await apiClient.post(
-              `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-              { ...args }
-            );
+          const loginAnonResponse = await apiClient.post<
+            Response<LoginAnonResponse>
+          >(`${process.env.NEXT_PUBLIC_API_URL}/users/anon/sessions`);
 
           return {
-            id: `${loginResponse.data.id}`,
-          };
+            id: loginAnonResponse.data.data?.session.token ?? "",
+            token: loginAnonResponse.data.data?.session.token ?? "",
+          } as LoginResponseNextAuth;
         } catch (error) {
           if (error instanceof AxiosError && error.response?.data.alert) {
             const errorData: Alert = error.response.data.alert;

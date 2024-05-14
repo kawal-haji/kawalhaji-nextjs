@@ -1,13 +1,11 @@
-import { Alert, ErrorAlert } from "@/types/alert";
+import { ErrorAlert } from "@/types/alert";
 import { AxiosError } from "axios";
 
-export interface Response<
-  R = Record<string, string>,
-  M = Record<string, string>
-> {
-  alert: Alert;
+export interface Response<R = Record<string, string>> {
+  success: boolean;
+  code: string;
+  message: string;
   data?: R;
-  meta?: M;
 }
 
 export interface ErrorResponse {
