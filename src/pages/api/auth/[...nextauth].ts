@@ -1,15 +1,55 @@
 import { apiClient } from "@/apis/api-client";
 import { Response } from "@/types/Response";
 import { Alert } from "@/types/alert";
-import { LoginAnonResponse, LoginResponseNextAuth } from "@/types/auth";
-import { AxiosError } from "axios";
+import { LoginResponse, LoginResponseNextAuth } from "@/types/auth";
+import axios, { AxiosError } from "axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-interface LoginArgs {
-  email: string;
-  password: string;
-}
+const loginAsGuest = async () => {
+  return await apiClient.post<Response<LoginResponse>>(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/anon/sessions`
+  );
+};
+
+const loginAsGoogle = async (code: string) => {
+  const getUserGuest = await loginAsGuest();
+  const token = getUserGuest.data.data?.session?.token ?? "";
+
+  const getToken = await axios.post("https://oauth2.googleapis.com/token", {
+    code: code,
+    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+    client_secret: process.env.GOOGLE_CLIENT_SECRET,
+    redirect_uri: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback/google`,
+    grant_type: "authorization_code",
+  });
+
+  const getSession = await axios.post<Response<LoginResponse>>(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/sessions`,
+    {
+      notification: {
+        channel: 0,
+        token: "",
+      },
+      googleSignIn: {
+        jwt: getToken.data.id_token,
+      },
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      auth: {
+        username: process.env.NEXT_PUBLIC_API_CLIENT_ID ?? "",
+        password: process.env.NEXT_PUBLIC_API_CLIENT_SECRET ?? "",
+      },
+    }
+  );
+
+  console.log("getSession", getSession.data.data);
+
+  return getSession;
+};
 
 /**
  * Authentication configuration for NextAuth using ERKAM for retrieving JWT
@@ -24,18 +64,31 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
-      credentials: {},
+      credentials: {
+        loginAs: {},
+        code: {},
+      },
       async authorize(credentials) {
         try {
-          const loginAnonResponse = await apiClient.post<
-            Response<LoginAnonResponse>
-          >(`${process.env.NEXT_PUBLIC_API_URL}/users/anon/sessions`);
+          const loginAnonResponse =
+            credentials?.loginAs == "guest"
+              ? await loginAsGuest()
+              : await loginAsGoogle(credentials?.code ?? "");
+
+          console.log("loginAnonResponse", loginAnonResponse.data.data);
+
+          const token =
+            loginAnonResponse.data.data?.session?.token ??
+            loginAnonResponse.data.data?.accessSession?.token ??
+            "";
 
           return {
-            id: loginAnonResponse.data.data?.session.token ?? "",
-            token: loginAnonResponse.data.data?.session.token ?? "",
+            id: token,
+            token: token,
           } as LoginResponseNextAuth;
         } catch (error) {
+          console.log("error", error);
+
           if (error instanceof AxiosError && error.response?.data.alert) {
             const errorData: Alert = error.response.data.alert;
 

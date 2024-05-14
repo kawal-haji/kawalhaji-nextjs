@@ -1,3 +1,4 @@
+import { BASE_URL, GOOGLE_CLIENT_ID } from "@/lib/constants";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -27,9 +28,12 @@ export interface LandingPageMainProps {}
 
 const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
   const router = useRouter();
+  const code = router.query.code as string;
 
   const handleLoginAsGuest = async () => {
-    const response = await signIn("credentials", {});
+    const response = await signIn("credentials", {
+      loginAs: "guest",
+    });
 
     if (response?.error) {
       console.error(response.error);
@@ -37,6 +41,25 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
       location.href = "/menu/beranda";
     }
   };
+
+  React.useEffect(() => {
+    const handleLoginWithGoogle = async () => {
+      const response = await signIn("credentials", {
+        loginAs: "google",
+        code,
+      });
+
+      if (response?.error) {
+        console.error(response.error);
+      } else {
+        location.href = "/menu/beranda";
+      }
+    };
+
+    if (!!code) {
+      handleLoginWithGoogle();
+    }
+  }, [code]);
 
   return (
     <>
@@ -56,7 +79,7 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
             <div className="pt-16 pb-4 text-center font-bold">Masuk Akun</div>
             <div className="flex flex-col gap-2">
               <a
-                href="https://accounts.google.com/o/oauth2/v2/auth?client_id={{ GOOGLE_CLIENT_ID }}&state={{ SESSION }}&redirect_uri={{ BASE_URL }}/auth/callback/google&response_type=code&include_granted_scopes=true&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email"
+                href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&state=kawalhaji&redirect_uri=${BASE_URL}/auth/callback/google&response_type=code&include_granted_scopes=true&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email`}
                 className="btn bg-white"
               >
                 Masuk dengan Google
@@ -65,7 +88,7 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
                 className="btn bg-black text-white"
                 onClick={handleLoginAsGuest}
               >
-                Masuk sebagai tamu
+                Masuk sebagai Tamu
               </button>
             </div>
             <div className="text-center pt-8">
