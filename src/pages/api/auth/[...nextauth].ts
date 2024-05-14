@@ -36,17 +36,15 @@ const loginAsGoogle = async (code: string) => {
       },
     },
     {
+      // auth: {
+      //   username: process.env.NEXT_PUBLIC_API_CLIENT_ID ?? "",
+      //   password: process.env.NEXT_PUBLIC_API_CLIENT_SECRET ?? "",
+      // },
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      auth: {
-        username: process.env.NEXT_PUBLIC_API_CLIENT_ID ?? "",
-        password: process.env.NEXT_PUBLIC_API_CLIENT_SECRET ?? "",
-      },
     }
   );
-
-  console.log("getSession", getSession.data.data);
 
   return getSession;
 };
@@ -70,16 +68,16 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const loginAnonResponse =
+          const loginResponse =
             credentials?.loginAs == "guest"
               ? await loginAsGuest()
               : await loginAsGoogle(credentials?.code ?? "");
 
-          console.log("loginAnonResponse", loginAnonResponse.data.data);
+          console.log("loginAnonResponse", loginResponse.data.data);
 
           const token =
-            loginAnonResponse.data.data?.session?.token ??
-            loginAnonResponse.data.data?.accessSession?.token ??
+            loginResponse.data.data?.session?.token ??
+            loginResponse.data.data?.accessSession?.token ??
             "";
 
           return {
@@ -87,8 +85,6 @@ export const authOptions: NextAuthOptions = {
             token: token,
           } as LoginResponseNextAuth;
         } catch (error) {
-          console.log("error", error);
-
           if (error instanceof AxiosError && error.response?.data.alert) {
             const errorData: Alert = error.response.data.alert;
 
