@@ -2,7 +2,9 @@ import { Location } from "@/types/location";
 import axios from "axios";
 import * as React from "react";
 
-export interface GeolocationProps {}
+export interface GeolocationProps {
+  onLocationChange?: (location: Location) => void;
+}
 
 const getLocationName = async ({ lat, lng }: Location) => {
   var apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
@@ -16,7 +18,7 @@ const getLocationName = async ({ lat, lng }: Location) => {
   }
 };
 
-const Geolocation: React.FC<GeolocationProps> = ({}) => {
+const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
   const [location, setLocation] = React.useState<Location>();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [errorGetCurrentLocation, setErrorGetCurrentLocation] =
@@ -35,6 +37,8 @@ const Geolocation: React.FC<GeolocationProps> = ({}) => {
           };
 
           const locationName = await getLocationName(location);
+          location.description = locationName;
+          onLocationChange?.(location);
           setLocation({ ...location, description: locationName });
           setIsLoading(false);
         },
@@ -56,6 +60,7 @@ const Geolocation: React.FC<GeolocationProps> = ({}) => {
 
   React.useEffect(() => {
     accessLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const requestAccessLocationAgain = () => {

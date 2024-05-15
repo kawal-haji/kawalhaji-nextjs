@@ -116,7 +116,7 @@ const CariMain: React.FC<CariMainProps> = ({}) => {
             <a role="tab" className="tab h-[44px]">
               <div className="flex items-center gap-2 px-[12px] py-[8px]">
                 <img
-                  src="/icons/food.svg"
+                  src="/icons/konsumsi.svg"
                   alt="Semua"
                   className="w-[24px] h-[24px]"
                 />
@@ -146,7 +146,7 @@ const CariMain: React.FC<CariMainProps> = ({}) => {
             <a role="tab" className="tab h-[44px]">
               <div className="flex items-center gap-2 px-[12px] py-[8px]">
                 <img
-                  src="/icons/orang_hilang.svg"
+                  src="/icons/orang-hilang.svg"
                   alt="Semua"
                   className="w-[24px] h-[24px]"
                 />

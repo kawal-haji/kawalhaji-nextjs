@@ -26,7 +26,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({}) => {
             <div className="rounded-full bg-green-100  px-2 py-1">
               <div className="flex items-center gap-1">
                 <img
-                  src="/icons/food.svg"
+                  src="/icons/konsumsi.svg"
                   alt="more"
                   className="w-[16px] h-[16px]"
                 />

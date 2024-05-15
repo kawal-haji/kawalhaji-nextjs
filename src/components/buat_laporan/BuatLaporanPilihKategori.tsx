@@ -17,11 +17,7 @@ const BuatLaporanPilihKategori: React.FC<BuatLaporanPilihKategoriProps> = ({
         description: "",
         attachments: [],
       },
-      location: {
-        description: "",
-        lat: "",
-        lng: "",
-      },
+      location: {},
     });
   };
 
@@ -47,7 +43,7 @@ const BuatLaporanPilihKategori: React.FC<BuatLaporanPilihKategoriProps> = ({
                 <img
                   src="/icons/arrow_right_circle.svg"
                   alt="flag"
-                  height="24"
+                  width={22}
                 />
               </div>
             </div>

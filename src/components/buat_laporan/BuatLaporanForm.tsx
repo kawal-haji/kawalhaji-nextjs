@@ -1,4 +1,5 @@
 import Geolocation from "@/components/geolocation/Geolocation";
+import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
 import * as React from "react";
 
@@ -11,6 +12,13 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   reportForm,
   onReportFormChange,
 }) => {
+  const handleLocationChange = (location: Location) => {
+    onReportFormChange({
+      ...reportForm,
+      location: location,
+    });
+  };
+
   return (
     <>
       <form method="post" action="/simpan-laporan-baru">
@@ -31,14 +39,14 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                       <img
                         src={`/icons/${reportForm.category.icon}`}
                         alt="flag"
-                        height="24"
+                        width={22}
                       />
                       <div className="text-[14px] font-medium">
                         {reportForm.category.name}
                       </div>
                     </div>
                   </div>
-                  <Geolocation />
+                  <Geolocation onLocationChange={handleLocationChange} />
                 </div>
               </div>
               <label className="form-control w-full max-w-xs">

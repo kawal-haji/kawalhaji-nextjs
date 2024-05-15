@@ -8,21 +8,21 @@ export const reportCategories: ReportCategory[] = [
   {
     id: 1,
     name: "Konsumsi",
-    icon: "konsumsi.png",
+    icon: "konsumsi.svg",
   },
   {
     id: 2,
     name: "Akomodasi",
-    icon: "akomodasi.png",
+    icon: "akomodasi.svg",
   },
   {
     id: 3,
     name: "Transportasi",
-    icon: "transportasi.png",
+    icon: "transportasi.svg",
   },
   {
     id: 4,
     name: "Orang Hilang",
-    icon: "orang-hilang.png",
+    icon: "orang-hilang.svg",
   },
 ];
