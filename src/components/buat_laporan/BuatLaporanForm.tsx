@@ -1,3 +1,4 @@
+import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImageUpload";
 import Geolocation from "@/components/geolocation/Geolocation";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
@@ -98,23 +99,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                 <div className="label">
                   <span className="label-text text-[12px]">Foto/Video</span>
                 </div>
-                <div className="space-y-2">
-                  <input
-                    type="file"
-                    name="media[]"
-                    className="file-input file-input-bordered w-full text-[14px]"
-                  />
-                  <input
-                    type="file"
-                    name="media[]"
-                    className="file-input file-input-bordered w-full text-[14px]"
-                  />
-                  <input
-                    type="file"
-                    name="media[]"
-                    className="file-input file-input-bordered w-full text-[14px]"
-                  />
-                </div>
+                <LaporanImageUpload />
               </label>
             </div>
           </div>
