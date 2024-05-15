@@ -1,3 +1,4 @@
+import Geolocation from "@/components/geolocation/Geolocation";
 import { ReportForm } from "@/types/report/report";
 import * as React from "react";
 
@@ -27,44 +28,17 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                       Kategori Laporan
                     </div>
                     <div className="flex items-center gap-1 bg-white rounded-full px-[8px] py-[4px]">
-                      <img src="/icons/konsumsi.png" alt="flag" height="24" />
-                      <div className="text-[14px] font-medium">Konsumsi</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2 justify-between pb-[2px]">
-                    <span
-                      id="loading-location"
-                      className="loading loading-spinner loading-lg text-primary hidden"
-                    ></span>
-                    <img
-                      id="icon-location-found"
-                      src="/icons/location.svg"
-                      className="hidden"
-                      alt="location"
-                    />
-                    <img
-                      id="icon-location-not-found"
-                      src="/icons/location_disabled.svg"
-                      className="hidden"
-                      alt="location"
-                    />
-                    <div className="w-full">
-                      <div className="text-[12px] font-medium">Lokasi Anda</div>
-                      <div id="name-location" className="text-[12px]">
-                        InterContinental Dar al Tawhid Makkah
+                      <img
+                        src={`/icons/${reportForm.category.icon}`}
+                        alt="flag"
+                        height="24"
+                      />
+                      <div className="text-[14px] font-medium">
+                        {reportForm.category.name}
                       </div>
                     </div>
-                    <button
-                      className="btn btn-sm bg-primary text-white rounded-full hidden"
-                      id="btn-grant-location-permission"
-                    >
-                      <img
-                        src="/icons/refresh.svg"
-                        alt="refresh"
-                        className="w-[16px] h-[16px] text-white"
-                      />
-                    </button>
                   </div>
+                  <Geolocation />
                 </div>
               </div>
               <label className="form-control w-full max-w-xs">
@@ -76,6 +50,16 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                   name="judul"
                   placeholder="Masukan judul laporan"
                   className="input input-bordered w-full text-[14px]"
+                  value={reportForm.content.title}
+                  onChange={(e) =>
+                    onReportFormChange({
+                      ...reportForm,
+                      content: {
+                        ...reportForm.content,
+                        title: e.target.value,
+                      },
+                    })
+                  }
                 />
               </label>
               <label className="form-control w-full max-w-xs">
@@ -88,6 +72,16 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                   name="keterangan"
                   placeholder="Masukan tambahan keterangan"
                   className="textarea textarea-bordered w-full text-[14px]"
+                  value={reportForm.content.description}
+                  onChange={(e) =>
+                    onReportFormChange({
+                      ...reportForm,
+                      content: {
+                        ...reportForm.content,
+                        description: e.target.value,
+                      },
+                    })
+                  }
                 ></textarea>
               </label>
               <label className="form-control w-full max-w-xs">
