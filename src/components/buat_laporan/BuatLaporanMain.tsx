@@ -14,6 +14,10 @@ const BuatLaporanMain: React.FC<BuatLaporanMainProps> = ({}) => {
     setReportForm(reportForm);
   };
 
+  const handleSaveReport = () => {
+    console.log("Save report");
+  };
+
   const handleBack = () => {
     if (reportForm?.category) {
       setReportForm(undefined);
@@ -40,6 +44,7 @@ const BuatLaporanMain: React.FC<BuatLaporanMainProps> = ({}) => {
         <BuatLaporanForm
           onReportFormChange={handleReportFormChange}
           reportForm={reportForm}
+          onReportFormSubmit={handleSaveReport}
         />
       )}
     </div>

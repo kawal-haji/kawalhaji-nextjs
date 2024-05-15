@@ -6,11 +6,13 @@ import * as React from "react";
 export interface BuatLaporanFormProps {
   reportForm: ReportForm;
   onReportFormChange: (reportForm: ReportForm) => void;
+  onReportFormSubmit: () => void;
 }
 
 const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   reportForm,
   onReportFormChange,
+  onReportFormSubmit,
 }) => {
   const handleLocationChange = (location: Location) => {
     onReportFormChange({
@@ -117,7 +119,11 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
             </div>
           </div>
           <div className="px-[16px] py-[14px] border-t-2 border-t-gray-200">
-            <button type="submit" className="btn bg-primary w-full text-white">
+            <button
+              type="submit"
+              className="btn bg-primary w-full text-white"
+              onClick={onReportFormSubmit}
+            >
               Kirim Laporan
             </button>
           </div>
