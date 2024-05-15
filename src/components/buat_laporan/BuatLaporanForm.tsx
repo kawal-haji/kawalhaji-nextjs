@@ -1,8 +1,15 @@
+import { ReportForm } from "@/types/report/report";
 import * as React from "react";
 
-export interface BuatLaporanFormProps {}
+export interface BuatLaporanFormProps {
+  reportForm: ReportForm;
+  onReportFormChange: (reportForm: ReportForm) => void;
+}
 
-const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({}) => {
+const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
+  reportForm,
+  onReportFormChange,
+}) => {
   return (
     <>
       <form method="post" action="/simpan-laporan-baru">
