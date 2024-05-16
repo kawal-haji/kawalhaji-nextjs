@@ -1,16 +1,19 @@
 import LaporanImageUploadDetail from "@/components/buat_laporan/components/LaporanImageUploadDetail";
 import ImageUpload from "@/components/image/ImageUpload";
+import { AssetType, UploadAttachment } from "@/types/attachment";
 import * as React from "react";
 
 export interface LaporanImageUploadProps {}
 
 const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({}) => {
-  const [fileUploaded, setFileUploaded] = React.useState<File[]>([]);
+  const [fileUploaded, setFileUploaded] = React.useState<UploadAttachment[]>(
+    []
+  );
   const [errorUploadFileMsg, setErrorUploadFileMsg] =
     React.useState<string>("");
 
-  const handleChangeImage = (image: File) => {
-    setFileUploaded((prev) => [...prev, image]);
+  const handleChangeImage = (data: UploadAttachment) => {
+    setFileUploaded((prev) => [...prev, data]);
   };
 
   const handleRemoveImage = (index: number) => {
@@ -23,6 +26,11 @@ const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({}) => {
         <div className="text-red-500">{errorUploadFileMsg}</div>
       )}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+        <ImageUpload
+          assetType={AssetType.USER_REPORT_ATTACHMENT}
+          onImageChange={handleChangeImage}
+          onErrorUploadFile={setErrorUploadFileMsg}
+        />
         {fileUploaded.map((file, index) => (
           <LaporanImageUploadDetail
             key={index}
@@ -30,11 +38,9 @@ const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({}) => {
             onRemove={() => handleRemoveImage(index)}
           />
         ))}
-        <ImageUpload
-          onImageChange={handleChangeImage}
-          onErrorUploadFile={setErrorUploadFileMsg}
-        />
-        <img src="/icons/no_image.svg" alt="image" />
+        {fileUploaded.length === 0 && (
+          <img src="/icons/no_image.svg" alt="image" />
+        )}
       </div>
     </>
   );

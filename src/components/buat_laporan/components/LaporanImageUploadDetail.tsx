@@ -1,7 +1,8 @@
+import { UploadAttachment } from "@/types/attachment";
 import * as React from "react";
 
 export interface LaporanImageUploadDetailProps {
-  file: File;
+  file: UploadAttachment;
   onRemove: () => void;
 }
 
@@ -17,11 +18,19 @@ const LaporanImageUploadDetail: React.FC<LaporanImageUploadDetailProps> = ({
         className="absolute top-1 right-1 bg-white rounded-full border border-gray-200 p-1 w-[20px] h-[20px]"
         onClick={onRemove}
       />
-      <img
-        src={URL.createObjectURL(file)}
-        alt="image"
-        className="w-full object-cover rounded-md"
-      />
+      {file.file ? (
+        <img
+          src={URL.createObjectURL(file.file)}
+          alt="image"
+          className="w-full object-cover rounded-md"
+        />
+      ) : (
+        <img
+          src="/icons/no_image.svg"
+          alt="image"
+          className="w-full object-cover rounded-md"
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,12 @@
+import { useUploadFileURL } from "@/hooks/asset/useUploadFileURL";
+import { AssetType, UploadAttachment } from "@/types/attachment";
 import Compressor from "compressorjs";
 import * as React from "react";
 import { useDropzone } from "react-dropzone";
 
 export interface ImageUploadProps {
-  onImageChange: (image: File) => void;
+  assetType: AssetType;
+  onImageChange: (data: UploadAttachment) => void;
   onErrorUploadFile: (error: string) => void;
 }
 
@@ -16,7 +19,24 @@ const maxSize = 20_000_000; // 2MB
 
 const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
   (props, _reference) => {
-    const { onImageChange, onErrorUploadFile } = props;
+    const { onImageChange, onErrorUploadFile, assetType } = props;
+    const { mutate: uploadFile, isPending: isUploading } = useUploadFileURL();
+
+    const handleUploadFile = async (file: File) => {
+      await uploadFile(
+        { assetType, fileName: file.name, file },
+        {
+          onSuccess: (data) => {
+            if (data) {
+              onImageChange(data);
+            }
+          },
+          onError: (error) => {
+            onErrorUploadFile("Gagal mengunggah file");
+          },
+        }
+      );
+    };
 
     const handleChangeImage = (newImage: File) => {
       try {
@@ -26,12 +46,19 @@ const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
           maxHeight: 800,
           convertTypes: ["image/jpeg", "image/png", "image/jpg"],
           success: (resultBlob) => {
-            const compressedImage = new File([resultBlob], newImage.name, {
-              type: newImage.type,
-              lastModified: Date.now(),
-            });
+            const newName = newImage.name.replace(/\.[^/.]+$/, "");
+            const randomName = Math.random().toString(36).substring(7);
 
-            onImageChange(compressedImage);
+            const compressedImage = new File(
+              [resultBlob],
+              `${newName}_${randomName}`,
+              {
+                type: newImage.type,
+                lastModified: Date.now(),
+              }
+            );
+
+            handleUploadFile(compressedImage);
           },
         });
       } catch (error) {
@@ -58,7 +85,12 @@ const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
     }
 
     return (
-      <div>
+      <div className="relative">
+        {isUploading && (
+          <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
+            <span className="loading loading-spinner loading-lg bg-neutral"></span>
+          </div>
+        )}
         <div {...getRootProps()} onClick={(e) => e.stopPropagation()}>
           <input {...getInputProps()} />
           <img src="/icons/add_photo_video.svg" alt="image" />
