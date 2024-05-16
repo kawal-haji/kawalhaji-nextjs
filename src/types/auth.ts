@@ -53,6 +53,7 @@ export interface User {
   updatedAt: string;
   modifiedBy: ModifiedBy;
   version: string;
+  role?: string;
 }
 
 export interface Avatar {

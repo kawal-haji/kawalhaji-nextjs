@@ -1,28 +1,31 @@
+import { Icon } from "@/types/icon";
+
 export interface ReportCategory {
   id: number;
   name: string;
-  icon: string;
+  iconText: string;
+  icon?: Icon;
 }
 
 export const reportCategories: ReportCategory[] = [
   {
     id: 1,
     name: "Konsumsi",
-    icon: "konsumsi.svg",
+    iconText: "konsumsi.svg",
   },
   {
     id: 2,
     name: "Akomodasi",
-    icon: "akomodasi.svg",
+    iconText: "akomodasi.svg",
   },
   {
     id: 3,
     name: "Transportasi",
-    icon: "transportasi.svg",
+    iconText: "transportasi.svg",
   },
   {
     id: 4,
     name: "Orang Hilang",
-    icon: "orang-hilang.svg",
+    iconText: "orang-hilang.svg",
   },
 ];

@@ -37,7 +37,11 @@ const BuatLaporanPilihKategori: React.FC<BuatLaporanPilihKategoriProps> = ({
             >
               <div className="flex items-center gap-3 justify-between p-[10px]">
                 <div className="flex items-center gap-1 bg-white rounded-full px-[8px] py-[4px]">
-                  <img src={`/icons/${category.icon}`} alt="flag" height="24" />
+                  <img
+                    src={`/icons/${category.iconText}`}
+                    alt="flag"
+                    height="24"
+                  />
                   <div className="text-[14px] font-medium">{category.name}</div>
                 </div>
                 <img
