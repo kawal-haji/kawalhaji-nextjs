@@ -1,5 +1,6 @@
 import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImageUpload";
 import Geolocation from "@/components/geolocation/Geolocation";
+import { UploadAttachment } from "@/types/attachment";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
 import * as React from "react";
@@ -15,6 +16,9 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   onReportFormChange,
   onReportFormSubmit,
 }) => {
+  const [fileUploaded, setFileUploaded] = React.useState<UploadAttachment[]>(
+    []
+  );
   const handleLocationChange = (location: Location) => {
     onReportFormChange({
       ...reportForm,
@@ -99,7 +103,10 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                 <div className="label">
                   <span className="label-text text-[12px]">Foto/Video</span>
                 </div>
-                <LaporanImageUpload />
+                <LaporanImageUpload
+                  fileUploaded={fileUploaded}
+                  setFileUploaded={setFileUploaded}
+                />
               </label>
             </div>
           </div>

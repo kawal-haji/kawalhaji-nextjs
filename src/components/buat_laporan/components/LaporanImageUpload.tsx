@@ -3,12 +3,15 @@ import ImageUpload from "@/components/image/ImageUpload";
 import { AssetType, UploadAttachment } from "@/types/attachment";
 import * as React from "react";
 
-export interface LaporanImageUploadProps {}
+export interface LaporanImageUploadProps {
+  fileUploaded: UploadAttachment[];
+  setFileUploaded: React.Dispatch<React.SetStateAction<UploadAttachment[]>>;
+}
 
-const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({}) => {
-  const [fileUploaded, setFileUploaded] = React.useState<UploadAttachment[]>(
-    []
-  );
+const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({
+  fileUploaded,
+  setFileUploaded,
+}) => {
   const [errorUploadFileMsg, setErrorUploadFileMsg] =
     React.useState<string>("");
 
