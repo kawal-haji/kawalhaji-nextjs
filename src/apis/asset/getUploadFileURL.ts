@@ -2,6 +2,7 @@ import { apiClient } from "@/apis/api-client";
 
 import { Response } from "@/types/Response";
 import { AssetType, UploadAttachment } from "@/types/attachment";
+import axios from "axios";
 
 type APIResponse = Response<UploadAttachment>;
 
@@ -26,9 +27,9 @@ export const getUploadFileURL = async (args: UploadFileURLArgs) => {
     throw new Error("Failed to get upload URL");
   }
 
-  await apiClient.put(urlUploadInformation.data.data.url, args.file, {
+  await axios.put(urlUploadInformation.data.data.url, args.file, {
     headers: {
-      "Content-Type": "image/jpeg",
+      "Content-Type": args.file.type,
     },
   });
 

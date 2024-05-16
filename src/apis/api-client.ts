@@ -1,13 +1,9 @@
-import { API_CLIENT_ID, API_CLIENT_SECRET, API_URL } from "@/lib/constants";
+import { API_URL } from "@/lib/constants";
 import axios, { AxiosInstance, isAxiosError } from "axios";
 import { signOut } from "next-auth/react";
 
 interface ApiClientOptions {
   baseURL: string;
-  basicAuth?: {
-    username: string;
-    password: string;
-  };
 }
 
 /**
@@ -16,11 +12,14 @@ interface ApiClientOptions {
  * @param {{ baseURL: string }} param0
  * @param {string} param0.baseURL
  * @returns {AxiosInstance}
+ */ /**
+ *
+ *
+ * @param {*} error
  */
 const ApiClient = (options: ApiClientOptions): AxiosInstance => {
   const instance = axios.create({
     baseURL: options.baseURL,
-    auth: options.basicAuth,
   });
 
   instance.interceptors.response.use(
@@ -30,7 +29,7 @@ const ApiClient = (options: ApiClientOptions): AxiosInstance => {
     async (error) => {
       // if unauthorized auto logout
       if (401 === error?.response?.status) {
-        await signOut({ callbackUrl: "/login", redirect: false });
+        await signOut({ callbackUrl: "/", redirect: true });
 
         throw error;
       }
@@ -69,10 +68,6 @@ const setClientToken = (instance: AxiosInstance, token: string) => {
 
 const apiClient = ApiClient({
   baseURL: API_URL ?? "",
-  basicAuth: {
-    username: API_CLIENT_ID ?? "",
-    password: API_CLIENT_SECRET ?? "",
-  },
 });
 
 export { apiClient, setClientToken };

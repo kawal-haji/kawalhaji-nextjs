@@ -1,4 +1,3 @@
-import { apiClient } from "@/apis/api-client";
 import { Response } from "@/types/Response";
 import { Alert } from "@/types/alert";
 import { LoginResponse, LoginResponseNextAuth } from "@/types/auth";
@@ -7,8 +6,15 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const loginAsGuest = async () => {
-  return await apiClient.post<Response<LoginResponse>>(
-    `${process.env.NEXT_PUBLIC_API_URL}/users/anon/sessions`
+  return await axios.post<Response<LoginResponse>>(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/anon/sessions`,
+    {},
+    {
+      auth: {
+        username: process.env.API_CLIENT_ID ?? "",
+        password: process.env.API_CLIENT_SECRET ?? "",
+      },
+    }
   );
 };
 

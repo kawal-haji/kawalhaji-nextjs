@@ -23,7 +23,9 @@ const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({}) => {
   return (
     <>
       {errorUploadFileMsg && (
-        <div className="text-red-500">{errorUploadFileMsg}</div>
+        <div className="text-red-500 text-[12px] mb-1">
+          {errorUploadFileMsg}
+        </div>
       )}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
         <ImageUpload

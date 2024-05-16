@@ -48,10 +48,11 @@ const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
           success: (resultBlob) => {
             const newName = newImage.name.replace(/\.[^/.]+$/, "");
             const randomName = Math.random().toString(36).substring(7);
+            const ext = newImage.name.split(".").pop();
 
             const compressedImage = new File(
               [resultBlob],
-              `${newName}_${randomName}`,
+              `${newName}_${randomName}.${ext}`,
               {
                 type: newImage.type,
                 lastModified: Date.now(),
