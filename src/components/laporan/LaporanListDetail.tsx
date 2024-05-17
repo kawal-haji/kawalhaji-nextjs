@@ -1,8 +1,11 @@
+import { Report } from "@/types/report/report";
 import * as React from "react";
 
-export interface LaporanListDetailProps {}
+export interface LaporanListDetailProps {
+  report: Report;
+}
 
-const LaporanListDetail: React.FC<LaporanListDetailProps> = ({}) => {
+const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
   return (
     <>
       <a href="/detail-laporan">
@@ -11,13 +14,15 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({}) => {
             <div>
               <div className="flex items-center gap-1">
                 <div className="text-[10px] font-medium truncate">
-                  Carlos Sainz
+                  {report.user?.fullName ?? "Anonim"}
                 </div>
-                <img
-                  src="/icons/verified_flag.svg"
-                  alt="verified"
-                  className="w-[12px] h-[12px]"
-                />
+                {report.user?.verified && (
+                  <img
+                    src="/icons/verified_flag.svg"
+                    alt="verified"
+                    className="w-[12px] h-[12px]"
+                  />
+                )}
               </div>
               <div className="text-[10px] text-gray-500">
                 17 Nov 2024, 12:00
@@ -26,21 +31,22 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({}) => {
             <div className="rounded-full bg-green-100  px-2 py-1">
               <div className="flex items-center gap-1">
                 <img
-                  src="/icons/konsumsi.svg"
+                  src={report.category.icon?.url}
                   alt="more"
                   className="w-[16px] h-[16px]"
                 />
-                <div className="text-[10px] text-green-500">Makanan</div>
+                <div className="text-[10px] text-green-500">
+                  {report.category.name}
+                </div>
               </div>
             </div>
           </div>
           <div className="mt-[8px]">
             <div className="text-[14px] font-semibold">
-              Makanan Kurang Bersih
+              {report.content.title}
             </div>
             <div className="text-[12px] text-gray-500">
-              Makanan yang saya dapatkan kurang bersih. Banyak yang terkena
-              diare.
+              {report.content.description}
             </div>
           </div>
           <div className="mt-[8px]">
@@ -75,7 +81,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({}) => {
                   alt="Komentar"
                   className="w-[16px] h-[16px]"
                 />
-                16 Respon
+                {report.commentCount} Respon
               </button>
               <button className="btn btn-ghost btn-success text-green-600 text-[10px]">
                 <img
@@ -83,7 +89,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({}) => {
                   alt="Dukungan"
                   className="w-[16px] h-[16px]"
                 />
-                86 Dukungan
+                {report.upvoteCount} Dukungan
               </button>
             </div>
           </div>

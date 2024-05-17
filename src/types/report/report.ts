@@ -18,7 +18,7 @@ export interface Content {
 
 export interface Report {
   xid: string;
-  user: User;
+  user?: User;
   category: ReportCategory;
   content: Content;
   location: Location;

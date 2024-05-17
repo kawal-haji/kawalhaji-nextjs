@@ -36,7 +36,7 @@ const LaporanList: React.FC<LaporanListProps> = (props: LaporanListProps) => {
         )}
         <div className="pb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
           {listUserReport?.map((report) => (
-            <LaporanListDetail key={report.xid} />
+            <LaporanListDetail report={report} key={report.xid} />
           ))}
           {!isLoading && listUserReport?.length === 0 && <LaporanTidakAda />}
           {isLoading && (
