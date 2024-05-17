@@ -4,7 +4,8 @@ export interface Attachment {
 }
 
 export interface FileType {
-  id: number;
+  id: FileTypeEmum;
+  name?: string;
 }
 
 export interface FileDetail {
@@ -21,4 +22,9 @@ export interface UploadAttachment {
 export enum AssetType {
   USER_AVATAR = 1,
   USER_REPORT_ATTACHMENT = 3,
+}
+
+export enum FileTypeEmum {
+  IMAGE = 1,
+  VIDEO = 2,
 }

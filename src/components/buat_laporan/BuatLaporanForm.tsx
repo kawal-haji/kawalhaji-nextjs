@@ -1,7 +1,7 @@
 import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImageUpload";
 import Geolocation from "@/components/geolocation/Geolocation";
 import { useCreateUserReport } from "@/hooks/user_report/userCreateUserReport";
-import { Attachment, UploadAttachment } from "@/types/attachment";
+import { Attachment, FileTypeEmum, UploadAttachment } from "@/types/attachment";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
 import { useRouter } from "next/router";
@@ -29,10 +29,10 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
       id: reportForm.category.id,
     };
     dataCreate.content.attachments = fileUploaded.map(
-      (file, index) =>
+      (file) =>
         ({
           fileType: {
-            id: index + 1,
+            id: FileTypeEmum.IMAGE,
           },
           file: {
             fileName: file.fileName,

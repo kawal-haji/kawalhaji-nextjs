@@ -1,6 +1,5 @@
 import { API_URL } from "@/lib/constants";
 import axios, { AxiosInstance, isAxiosError } from "axios";
-import { signOut } from "next-auth/react";
 
 interface ApiClientOptions {
   baseURL: string;
@@ -29,7 +28,7 @@ const ApiClient = (options: ApiClientOptions): AxiosInstance => {
     async (error) => {
       // if unauthorized auto logout
       if (401 === error?.response?.status) {
-        await signOut({ callbackUrl: "/", redirect: true });
+        // await signOut({ callbackUrl: "/", redirect: true });
 
         throw error;
       }

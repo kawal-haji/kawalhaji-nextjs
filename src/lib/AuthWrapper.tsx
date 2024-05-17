@@ -13,6 +13,14 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
     setClientToken(apiClient, data?.token ?? "");
   }
 
+  if (status === "loading") {
+    return (
+      <div className="flex justify-center h-screen">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
   return <div>{children}</div>;
 };
 

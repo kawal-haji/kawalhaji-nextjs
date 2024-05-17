@@ -1,5 +1,6 @@
 import AuthWrapper from "@/lib/AuthWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Provider as JotaiProvider } from "jotai";
 import type { NextPage } from "next";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
@@ -55,7 +56,9 @@ export default function MyApp({
       <AppHead />
       <QueryClientProvider client={queryClient}>
         <SessionProvider session={session}>
-          <AuthWrapper>{getLayout(<Component {...pageProps} />)}</AuthWrapper>
+          <JotaiProvider>
+            <AuthWrapper>{getLayout(<Component {...pageProps} />)}</AuthWrapper>
+          </JotaiProvider>
         </SessionProvider>
       </QueryClientProvider>
     </>

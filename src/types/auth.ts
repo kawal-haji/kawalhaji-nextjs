@@ -43,16 +43,16 @@ export interface Session {
 export interface User {
   xid: string;
   fullName: string;
-  email: string;
-  phone: string;
+  email?: string;
+  phone?: string;
   avatar: Avatar;
   verified: boolean;
-  status: Status;
-  preferences: Preferences;
-  createdAt: string;
-  updatedAt: string;
-  modifiedBy: ModifiedBy;
-  version: string;
+  status?: Status;
+  preferences?: Preferences;
+  createdAt?: string;
+  updatedAt?: string;
+  modifiedBy?: ModifiedBy;
+  version?: string;
   role?: string;
 }
 
