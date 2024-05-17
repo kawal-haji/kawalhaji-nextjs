@@ -2,8 +2,8 @@ import { Icon } from "@/types/icon";
 
 export interface ReportCategory {
   id: number;
-  name: string;
-  iconText: string;
+  name?: string;
+  iconText?: string;
   icon?: Icon;
 }
 

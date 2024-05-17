@@ -1,9 +1,10 @@
 import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImageUpload";
 import Geolocation from "@/components/geolocation/Geolocation";
 import { useCreateUserReport } from "@/hooks/user_report/userCreateUserReport";
-import { UploadAttachment } from "@/types/attachment";
+import { Attachment, UploadAttachment } from "@/types/attachment";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 export interface BuatLaporanFormProps {
@@ -15,6 +16,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   reportForm,
   onReportFormChange,
 }) => {
+  const router = useRouter();
   const [fileUploaded, setFileUploaded] = React.useState<UploadAttachment[]>(
     []
   );
@@ -22,7 +24,27 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   const { mutate: createUserReport, isPending: isCreating } =
     useCreateUserReport();
   const handleCreateUserReport = async () => {
-    await createUserReport({ ...reportForm });
+    const dataCreate = { ...reportForm };
+    dataCreate.category = {
+      id: reportForm.category.id,
+    };
+    dataCreate.content.attachments = fileUploaded.map(
+      (file, index) =>
+        ({
+          fileType: {
+            id: index + 1,
+          },
+          file: {
+            fileName: file.fileName,
+          },
+        } as Attachment)
+    );
+    await createUserReport(
+      { ...dataCreate },
+      {
+        onSuccess: () => router.push("/menu/beranda"),
+      }
+    );
   };
 
   const handleLocationChange = (location: Location) => {
