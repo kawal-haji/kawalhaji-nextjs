@@ -16,6 +16,7 @@ export interface UploadAttachment {
   httpMethod: string;
   url: string;
   fileName: string;
+  isImage: boolean;
   file?: File;
 }
 

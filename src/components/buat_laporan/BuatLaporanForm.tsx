@@ -32,7 +32,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
       (file) =>
         ({
           fileType: {
-            id: FileTypeEmum.IMAGE,
+            id: file.isImage ? FileTypeEmum.IMAGE : FileTypeEmum.VIDEO,
           },
           file: {
             fileName: file.fileName,

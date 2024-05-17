@@ -19,11 +19,21 @@ const LaporanImageUploadDetail: React.FC<LaporanImageUploadDetailProps> = ({
         onClick={onRemove}
       />
       {file.file ? (
-        <img
-          src={URL.createObjectURL(file.file)}
-          alt="image"
-          className="w-full object-cover rounded-md"
-        />
+        <>
+          {file.isImage ? (
+            <img
+              src={URL.createObjectURL(file.file)}
+              alt="image"
+              className="w-full object-cover rounded-md"
+            />
+          ) : (
+            <video
+              src={URL.createObjectURL(file.file)}
+              className="w-full object-cover rounded-md"
+              controls
+            />
+          )}
+        </>
       ) : (
         <img
           src="/icons/no_image.svg"

@@ -13,6 +13,7 @@ export interface ImageUploadProps {
 const accept = {
   "image/jpeg": [".jpg", ".jpeg"],
   "image/png": [".png"],
+  "video/mp4": [".mp4"],
 };
 
 const maxSize = 20_000_000; // 2MB
@@ -28,6 +29,7 @@ const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
         {
           onSuccess: (data) => {
             if (data) {
+              data.isImage = file.type.includes("image");
               onImageChange(data);
             }
           },
@@ -70,11 +72,15 @@ const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
     const { getInputProps, getRootProps, fileRejections } = useDropzone({
       accept,
       multiple: false,
-      maxSize,
       onDrop: (acceptedFiles) => {
         if (acceptedFiles.length > 0) {
           const file = acceptedFiles[0];
-          handleChangeImage(file);
+
+          if (file.type.includes("image")) {
+            handleChangeImage(file);
+          } else {
+            handleUploadFile(file);
+          }
         }
       },
     });
