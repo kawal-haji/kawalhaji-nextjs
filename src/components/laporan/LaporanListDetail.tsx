@@ -1,3 +1,6 @@
+import { formatHumanDayTime } from "@/lib/datetime";
+import { FileTypeEmum } from "@/types/attachment";
+import { reportCategories } from "@/types/report/category";
 import { Report } from "@/types/report/report";
 import * as React from "react";
 
@@ -6,6 +9,10 @@ export interface LaporanListDetailProps {
 }
 
 const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
+  const iconCategory = reportCategories.find(
+    (category) => category.id === report.category.id
+  )?.iconText;
+
   return (
     <>
       <a href="/detail-laporan">
@@ -25,13 +32,13 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
                 )}
               </div>
               <div className="text-[10px] text-gray-500">
-                17 Nov 2024, 12:00
+                {formatHumanDayTime(parseInt(report.createdAt))}
               </div>
             </div>
             <div className="rounded-full bg-green-100  px-2 py-1">
               <div className="flex items-center gap-1">
                 <img
-                  src={report.category.icon?.url}
+                  src={`/icons/${iconCategory}`}
                   alt="more"
                   className="w-[16px] h-[16px]"
                 />
@@ -51,26 +58,29 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
           </div>
           <div className="mt-[8px]">
             <div className="flex items-center justify-start gap-2">
-              <img
-                src="/images/food_example_1.png"
-                alt="like"
-                className="w-[93px] h-[93px] rounded-md object-cover"
-              />
-              <img
-                src="/images/food_example_2.png"
-                alt="like"
-                className="w-[93px] h-[93px] rounded-md object-cover"
-              />
-              <div className="relative rounded-md">
-                <img
-                  src="/images/food_example_2.png"
-                  alt="like"
-                  className="w-[93px] h-[93px] rounded-md object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center  rounded-md">
-                  <img src="/icons/play.svg" alt="Play" />
-                </div>
-              </div>
+              {report.content.attachments.map((attachment, index) => (
+                <>
+                  {attachment.fileType.id === FileTypeEmum.IMAGE ? (
+                    <img
+                      key={index}
+                      src={attachment.file.url}
+                      alt="like"
+                      className="w-[93px] h-[93px] rounded-md object-cover"
+                    />
+                  ) : (
+                    <div key={index} className="relative rounded-md">
+                      <img
+                        src={attachment.file.url}
+                        alt="like"
+                        className="w-[93px] h-[93px] rounded-md object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center  rounded-md">
+                        <img src="/icons/play.svg" alt="Play" />
+                      </div>
+                    </div>
+                  )}
+                </>
+              ))}
             </div>
           </div>
           <div className="mt-[8px]">

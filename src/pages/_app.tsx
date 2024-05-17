@@ -1,5 +1,7 @@
 import AuthWrapper from "@/lib/AuthWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { setDefaultOptions } from "date-fns";
+import { id as idLocaleDate } from "date-fns/locale";
 import { Provider as JotaiProvider } from "jotai";
 import type { NextPage } from "next";
 import { SessionProvider } from "next-auth/react";
@@ -48,6 +50,8 @@ export default function MyApp({
   pageProps: { session, ...pageProps },
 }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
+
+  setDefaultOptions({ locale: idLocaleDate });
 
   const queryClient = new QueryClient();
 

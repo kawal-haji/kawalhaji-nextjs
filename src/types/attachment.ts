@@ -10,6 +10,8 @@ export interface FileType {
 
 export interface FileDetail {
   fileName: string;
+  url?: string;
+  signature?: string;
 }
 
 export interface UploadAttachment {
