@@ -8,6 +8,7 @@ export interface ImagePreviewProps {
 
 const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
   const imageModal = React.useRef<HTMLDialogElement>(null);
+  const videoModal = React.useRef<HTMLDialogElement>(null);
 
   return (
     <>
@@ -19,7 +20,10 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
           onClick={() => imageModal.current?.showModal()}
         />
       ) : (
-        <div className="relative rounded-md">
+        <div
+          className="relative rounded-md"
+          onClick={() => videoModal.current?.showModal()}
+        >
           <img
             src={attachment.file.url}
             alt="like"
@@ -42,6 +46,21 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
             src={attachment.file.url}
             alt="like"
             className="w-full rounded-md object-cover"
+          />
+        </div>
+      </dialog>
+      <dialog ref={videoModal} className="modal">
+        <div className="modal-box p-0">
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() => videoModal.current?.close()}
+          >
+            ✕
+          </button>
+          <video
+            src={attachment.file.url}
+            className="w-full rounded-md object-cover"
+            controls
           />
         </div>
       </dialog>
