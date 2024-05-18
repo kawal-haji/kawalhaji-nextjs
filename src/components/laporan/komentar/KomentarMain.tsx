@@ -1,3 +1,4 @@
+import { useListReportComment } from "@/hooks/user_report/useListReportComment";
 import * as React from "react";
 
 export interface KomentarMainProps {
@@ -5,6 +6,8 @@ export interface KomentarMainProps {
 }
 
 const KomentarMain: React.FC<KomentarMainProps> = ({ xid }) => {
+  const {} = useListReportComment({ xid });
+
   return (
     <div className="divide-y divide-gray-100">
       <div className="px-[16px] py-[12px]">

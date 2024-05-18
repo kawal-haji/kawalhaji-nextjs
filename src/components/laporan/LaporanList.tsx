@@ -22,11 +22,8 @@ const initiateFilter: PaginationReportQueryParams = {
 };
 
 const LaporanList: React.FC<LaporanListProps> = (props: LaporanListProps) => {
-  const [filter, setFilter] =
-    React.useState<PaginationReportQueryParams>(initiateFilter);
-
-  const { listUserReport, isLoading, isLastUserReport } =
-    useListUserReport(filter);
+  const { listUserReport, isLoading, isLastUserReport, handleLoadMore } =
+    useListUserReport();
 
   return (
     <>
@@ -52,12 +49,7 @@ const LaporanList: React.FC<LaporanListProps> = (props: LaporanListProps) => {
           {!isLoading && !isLastUserReport && (
             <div className="flex justify-center p-5">
               <button
-                onClick={() => {
-                  setFilter((prev) => ({
-                    ...prev,
-                    skip: prev.skip + prev.limit,
-                  }));
-                }}
+                onClick={handleLoadMore}
                 className="btn bg-primary btn-sm text-white"
               >
                 Load More

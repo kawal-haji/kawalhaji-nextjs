@@ -35,3 +35,7 @@ export interface StatusReport {
   id: number;
   name: string;
 }
+
+export interface ReportComment {
+  id: string;
+}

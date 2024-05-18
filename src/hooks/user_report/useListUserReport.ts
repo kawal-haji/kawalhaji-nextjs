@@ -7,7 +7,21 @@ import {
 import { Report } from "@/types/report/report";
 import React from "react";
 
-export const useListUserReport = (parameters: PaginationReportQueryParams) => {
+const initiateFilter: PaginationReportQueryParams = {
+  limit: 10,
+  skip: 0,
+  sortBy: "",
+  filters: {
+    categoryId: "",
+    title: "",
+    statusId: "",
+    isOwned: "",
+  },
+};
+
+export const useListUserReport = () => {
+  const [parameters, setParameters] =
+    React.useState<PaginationReportQueryParams>(initiateFilter);
   const [listUserReport, setListUserReport] = React.useState<Report[]>([]);
   const [isLastUserReport, setIsLastUserReport] =
     React.useState<boolean>(false);
@@ -31,5 +45,12 @@ export const useListUserReport = (parameters: PaginationReportQueryParams) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, data, parameters.limit]);
 
-  return { listUserReport, isLoading, isLastUserReport };
+  const handleLoadMore = () => {
+    setParameters((prev) => ({
+      ...prev,
+      skip: prev.skip + prev.limit,
+    }));
+  };
+
+  return { listUserReport, isLoading, isLastUserReport, handleLoadMore };
 };
