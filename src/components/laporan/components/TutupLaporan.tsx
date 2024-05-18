@@ -7,7 +7,7 @@ export interface TutupLaporanProps {
 }
 
 const TutupLaporan: React.FC<TutupLaporanProps> = ({ statusReport }) => {
-  if (statusReport.name === "Active") {
+  if (statusReport.name !== "Active") {
     return null;
   }
 

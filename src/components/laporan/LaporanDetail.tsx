@@ -30,7 +30,7 @@ const Header = ({ handleBack }: { handleBack: () => void }) => {
 
 const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
   const router = useRouter();
-  const { report, setReport } = useDetailReport();
+  const { report } = useDetailReport();
 
   const iconCategory = reportCategories.find(
     (category) => category.id === report?.category.id
@@ -39,8 +39,6 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
   const handleBack = () => {
     router.back();
   };
-
-  console.log("report", report);
 
   if (!report) {
     return (
@@ -168,6 +166,11 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
           <KomentarMain xid={report.xid} />
         </div>
         <div className="absolute bottom-0 w-full h-[56px]">
+          {report.status.name !== "Active" && (
+            <div className="bg-[#E83475] text-white text-[16px] h-[56px] text-center py-5 font-bold">
+              Tutup Laporan
+            </div>
+          )}
           <div className="bg-[#FDEBF1] text-[#E83475] text-[16px] h-[56px] text-center py-5 font-bold">
             Laporan Ditutup
           </div>
