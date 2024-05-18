@@ -35,36 +35,36 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
               {formatHumanDayTime(parseInt(report.createdAt))}
             </div>
           </div>
-          <Link href={`/laporan/${report.xid}`}>
-            <div className="rounded-full bg-green-100  px-2 py-1">
-              <div className="flex items-center gap-1">
-                <img
-                  src={`/icons/${iconCategory}`}
-                  alt="more"
-                  className="w-[16px] h-[16px]"
-                />
-                <div className="text-[10px] text-green-500">
-                  {report.category.name}
-                </div>
+          <div className="rounded-full bg-green-100  px-2 py-1">
+            <div className="flex items-center gap-1">
+              <img
+                src={`/icons/${iconCategory}`}
+                alt="more"
+                className="w-[16px] h-[16px]"
+              />
+              <div className="text-[10px] text-green-500">
+                {report.category.name}
               </div>
             </div>
-          </Link>
-        </div>
-        <div className="mt-[8px]">
-          <div className="text-[14px] font-semibold">
-            {report.content.title}
-          </div>
-          <div className="text-[12px] text-gray-500">
-            {report.content.description}
           </div>
         </div>
-        <div className="mt-[8px]">
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-2">
-            {report.content.attachments.map((attachment, index) => (
-              <ImagePreview key={index} attachment={attachment} />
-            ))}
+        <Link href={`/laporan/${report.xid}`}>
+          <div className="mt-[8px]">
+            <div className="text-[14px] font-semibold hover:underline hover:text-blue-600">
+              {report.content.title}
+            </div>
+            <div className="text-[12px] text-gray-500">
+              {report.content.description}
+            </div>
           </div>
-        </div>
+          <div className="mt-[8px]">
+            <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-2">
+              {report.content.attachments.map((attachment, index) => (
+                <ImagePreview key={index} attachment={attachment} />
+              ))}
+            </div>
+          </div>
+        </Link>
         <div className="mt-[8px]">
           <div className="flex items-center">
             <button className="btn btn-ghost text-[10px]">

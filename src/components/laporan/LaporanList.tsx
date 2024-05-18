@@ -3,7 +3,6 @@ import LaporanListDetail from "@/components/laporan/LaporanListDetail";
 import LaporanTidakAda from "@/components/laporan/LaporanTidakAda";
 import { useListUserReport } from "@/hooks/user_report/useListUserReport";
 import { initialPaginationReportQueryParams } from "@/store/report/PaginationReportStore";
-import { Report } from "@/types/report/report";
 import * as React from "react";
 
 export interface LaporanListProps {
@@ -15,18 +14,9 @@ const LaporanList: React.FC<LaporanListProps> = (props: LaporanListProps) => {
   const [filter, setFilter] = React.useState<PaginationReportQueryParams>(
     initialPaginationReportQueryParams
   );
-  const [listUserReport, setListUserReport] = React.useState<Report[]>([]);
-  const [isLastUserReport, setIsLastUserReport] =
-    React.useState<boolean>(false);
 
-  const { data, isPending: isLoading } = useListUserReport(filter);
-
-  React.useEffect(() => {
-    if (!isLoading && !!data) {
-      setListUserReport((prev) => [...prev, ...data]);
-      setIsLastUserReport(data.length < filter.limit);
-    }
-  }, [isLoading, data]);
+  const { listUserReport, isLoading, isLastUserReport } =
+    useListUserReport(filter);
 
   return (
     <>
