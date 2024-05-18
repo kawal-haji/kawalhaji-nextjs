@@ -1,4 +1,5 @@
 import ImagePreview from "@/components/image/ImagePreview";
+import KirimKomentar from "@/components/laporan/components/KirimKomentar";
 import ListKomentar from "@/components/laporan/components/ListKomentar";
 import TutupLaporan from "@/components/laporan/components/TutupLaporan";
 import { useDetailReport } from "@/hooks/user_report/useDetailReport";
@@ -167,18 +168,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
         </div>
         <div className="absolute bottom-0 mb-[-10px] w-full bg-white  border-t-2 border-t-neutral-200">
           {report.status.name === "Active" && (
-            <label className="input rounded-none flex items-center gap-2">
-              <input
-                type="text"
-                className="grow border-none text-[14px]"
-                placeholder="Tambahkan komentar..."
-              />
-              <img
-                src="/icons/send_comment.svg"
-                alt="search"
-                className="w-[32px] h-[32px]"
-              />
-            </label>
+            <KirimKomentar xid={report.xid} />
           )}
           {report.status.name !== "Active" && (
             <div className="bg-[#E83475] text-white text-[16px] text-center py-4 mb-[-5px] font-bold">

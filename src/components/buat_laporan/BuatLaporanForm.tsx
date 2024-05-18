@@ -1,6 +1,6 @@
 import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImageUpload";
 import Geolocation from "@/components/geolocation/Geolocation";
-import { useCreateUserReport } from "@/hooks/user_report/userCreateUserReport";
+import { useCreateUserReport } from "@/hooks/user_report/useCreateUserReport";
 import { Attachment, FileTypeEmum, UploadAttachment } from "@/types/attachment";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
