@@ -1,23 +1,20 @@
 import {
-  UserReportCommentArgs,
-  postUserReportComment,
-} from "@/apis/user_report/postUserReportComment";
+  ToggleReportVoteArgs,
+  postToggleReportVote,
+} from "@/apis/user_report/postToggleReportVote";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-export const useSendComment = () => {
+export const useToogleReportVote = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<
     string | undefined,
     AxiosError,
-    UserReportCommentArgs
+    ToggleReportVoteArgs
   >({
-    mutationFn: postUserReportComment,
+    mutationFn: postToggleReportVote,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["/users/reports/comment"],
-      });
       queryClient.invalidateQueries({
         queryKey: ["/users/reports/detail"],
       });

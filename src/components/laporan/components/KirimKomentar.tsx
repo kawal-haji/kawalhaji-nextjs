@@ -1,4 +1,4 @@
-import { useSendComment } from "@/hooks/user_report/useSendComment";
+import { useSendReportComment } from "@/hooks/user_report/useSendReportComment";
 import * as React from "react";
 
 export interface KirimKomentarProps {
@@ -8,7 +8,7 @@ export interface KirimKomentarProps {
 const KirimKomentar: React.FC<KirimKomentarProps> = ({ xid }) => {
   const [message, setMessage] = React.useState<string>("");
 
-  const { mutate: sendComment, isPending: isSending } = useSendComment();
+  const { mutate: sendComment, isPending: isSending } = useSendReportComment();
   const handleSendComment = async () => {
     if (message) {
       await sendComment({ xid, komentar: message });

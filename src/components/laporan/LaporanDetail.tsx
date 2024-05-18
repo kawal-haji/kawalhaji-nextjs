@@ -2,6 +2,7 @@ import ImagePreview from "@/components/image/ImagePreview";
 import KirimKomentar from "@/components/laporan/components/KirimKomentar";
 import ListKomentar from "@/components/laporan/components/ListKomentar";
 import TutupLaporan from "@/components/laporan/components/TutupLaporan";
+import VoteReport from "@/components/laporan/components/VoteReport";
 import { useDetailReport } from "@/hooks/user_report/useDetailReport";
 import { formatHumanDayTime } from "@/lib/datetime";
 import { reportCategories } from "@/types/report/category";
@@ -141,14 +142,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
                 />
                 {report.commentCount} Respon
               </button>
-              <button className="btn btn-outline btn-sm btn-success text-green-600 text-[10px]">
-                <img
-                  src="/icons/arrow_circle_up.svg"
-                  alt="Dukungan"
-                  className="w-[16px] h-[16px]"
-                />
-                {report.upvoteCount} Dukungan
-              </button>
+              <VoteReport report={report} />
             </div>
           </div>
           <ListKomentar xid={report.xid} />
