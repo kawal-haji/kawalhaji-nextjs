@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import {
   PaginationReportQueryParams,
+  SortByUserReport,
   getListUserReport,
 } from "@/apis/user_report/getListUserReport";
 import { Report } from "@/types/report/report";
@@ -10,12 +11,12 @@ import React from "react";
 export const initiatePaginationReportFilter: PaginationReportQueryParams = {
   limit: 10,
   skip: 0,
-  sortBy: "",
+  sortBy: SortByUserReport.LAST_UPDATED,
   filters: {
     categoryId: "",
     title: "",
     statusId: "",
-    isOwned: "",
+    isOwned: false,
   },
 };
 

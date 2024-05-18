@@ -2,6 +2,7 @@ import {
   UserReportStatusArgs,
   patchUserReportStatus,
 } from "@/apis/user_report/patchUserReportStatus";
+import { Report } from "@/types/report/report";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 

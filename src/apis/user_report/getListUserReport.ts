@@ -1,7 +1,7 @@
 import { apiClient } from "@/apis/api-client";
 
 import { Response } from "@/types/Response";
-import { Report } from "@/types/report/report";
+import { Report, ReportStatusEnum } from "@/types/report/report";
 
 interface ReportResponse {
   items: Report[];
@@ -13,18 +13,26 @@ interface ReportResponse {
   };
 }
 
+export enum SortByUserReport {
+  LATEST = "latest",
+  TITLE_ASC = "title-asc",
+  MOST_VOTED = "most-voted",
+  MOST_COMMENTED = "most-commented",
+  LAST_UPDATED = "last-updated",
+}
+
 export interface PaginationReportQueryParams {
   limit: number;
   skip: number;
-  sortBy: string;
+  sortBy: SortByUserReport;
   filters: PaginationReportFilter;
 }
 
 export interface PaginationReportFilter {
   categoryId: string;
   title: string;
-  statusId: string;
-  isOwned: string;
+  statusId: ReportStatusEnum | "";
+  isOwned: boolean;
 }
 
 type APIResponse = Response<ReportResponse>;

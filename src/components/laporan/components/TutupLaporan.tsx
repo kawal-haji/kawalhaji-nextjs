@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { ReportStatusEnum } from "@/apis/user_report/patchUserReportStatus";
 import { useChangeReportStatus } from "@/hooks/user_report/useChangeReportStatus";
-import { StatusReport } from "@/types/report/report";
+import { ReportStatusEnum, StatusReport } from "@/types/report/report";
 
 export interface TutupLaporanProps {
   xid: string;
@@ -23,7 +22,7 @@ const TutupLaporan: React.FC<TutupLaporanProps> = ({
       {
         xid,
         version,
-        status: ReportStatusEnum.RESOLVED,
+        status: ReportStatusEnum.CLOSED,
       },
       {
         onSuccess: () => {

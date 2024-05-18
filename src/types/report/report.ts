@@ -49,3 +49,9 @@ export interface StatusComment {
   id: number;
   name: string;
 }
+
+export enum ReportStatusEnum {
+  ACTIVE = 2,
+  RESOLVED = 3,
+  CLOSED = 4,
+}

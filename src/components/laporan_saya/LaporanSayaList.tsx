@@ -3,13 +3,15 @@ import {
   initiatePaginationReportFilter,
   useListUserReport,
 } from "@/hooks/user_report/useListUserReport";
+import { ReportStatusEnum } from "@/types/report/report";
 import * as React from "react";
 
 export interface LaporanSayaListProps {}
 
 const LaporanSayaList: React.FC<LaporanSayaListProps> = ({}) => {
   const initiatePagination = initiatePaginationReportFilter;
-  initiatePagination.filters.isOwned = "1";
+  initiatePagination.filters.isOwned = true;
+  initiatePagination.filters.statusId = ReportStatusEnum.ACTIVE;
 
   const { listUserReport, isLoading, isLastUserReport, handleLoadMore } =
     useListUserReport({

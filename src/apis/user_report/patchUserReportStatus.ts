@@ -1,13 +1,9 @@
 import { apiClient } from "@/apis/api-client";
 
 import { Response } from "@/types/Response";
+import { Report, ReportStatusEnum } from "@/types/report/report";
 
 type APIResponse = Response<Report>;
-
-export enum ReportStatusEnum {
-  ACTIVE = 2,
-  RESOLVED = 3,
-}
 
 export interface UserReportStatusArgs {
   xid: string;
