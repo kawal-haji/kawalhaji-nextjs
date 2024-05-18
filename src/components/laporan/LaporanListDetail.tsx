@@ -1,5 +1,5 @@
+import ImagePreview from "@/components/image/ImagePreview";
 import { formatHumanDayTime } from "@/lib/datetime";
-import { FileTypeEmum } from "@/types/attachment";
 import { reportCategories } from "@/types/report/category";
 import { Report } from "@/types/report/report";
 import Link from "next/link";
@@ -61,27 +61,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
         <div className="mt-[8px]">
           <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-2">
             {report.content.attachments.map((attachment, index) => (
-              <>
-                {attachment.fileType.id === FileTypeEmum.IMAGE ? (
-                  <img
-                    key={index}
-                    src={attachment.file.url}
-                    alt="like"
-                    className="w-full rounded-md object-cover"
-                  />
-                ) : (
-                  <div key={index} className="relative rounded-md">
-                    <img
-                      src={attachment.file.url}
-                      alt="like"
-                      className="w-full rounded-md object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-35 flex items-center justify-center  rounded-md">
-                      <img src="/icons/play.svg" alt="Play" />
-                    </div>
-                  </div>
-                )}
-              </>
+              <ImagePreview key={index} attachment={attachment} />
             ))}
           </div>
         </div>
