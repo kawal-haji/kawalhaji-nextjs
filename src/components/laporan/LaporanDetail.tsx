@@ -31,7 +31,7 @@ const Header = ({ handleBack }: { handleBack: () => void }) => {
 
 const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
   const router = useRouter();
-  const { report } = useDetailReport();
+  const { data: report, isLoading } = useDetailReport({ xid });
 
   const iconCategory = reportCategories.find(
     (category) => category.id === report?.category.id
@@ -45,7 +45,9 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
     return (
       <>
         <Header handleBack={handleBack} />
-        <div className="p-5 italic text-[12px]">Laporan tidak ditemukan</div>
+        <div className="flex justify-center p-5">
+          <span className="loading loading-spinner" />
+        </div>
       </>
     );
   }

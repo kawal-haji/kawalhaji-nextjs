@@ -14,10 +14,14 @@ export const useSendComment = () => {
     UserReportCommentArgs
   >({
     mutationFn: postUserReportComment,
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["/users/reports/comment"],
-      }),
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["/users/reports/detail"],
+      });
+    },
   });
 
   return {

@@ -1,8 +1,8 @@
 import ImagePreview from "@/components/image/ImagePreview";
-import { useDetailReport } from "@/hooks/user_report/useDetailReport";
 import { formatHumanDayTime } from "@/lib/datetime";
 import { reportCategories } from "@/types/report/category";
 import { Report } from "@/types/report/report";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -11,16 +11,10 @@ export interface LaporanListDetailProps {
 }
 
 const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
-  const { setReport } = useDetailReport();
   const router = useRouter();
   const iconCategory = reportCategories.find(
     (category) => category.id === report.category.id
   )?.iconText;
-
-  const handleOpenDetailUserReport = () => {
-    setReport(report);
-    router.push(`/laporan/${report.xid}`);
-  };
 
   return (
     <>
@@ -56,16 +50,18 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
             </div>
           </div>
         </div>
-        <div className="cursor-pointer" onClick={handleOpenDetailUserReport}>
-          <div className="mt-[8px]">
-            <div className="text-[14px] font-semibold hover:underline hover:text-blue-600">
-              {report.content.title}
-            </div>
-            <div className="text-[12px] text-gray-500">
-              {report.content.description}
+        <Link href={`/laporan/${report.xid}`}>
+          <div className="cursor-pointer">
+            <div className="mt-[8px]">
+              <div className="text-[14px] font-semibold hover:underline hover:text-blue-600">
+                {report.content.title}
+              </div>
+              <div className="text-[12px] text-gray-500">
+                {report.content.description}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
         <div className="mt-[8px]">
           <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-2">
             {report.content.attachments.slice(0, 3).map((attachment, index) => (
@@ -75,14 +71,16 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
         </div>
         <div className="mt-[8px]">
           <div className="flex items-center">
-            <button className="btn btn-ghost text-[10px]">
-              <img
-                src="/icons/comment.svg"
-                alt="Komentar"
-                className="w-[16px] h-[16px]"
-              />
-              {report.commentCount} Respon
-            </button>
+            <Link href={`/laporan/${report.xid}`}>
+              <button className="btn btn-ghost text-[10px]">
+                <img
+                  src="/icons/comment.svg"
+                  alt="Komentar"
+                  className="w-[16px] h-[16px]"
+                />
+                {report.commentCount} Respon
+              </button>
+            </Link>
             <button className="btn btn-ghost btn-success text-green-600 text-[10px]">
               <img
                 src="/icons/arrow_circle_up.svg"
