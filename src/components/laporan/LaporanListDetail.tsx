@@ -82,7 +82,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
                 {report.commentCount} Respon
               </button>
             </Link>
-            <VoteReport report={report} />
+            <VoteReport xid={report.xid} count={Number(report.upvoteCount)} />
           </div>
         </div>
       </div>

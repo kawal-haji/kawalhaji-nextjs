@@ -1,5 +1,6 @@
 import {
   ToggleReportVoteArgs,
+  ToggleReportVoteResponse,
   postToggleReportVote,
 } from "@/apis/user_report/postToggleReportVote";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -9,17 +10,17 @@ export const useToogleReportVote = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<
-    string | undefined,
+    ToggleReportVoteResponse | undefined,
     AxiosError,
     ToggleReportVoteArgs
   >({
     mutationFn: postToggleReportVote,
-    onSuccess: (xid) => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["/users/reports/detail"],
       });
       queryClient.invalidateQueries({
-        queryKey: [`/users/reports/${xid}/vote`],
+        queryKey: [`/users/reports/${data?.xid}/vote`],
       });
     },
   });

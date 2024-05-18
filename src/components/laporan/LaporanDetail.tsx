@@ -146,7 +146,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
                 />
                 {report.commentCount} Respon
               </button>
-              <VoteReport report={report} />
+              <VoteReport xid={report.xid} count={Number(report.upvoteCount)} />
             </div>
           </div>
           <ListKomentar xid={report.xid} />
