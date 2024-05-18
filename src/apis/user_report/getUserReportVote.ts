@@ -17,5 +17,5 @@ export const getUserReportVote = async (args: GetUserReportVoteArgs) => {
     `/users/reports/${args.xid}/vote`
   );
 
-  return !!result.data.data;
+  return !!result.data.data?.vote;
 };

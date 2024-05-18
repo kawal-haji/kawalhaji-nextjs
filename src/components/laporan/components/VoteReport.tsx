@@ -18,8 +18,10 @@ const VoteReport: React.FC<VoteReportProps> = ({ report }) => {
 
   return (
     <button
-      className={`btn btn-outline btn-sm text-[10px] ${
-        vote ? "btn-success text-green-600" : ""
+      className={`btn btn-sm text-[10px] ${
+        vote
+          ? "btn-outline btn-success text-green-600"
+          : " bg-white text-gray-500"
       }`}
       onClick={handleToggleVote}
       disabled={isLoading || isVoting}
@@ -30,7 +32,7 @@ const VoteReport: React.FC<VoteReportProps> = ({ report }) => {
         <img
           src="/icons/arrow_circle_up.svg"
           alt="Dukungan"
-          className="w-[16px] h-[16px]"
+          className="w-[16px] h-[16px] text-neutral-500"
         />
       )}
       {report.upvoteCount} Dukungan
