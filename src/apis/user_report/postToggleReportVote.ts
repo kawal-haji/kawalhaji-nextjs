@@ -3,7 +3,6 @@ import { apiClient } from "@/apis/api-client";
 import { Response } from "@/types/Response";
 
 export interface ToggleReportVoteResponse {
-  xid: string;
   vote: boolean;
 }
 
@@ -18,10 +17,5 @@ export const postToggleReportVote = async (args: ToggleReportVoteArgs) => {
     `/users/reports/${args.xid}/vote`
   );
 
-  if (!result.data.data) return;
-
-  const data: ToggleReportVoteResponse = { ...result.data.data };
-  data.xid = args.xid;
-
-  return data;
+  return result.data.data;
 };

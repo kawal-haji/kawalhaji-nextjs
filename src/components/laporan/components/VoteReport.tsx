@@ -10,6 +10,7 @@ export interface VoteReportProps {
 
 const VoteReport: React.FC<VoteReportProps> = ({ xid, count }) => {
   const [currentCount, setCurrentCount] = React.useState<number>(count);
+  const [isVoted, setIsVoted] = React.useState<boolean>(false);
   const { data: vote, isLoading } = useReportVote({ xid });
 
   const { mutate: toggleVote, isPending: isVoting } = useToogleReportVote();
@@ -18,18 +19,26 @@ const VoteReport: React.FC<VoteReportProps> = ({ xid, count }) => {
       { xid },
       {
         onSuccess: (data) => {
-          if (!!data) {
-            setCurrentCount(data.vote ? count + 1 : count);
+          if (vote) {
+            setCurrentCount(data?.vote ? count : count - 1);
+          } else {
+            setCurrentCount(data?.vote ? count + 1 : count);
           }
+
+          setIsVoted(data?.vote ?? false);
         },
       }
     );
   };
 
+  React.useEffect(() => {
+    setIsVoted(!!vote);
+  }, [vote]);
+
   return (
     <button
       className={`btn btn-sm text-[10px] ${
-        vote
+        isVoted
           ? "btn-outline btn-success text-green-600"
           : " bg-white text-gray-500"
       }`}
