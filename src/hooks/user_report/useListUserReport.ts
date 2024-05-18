@@ -2,29 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 
 import {
   PaginationReportQueryParams,
-  SortByUserReport,
   getListUserReport,
 } from "@/apis/user_report/getListUserReport";
 import { Report } from "@/types/report/report";
 import React from "react";
 
-export const initiatePaginationReportFilter: PaginationReportQueryParams = {
-  limit: 10,
-  skip: 0,
-  sortBy: SortByUserReport.LAST_UPDATED,
-  filters: {
-    categoryId: "",
-    title: "",
-    statusId: "",
-    isOwned: false,
-  },
-};
-
-export const useListUserReport = (filterArgs?: PaginationReportQueryParams) => {
+export const useListUserReport = (filterArgs: PaginationReportQueryParams) => {
   const [parameters, setParameters] =
-    React.useState<PaginationReportQueryParams>(
-      filterArgs ?? initiatePaginationReportFilter
-    );
+    React.useState<PaginationReportQueryParams>(filterArgs);
   const [listUserReport, setListUserReport] = React.useState<Report[]>([]);
   const [isLastUserReport, setIsLastUserReport] =
     React.useState<boolean>(false);

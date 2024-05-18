@@ -1,22 +1,29 @@
-import LaporanSayaListDetail from "@/components/laporan_saya/LaporanSayaListDetail";
 import {
-  initiatePaginationReportFilter,
-  useListUserReport,
-} from "@/hooks/user_report/useListUserReport";
+  PaginationReportQueryParams,
+  SortByUserReport,
+} from "@/apis/user_report/getListUserReport";
+import LaporanSayaListDetail from "@/components/laporan_saya/LaporanSayaListDetail";
+import { useListUserReport } from "@/hooks/user_report/useListUserReport";
 import { ReportStatusEnum } from "@/types/report/report";
 import * as React from "react";
 
 export interface LaporanSayaListProps {}
 
-const LaporanSayaList: React.FC<LaporanSayaListProps> = ({}) => {
-  const initiatePagination = initiatePaginationReportFilter;
-  initiatePagination.filters.isOwned = true;
-  initiatePagination.filters.statusId = ReportStatusEnum.ACTIVE;
+export const initiatePaginationReportFilter: PaginationReportQueryParams = {
+  limit: 10,
+  skip: 0,
+  sortBy: SortByUserReport.LAST_UPDATED,
+  filters: {
+    categoryId: "",
+    title: "",
+    statusId: ReportStatusEnum.ACTIVE,
+    isOwned: true,
+  },
+};
 
+const LaporanSayaList: React.FC<LaporanSayaListProps> = ({}) => {
   const { listUserReport, isLoading, isLastUserReport, handleLoadMore } =
-    useListUserReport({
-      ...initiatePaginationReportFilter,
-    });
+    useListUserReport(initiatePaginationReportFilter);
 
   if (!isLoading && listUserReport?.length === 0) {
     return null;
