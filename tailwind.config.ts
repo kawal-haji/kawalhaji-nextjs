@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         primary: "#00C9B5",
         "spot-pallate": "#F9F6EA",
+        "error-light": "#FDEBF1",
       },
     },
   },

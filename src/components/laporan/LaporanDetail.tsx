@@ -75,7 +75,11 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
               )}
             </div>
             {report.status.name === "Active" && (
-              <TutupLaporan statusReport={report.status} />
+              <TutupLaporan
+                statusReport={report.status}
+                xid={report.xid}
+                version={report.version}
+              />
             )}
           </div>
           <div className="px-[16px] py-[12px] space-y-2 border-b-8 border-b-gray-100">
@@ -152,7 +156,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
             <KirimKomentar xid={report.xid} />
           )}
           {report.status.name !== "Active" && (
-            <div className="bg-[#E83475] text-white text-[16px] text-center py-4 mb-[-5px] font-bold">
+            <div className="bg-error-light text-red-500 text-[16px] text-center py-4 mb-[-5px] font-bold">
               Laporan Ditutup
             </div>
           )}
