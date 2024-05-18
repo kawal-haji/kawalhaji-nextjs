@@ -2,7 +2,6 @@ import { PaginationReportQueryParams } from "@/apis/user_report/getListUserRepor
 import LaporanListDetail from "@/components/laporan/LaporanListDetail";
 import LaporanTidakAda from "@/components/laporan/LaporanTidakAda";
 import { useListUserReport } from "@/hooks/user_report/useListUserReport";
-import { initialPaginationReportQueryParams } from "@/store/report/PaginationReportStore";
 import * as React from "react";
 
 export interface LaporanListProps {
@@ -10,10 +9,21 @@ export interface LaporanListProps {
   description?: string;
 }
 
+const initiateFilter: PaginationReportQueryParams = {
+  limit: 10,
+  skip: 0,
+  sortBy: "",
+  filters: {
+    categoryId: "",
+    title: "",
+    statusId: "",
+    isOwned: "",
+  },
+};
+
 const LaporanList: React.FC<LaporanListProps> = (props: LaporanListProps) => {
-  const [filter, setFilter] = React.useState<PaginationReportQueryParams>(
-    initialPaginationReportQueryParams
-  );
+  const [filter, setFilter] =
+    React.useState<PaginationReportQueryParams>(initiateFilter);
 
   const { listUserReport, isLoading, isLastUserReport } =
     useListUserReport(filter);
