@@ -38,4 +38,14 @@ export interface StatusReport {
 
 export interface ReportComment {
   id: string;
+  message: string;
+  parentId: string;
+  user: User;
+  status: StatusComment;
+  createdAt: string;
+}
+
+export interface StatusComment {
+  id: number;
+  name: string;
 }

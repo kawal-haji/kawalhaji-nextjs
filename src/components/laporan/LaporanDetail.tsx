@@ -54,7 +54,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
     <>
       <div className="bg-white h-screen relative">
         <Header handleBack={handleBack} />
-        <div className="overflow-y-auto h-[calc(100vh-48px)]">
+        <div className="overflow-y-auto h-[calc(100vh-100px)]">
           <div className="flex items-center gap-4 px-[16px] py-[12px] border-b border-b-gray-100">
             <div className="text-[10px]">
               <div>No. Laporan</div>
@@ -149,24 +149,9 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
               </button>
             </div>
           </div>
-          {parseInt(report.commentCount) === 0 && (
-            <div className="p-[20px]">
-              <img
-                src="/icons/empty_comment.svg"
-                alt="empty"
-                className="w-[100px] h-[100px] mx-auto"
-              />
-              <div className="text-center text-[16px] mt-[20px] font-semibold">
-                Belum terdapat komentar!
-              </div>
-              <div className="text-center text-[14px] text-gray-500 mt-[12px]">
-                Saat ini belum terdapat komentar terkait laporan ini.
-              </div>
-            </div>
-          )}
           <ListKomentar xid={report.xid} />
         </div>
-        <div className="absolute bottom-0 mb-[-10px] w-full bg-white  border-t-2 border-t-neutral-200">
+        <div className="absolute bottom-0 w-full bg-white  border-t-2 border-t-neutral-200">
           {report.status.name === "Active" && (
             <KirimKomentar xid={report.xid} />
           )}

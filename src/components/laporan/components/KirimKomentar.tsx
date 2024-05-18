@@ -6,7 +6,7 @@ export interface KirimKomentarProps {
 }
 
 const KirimKomentar: React.FC<KirimKomentarProps> = ({ xid }) => {
-  const [message, setMessage] = React.useState<string>();
+  const [message, setMessage] = React.useState<string>("");
 
   const { mutate: sendComment, isPending: isSending } = useSendComment();
   const handleSendComment = async () => {

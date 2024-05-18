@@ -17,7 +17,7 @@ export const useListReportComment = ({ xid }: UseListReportComment) => {
     limit: 5,
     skip: 0,
   });
-  const [listComent, setListComent] = React.useState<ReportComment[]>([]);
+  const [listComment, setListComment] = React.useState<ReportComment[]>([]);
   const [isLastComment, setIsLastComment] = React.useState<boolean>(false);
 
   const { data, isPending: isLoading } = useQuery({
@@ -27,13 +27,13 @@ export const useListReportComment = ({ xid }: UseListReportComment) => {
 
   React.useEffect(() => {
     if (!isLoading && !!data) {
-      const combinedData = [...listComent];
+      const combinedData = [...listComment];
       data.forEach((item) => {
         if (!combinedData.find((i) => i.id === item.id)) {
           combinedData.push(item);
         }
       });
-      setListComent(combinedData);
+      setListComment(combinedData);
       setIsLastComment(data.length < parameters.limit);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,5 +46,5 @@ export const useListReportComment = ({ xid }: UseListReportComment) => {
     });
   };
 
-  return { listComent, isLoading, isLastComment, handleNextPage };
+  return { listComment, isLoading, isLastComment, handleNextPage };
 };
