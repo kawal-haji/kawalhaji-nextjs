@@ -1,19 +1,50 @@
+import { useDetailReport } from "@/hooks/user_report/useDetailReport";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 export interface LaporanDetailProps {
-  id: number;
+  xid: string;
 }
 
-const LaporanDetail: React.FC<LaporanDetailProps> = ({}) => {
+const Header = ({ handleBack }: { handleBack: () => void }) => {
+  return (
+    <div className="sticky top-0 bg-white z-50">
+      <div className="flex items-center gap-4 p-[16px] border-b-2 border-b-gray-100">
+        <img
+          src="/icons/arrow_left.svg"
+          alt="arrow_left"
+          height="24"
+          className="cursor-pointer"
+          onClick={handleBack}
+        />
+        <div className="text-[17px] font-medium">Detail Laporan</div>
+      </div>
+    </div>
+  );
+};
+
+const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
+  const router = useRouter();
+  const { report, setReport } = useDetailReport();
+
+  const handleBack = () => {
+    setReport(null);
+    router.back();
+  };
+
+  if (!report) {
+    return (
+      <>
+        <Header handleBack={handleBack} />
+        <div className="p-5 italic text-[12px]">Laporan tidak ditemukan</div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="bg-white h-screen relative">
-        <div className="sticky top-0 bg-white z-50">
-          <div className="flex items-center gap-4 p-[16px] border-b-2 border-b-gray-100">
-            <img src="/icons/arrow_left.svg" alt="arrow_left" height="24" />
-            <div className="text-[17px] font-medium">Detail Laporan</div>
-          </div>
-        </div>
+        <Header handleBack={handleBack} />
         <div className="overflow-y-auto h-[calc(100vh-48px)]">
           <div className="flex items-center gap-4 px-[16px] py-[12px] border-b border-b-gray-100">
             <div className="text-[10px]">
@@ -56,7 +87,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({}) => {
               <div>
                 <div className="flex items-center gap-1">
                   <div className="text-[10px] font-medium truncate">
-                    Carlos Sainz
+                    {report.user?.fullName ?? "Anonim"}
                   </div>
                   <img
                     src="/icons/verified_flag.svg"

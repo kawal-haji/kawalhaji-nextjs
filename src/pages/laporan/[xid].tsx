@@ -6,9 +6,9 @@ import type { ReactElement } from "react";
 
 const BuatLaporanPage: NextPageWithLayout = () => {
   const router = useRouter();
-  const id = router.query.id as string;
+  const xid = router.query.xid as string;
 
-  return <LaporanDetail id={Number(id)} />;
+  return <LaporanDetail xid={xid} />;
 };
 
 BuatLaporanPage.getLayout = function getLayout(page: ReactElement) {

@@ -13,5 +13,5 @@ export const initialPaginationReportQueryParams: PaginationReportQueryParams = {
   },
 };
 
-export const PaginationReportQueryParamsAtom =
+export const paginationReportQueryParamsAtom =
   atom<PaginationReportQueryParams>(initialPaginationReportQueryParams);
