@@ -35,6 +35,12 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
         </div>
       )}
       <dialog ref={imageModal} className="modal">
+        <div
+          className="modal-backdrop"
+          onClick={() => imageModal.current?.close()}
+        >
+          <button>close</button>
+        </div>
         <div className="modal-box p-0">
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -50,6 +56,12 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
         </div>
       </dialog>
       <dialog ref={videoModal} className="modal">
+        <div
+          className="modal-backdrop"
+          onClick={() => videoModal.current?.close()}
+        >
+          <button>close</button>
+        </div>
         <div className="modal-box p-0">
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
