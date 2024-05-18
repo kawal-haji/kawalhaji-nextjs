@@ -17,12 +17,14 @@ export interface PaginationReportQueryParams {
   limit: number;
   skip: number;
   sortBy: string;
-  filters: {
-    categoryId: number | string;
-    title: string;
-    statusId: number | string;
-    isOwned: number | string;
-  };
+  filters: PaginationReportFilter;
+}
+
+export interface PaginationReportFilter {
+  categoryId: string;
+  title: string;
+  statusId: string;
+  isOwned: string;
 }
 
 type APIResponse = Response<ReportResponse>;

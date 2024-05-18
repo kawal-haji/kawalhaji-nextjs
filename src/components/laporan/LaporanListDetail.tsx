@@ -4,7 +4,6 @@ import { formatHumanDayTime } from "@/lib/datetime";
 import { reportCategories } from "@/types/report/category";
 import { Report } from "@/types/report/report";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import * as React from "react";
 
 export interface LaporanListDetailProps {
@@ -12,7 +11,6 @@ export interface LaporanListDetailProps {
 }
 
 const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
-  const router = useRouter();
   const iconCategory = reportCategories.find(
     (category) => category.id === report.category.id
   )?.iconText;

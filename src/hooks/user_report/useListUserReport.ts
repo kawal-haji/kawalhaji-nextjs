@@ -7,7 +7,7 @@ import {
 import { Report } from "@/types/report/report";
 import React from "react";
 
-const initiateFilter: PaginationReportQueryParams = {
+export const initiatePaginationReportFilter: PaginationReportQueryParams = {
   limit: 10,
   skip: 0,
   sortBy: "",
@@ -19,9 +19,11 @@ const initiateFilter: PaginationReportQueryParams = {
   },
 };
 
-export const useListUserReport = () => {
+export const useListUserReport = (filterArgs?: PaginationReportQueryParams) => {
   const [parameters, setParameters] =
-    React.useState<PaginationReportQueryParams>(initiateFilter);
+    React.useState<PaginationReportQueryParams>(
+      filterArgs ?? initiatePaginationReportFilter
+    );
   const [listUserReport, setListUserReport] = React.useState<Report[]>([]);
   const [isLastUserReport, setIsLastUserReport] =
     React.useState<boolean>(false);
