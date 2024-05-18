@@ -33,6 +33,18 @@ export const useListReportComment = ({ xid }: UseListReportComment) => {
           combinedData.push(item);
         }
       });
+
+      // urutkan berdasarkan tanggal terbaru
+      combinedData.sort((a, b) => {
+        if (a.createdAt > b.createdAt) {
+          return -1;
+        }
+        if (a.createdAt < b.createdAt) {
+          return 1;
+        }
+        return 0;
+      });
+
       setListComment(combinedData);
       setIsLastComment(data.length < parameters.limit);
     }
