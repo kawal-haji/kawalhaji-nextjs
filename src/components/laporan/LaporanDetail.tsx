@@ -1,6 +1,6 @@
 import ImagePreview from "@/components/image/ImagePreview";
+import ListKomentar from "@/components/laporan/components/ListKomentar";
 import TutupLaporan from "@/components/laporan/components/TutupLaporan";
-import KomentarMain from "@/components/laporan/komentar/KomentarMain";
 import { useDetailReport } from "@/hooks/user_report/useDetailReport";
 import { formatHumanDayTime } from "@/lib/datetime";
 import { reportCategories } from "@/types/report/category";
@@ -163,29 +163,28 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
               </div>
             </div>
           )}
-          <KomentarMain xid={report.xid} />
+          <ListKomentar xid={report.xid} />
         </div>
-        <div className="absolute bottom-0 w-full h-[56px]">
+        <div className="absolute bottom-0 mb-[-10px] w-full bg-white  border-t-2 border-t-neutral-200">
+          {report.status.name === "Active" && (
+            <label className="input rounded-none flex items-center gap-2">
+              <input
+                type="text"
+                className="grow border-none text-[14px]"
+                placeholder="Tambahkan komentar..."
+              />
+              <img
+                src="/icons/send_comment.svg"
+                alt="search"
+                className="w-[32px] h-[32px]"
+              />
+            </label>
+          )}
           {report.status.name !== "Active" && (
-            <div className="bg-[#E83475] text-white text-[16px] h-[56px] text-center py-5 font-bold">
-              Tutup Laporan
+            <div className="bg-[#E83475] text-white text-[16px] text-center py-4 mb-[-5px] font-bold">
+              Laporan Ditutup
             </div>
           )}
-          <div className="bg-[#FDEBF1] text-[#E83475] text-[16px] h-[56px] text-center py-5 font-bold">
-            Laporan Ditutup
-          </div>
-          <label className="input flex items-center gap-2 h-[56px]">
-            <input
-              type="text"
-              className="grow border-none text-[14px] h-[56px]"
-              placeholder="Tambahkan komentar..."
-            />
-            <img
-              src="/icons/send_comment.svg"
-              alt="search"
-              className="w-[32px] h-[32px]"
-            />
-          </label>
         </div>
       </div>
     </>
