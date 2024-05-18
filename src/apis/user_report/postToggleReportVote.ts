@@ -9,9 +9,7 @@ export interface ToggleReportVoteArgs {
 }
 
 export const postToggleReportVote = async (args: ToggleReportVoteArgs) => {
-  const result = await apiClient.post<APIResponse>(
-    `/users/reports/${args.xid}/vote`
-  );
+  await apiClient.post<APIResponse>(`/users/reports/${args.xid}/vote`);
 
-  return result.data.data;
+  return args.xid;
 };

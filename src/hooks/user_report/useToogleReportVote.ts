@@ -14,9 +14,12 @@ export const useToogleReportVote = () => {
     ToggleReportVoteArgs
   >({
     mutationFn: postToggleReportVote,
-    onSuccess: () => {
+    onSuccess: (xid) => {
       queryClient.invalidateQueries({
         queryKey: ["/users/reports/detail"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [`/users/reports/${xid}/vote`],
       });
     },
   });
