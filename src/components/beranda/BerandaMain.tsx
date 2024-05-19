@@ -1,12 +1,15 @@
 import BerandaMenu from "@/components/beranda/BerandaMenu";
 import LaporanList from "@/components/laporan/LaporanList";
 import LaporanSayaList from "@/components/laporan_saya/LaporanSayaList";
+import { ReportCategory } from "@/types/report/category";
 import Link from "next/link";
 import * as React from "react";
 
 export interface BerandaMainProps {}
 
 const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
+  const [category, setCategory] = React.useState<ReportCategory | null>(null);
+
   return (
     <div className="h-screen relative">
       <img
@@ -30,13 +33,14 @@ const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
             />
           </a>
         </div>
-        <BerandaMenu />
+        <BerandaMenu category={category} setCategory={setCategory} />
         <div className="overflow-y-auto h-[calc(100vh-260px)]">
           <div className="pt-[12px] pb-[0px] flex flex-col gap-4">
             <LaporanSayaList />
             <LaporanList
               title="Laporan Teratas"
               description="Permasalahan yang populer"
+              category={category}
             />
           </div>
         </div>

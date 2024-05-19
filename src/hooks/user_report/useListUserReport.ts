@@ -21,7 +21,7 @@ export const useListUserReport = (filterArgs: PaginationReportQueryParams) => {
 
   React.useEffect(() => {
     if (!isLoading && !!data) {
-      const combinedData = [...listUserReport];
+      const combinedData = filterArgs.skip === 0 ? [] : [...listUserReport];
       data.forEach((item) => {
         if (!combinedData.find((i) => i.xid === item.xid)) {
           combinedData.push(item);
@@ -31,7 +31,7 @@ export const useListUserReport = (filterArgs: PaginationReportQueryParams) => {
       setIsLastUserReport(data.length < parameters.limit);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, data, parameters.limit]);
+  }, [isLoading, data, parameters]);
 
   const handleLoadMore = () => {
     setParameters((prev) => ({
