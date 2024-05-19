@@ -57,6 +57,7 @@ const LaporanList: React.FC<LaporanListProps> = ({
   React.useEffect(() => {
     if (!!sortBy) {
       const temp = { ...initiatePaginationReportFilter };
+      if (!!filter) temp.filters = filter;
       temp.sortBy = sortBy;
       temp.skip = 0;
       handleChangeParameter(temp);
