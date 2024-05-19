@@ -13,12 +13,14 @@ export interface LaporanListProps {
   title?: string;
   description?: string;
   filter?: PaginationReportFilter | null;
+  sortBy?: SortByUserReport | null;
+  noReportJsx?: JSX.Element;
 }
 
 export const initiatePaginationReportFilter: PaginationReportQueryParams = {
   limit: 10,
   skip: 0,
-  sortBy: SortByUserReport.LAST_UPDATED,
+  sortBy: SortByUserReport.LATEST,
   filters: {
     categoryId: "",
     title: "",
@@ -31,6 +33,8 @@ const LaporanList: React.FC<LaporanListProps> = ({
   title,
   description,
   filter,
+  sortBy,
+  noReportJsx,
 }: LaporanListProps) => {
   const {
     listUserReport,
@@ -49,6 +53,16 @@ const LaporanList: React.FC<LaporanListProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
+
+  React.useEffect(() => {
+    if (!!sortBy) {
+      const temp = { ...initiatePaginationReportFilter };
+      temp.sortBy = sortBy;
+      temp.skip = 0;
+      handleChangeParameter(temp);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy]);
 
   return (
     <>
@@ -77,7 +91,13 @@ const LaporanList: React.FC<LaporanListProps> = ({
               </button>
             </div>
           )}
-          {!isLoading && listUserReport?.length === 0 && <LaporanTidakAda />}
+          {!isLoading && listUserReport?.length === 0 && !noReportJsx && (
+            <LaporanTidakAda />
+          )}
+          {!isLoading &&
+            listUserReport?.length === 0 &&
+            !!noReportJsx &&
+            noReportJsx}
           {isLoading && (
             <div className="flex justify-center p-5">
               <span className="loading loading-spinner"></span>
