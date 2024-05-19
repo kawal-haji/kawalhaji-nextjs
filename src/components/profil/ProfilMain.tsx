@@ -1,14 +1,15 @@
 import ProfilMenu from "@/components/profil/ProfilMenu";
-import { signOut } from "next-auth/react";
+import { useLogout } from "@/hooks/useLogout";
 import * as React from "react";
 
 export interface ProfilMainProps {}
 
 const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
   const refModalLogout = React.useRef<HTMLDialogElement>(null);
+  const { mutate: logout, isPending: isLoadingLogout } = useLogout();
 
   const handleLogout = async () => {
-    await signOut();
+    await logout({});
   };
 
   return (
@@ -52,7 +53,11 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
             className="btn btn-outline w-full btn-sm text-[13px]"
             onClick={() => refModalLogout.current?.showModal()}
           >
-            Logout
+            {isLoadingLogout ? (
+              <span className="loading loading-spinner" />
+            ) : (
+              "Logout"
+            )}
           </button>
         </div>
         <dialog ref={refModalLogout} className="modal">
@@ -70,7 +75,11 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
                 className="btn bg-primary text-white"
                 onClick={handleLogout}
               >
-                Ya, Logout
+                {isLoadingLogout ? (
+                  <span className="loading loading-spinner" />
+                ) : (
+                  "Ya, Logout"
+                )}
               </button>
             </div>
           </div>

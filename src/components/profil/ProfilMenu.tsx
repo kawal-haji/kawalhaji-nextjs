@@ -27,7 +27,7 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             />
           </a>
         </li>
-        <li>
+        {/* <li>
           <a>
             <img
               src="/icons/shield.svg"
@@ -43,7 +43,7 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
               className="w-[16px] h-[16px]"
             />
           </a>
-        </li>
+        </li> */}
         <li>
           <a>
             <img
@@ -59,20 +59,13 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             </div>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <img
-              src="/icons/profile_delete.svg"
-              alt="Shield"
-              className="w-[16px] h-[16px]"
-            />
-            <span className="text-[12px] font-medium mr-auto">Hapus Akun</span>
-          </a>
-        </li>
       </ul>
       <dialog ref={syaratRef} className="modal">
         <div className="modal-box">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() => syaratRef.current?.close()}
+          >
             ✕
           </button>
           <h3 className="font-bold text-lg">
@@ -88,20 +81,6 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             >
               Tutup
             </button>
-          </div>
-        </div>
-      </dialog>
-      <dialog id="delete_account_modal" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Konfirmasi Hapus Akun</h3>
-          <p className="py-4">
-            Anda akan diarahkan untuk mengisi form permintaan hapus akun.
-          </p>
-          <div className="modal-action">
-            <button className="btn bg-gray-100 text-primary">
-              Tidak, Kembali
-            </button>
-            <button className="btn bg-primary text-white">Arahkan Saya</button>
           </div>
         </div>
       </dialog>
