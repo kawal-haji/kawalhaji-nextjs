@@ -131,7 +131,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
             <div className="flex items-start gap-2 justify-between p-[8px] bg-spot-pallate">
               <img src="/icons/location.svg" alt="location" />
               <div className="w-full">
-                <div className="text-[12px] font-medium">Lokasi</div>
+                <div className="text-[12px] font-medium">Lokasi Pelaporan</div>
                 <div id="name-location" className="text-[12px]">
                   {report.location.description}
                 </div>

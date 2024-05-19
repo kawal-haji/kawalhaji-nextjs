@@ -5,6 +5,7 @@ import {
 import LaporanListDetail from "@/components/laporan/LaporanListDetail";
 import LaporanTidakAda from "@/components/laporan/LaporanTidakAda";
 import { useListUserReport } from "@/hooks/user_report/useListUserReport";
+import { ReportStatusEnum } from "@/types/report/report";
 import * as React from "react";
 
 export interface LaporanListProps {
@@ -19,7 +20,7 @@ export const initiatePaginationReportFilter: PaginationReportQueryParams = {
   filters: {
     categoryId: "",
     title: "",
-    statusId: "",
+    statusId: ReportStatusEnum.ACTIVE,
     isOwned: false,
   },
 };

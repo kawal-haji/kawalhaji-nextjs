@@ -25,41 +25,41 @@ const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
     React.useState<string>();
 
   const accessLocation = async () => {
+    setIsLoading(true);
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const location: Location = {
+          description: "",
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+
+        const locationName = await getLocationName(location);
+        location.description = locationName;
+        onLocationChange?.(location);
+        setLocation({ ...location, description: locationName });
+        setIsLoading(false);
+      },
+      (error) => {
+        setErrorGetCurrentLocation(
+          error.PERMISSION_DENIED
+            ? "Akses lokasi ditolak"
+            : "Lokasi tidak ditemukan"
+        );
+        setIsLoading(false);
+      }
+    );
+  };
+
+  React.useEffect(() => {
     if ("geolocation" in navigator) {
-      setIsLoading(true);
-
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const location: Location = {
-            description: "",
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-
-          const locationName = await getLocationName(location);
-          location.description = locationName;
-          onLocationChange?.(location);
-          setLocation({ ...location, description: locationName });
-          setIsLoading(false);
-        },
-        (error) => {
-          setErrorGetCurrentLocation(
-            error.PERMISSION_DENIED
-              ? "Akses lokasi ditolak"
-              : "Lokasi tidak ditemukan"
-          );
-          setIsLoading(false);
-        }
-      );
+      accessLocation();
     } else {
       setErrorGetCurrentLocation(
         "Geolocation is not supported by this browser."
       );
     }
-  };
-
-  React.useEffect(() => {
-    accessLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -72,7 +72,12 @@ const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
         .then(function (permissionStatus) {
           // Check if the permission is denied
           if (permissionStatus.state === "denied") {
-            accessLocation();
+            const isConfirmed = window.confirm(
+              "Aplikasi membutuhkan akses lokasi untuk berfungsi dengan baik. Izinkan akses lokasi?"
+            );
+            if (isConfirmed) {
+              accessLocation();
+            }
           }
         });
     } else {
@@ -93,18 +98,6 @@ const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
       {!isLoading && !!errorGetCurrentLocation && (
         <img src="/icons/location_disabled.svg" alt="location is not found" />
       )}
-      {!isLoading && errorGetCurrentLocation === "Akses lokasi ditolak" && (
-        <button
-          className="btn btn-sm bg-primary text-white rounded-full hidden"
-          onClick={requestAccessLocationAgain}
-        >
-          <img
-            src="/icons/refresh.svg"
-            alt="refresh"
-            className="w-[16px] h-[16px] text-white"
-          />
-        </button>
-      )}
       <div className="w-full">
         <div className="text-[12px] font-medium">Lokasi Anda</div>
         <div className="text-[12px]">
@@ -113,6 +106,14 @@ const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
             : location?.description ?? errorGetCurrentLocation}
         </div>
       </div>
+      {!isLoading && !!errorGetCurrentLocation && (
+        <img
+          src="/icons/refresh.svg"
+          alt="refresh"
+          className="w-[20px] h-[20px] mt-2 mr-1 text-white"
+          onClick={requestAccessLocationAgain}
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImageUpload";
 import Geolocation from "@/components/geolocation/Geolocation";
+import { useToast } from "@/hooks/useToast";
 import { useCreateUserReport } from "@/hooks/user_report/useCreateUserReport";
 import { Attachment, FileTypeEmum, UploadAttachment } from "@/types/attachment";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
+import { ToastType } from "@/types/toast";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -16,6 +18,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   reportForm,
   onReportFormChange,
 }) => {
+  const { showToast } = useToast();
   const router = useRouter();
   const [fileUploaded, setFileUploaded] = React.useState<UploadAttachment[]>(
     []
@@ -24,6 +27,21 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   const { mutate: createUserReport, isPending: isCreating } =
     useCreateUserReport();
   const handleCreateUserReport = async () => {
+    if (!reportForm.category.id) {
+      showToast(ToastType.Error, "Kategori laporan harus diisi");
+      return;
+    }
+
+    if (!reportForm.content.title) {
+      showToast(ToastType.Error, "Judul laporan harus diisi");
+      return;
+    }
+
+    if (!reportForm.location.lat || !reportForm.location.lng) {
+      showToast(ToastType.Error, "Lokasi laporan tidak ditemukan");
+      return;
+    }
+
     const dataCreate = { ...reportForm };
     dataCreate.category = {
       id: reportForm.category.id,
@@ -83,7 +101,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                 <Geolocation onLocationChange={handleLocationChange} />
               </div>
             </div>
-            <label className="form-control w-full max-w-xs">
+            <label className="form-control w-full">
               <div className="label">
                 <span className="label-text text-[12px]">Judul Laporan</span>
               </div>
@@ -104,7 +122,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                 }
               />
             </label>
-            <label className="form-control w-full max-w-xs">
+            <label className="form-control w-full">
               <div className="label">
                 <span className="label-text text-[12px]">
                   Tambahan Keterangan
@@ -126,7 +144,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
                 }
               ></textarea>
             </label>
-            <label className="form-control w-full max-w-xs">
+            <label className="form-control w-full">
               <div className="label">
                 <span className="label-text text-[12px]">Foto/Video</span>
               </div>
