@@ -7,7 +7,6 @@ import CariSortBy from "@/components/cari/CariSortBy";
 import CariTidakAdaHasil from "@/components/cari/CariTidakAdaHasil";
 import CariTitle from "@/components/cari/CariTitle";
 import LaporanList from "@/components/laporan/LaporanList";
-import { ReportStatusEnum } from "@/types/report/report";
 import * as React from "react";
 
 export interface CariMainProps {}
@@ -19,7 +18,7 @@ const CariMain: React.FC<CariMainProps> = ({}) => {
   const [filter, setFilter] = React.useState<PaginationReportFilter>({
     categoryId: "",
     title: "",
-    statusId: ReportStatusEnum.ACTIVE,
+    statusId: "",
     isOwned: false,
   });
 
