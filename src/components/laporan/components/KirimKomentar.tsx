@@ -16,6 +16,12 @@ const KirimKomentar: React.FC<KirimKomentarProps> = ({ xid }) => {
     }
   };
 
+  const handleEnterKeyPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSendComment();
+    }
+  };
+
   return (
     <label className="input rounded-none flex items-center gap-2">
       <input
@@ -25,6 +31,7 @@ const KirimKomentar: React.FC<KirimKomentarProps> = ({ xid }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         disabled={isSending}
+        onKeyUp={handleEnterKeyPressed}
       />
       {isSending ? (
         <span className="loading loading-spinner text-primary"></span>

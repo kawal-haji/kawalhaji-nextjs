@@ -1,7 +1,6 @@
 import AuthWrapper from "@/lib/AuthWrapper";
 import Toast from "@/lib/Toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { setDefaultOptions } from "date-fns";
 import { id as idLocaleDate } from "date-fns/locale";
 import { Provider as JotaiProvider } from "jotai";
@@ -64,10 +63,7 @@ export default function MyApp({
         <SessionProvider session={session}>
           <JotaiProvider>
             <AuthWrapper>
-              <Toast>
-                {getLayout(<Component {...pageProps} />)}
-                <ReactQueryDevtools initialIsOpen={false} />
-              </Toast>
+              <Toast>{getLayout(<Component {...pageProps} />)}</Toast>
             </AuthWrapper>
           </JotaiProvider>
         </SessionProvider>
