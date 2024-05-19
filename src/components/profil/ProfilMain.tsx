@@ -1,6 +1,7 @@
 import ProfilMenu from "@/components/profil/ProfilMenu";
 import { useLogout } from "@/hooks/useLogout";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import * as React from "react";
 
 export interface ProfilMainProps {}
@@ -45,12 +46,12 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
               Anda belum terverifikasi, silakan verifikasi untuk dapat
               dikonfirmasi sebagai jemaah
             </div>
-            <a
-              href="/verifikasi-paspor"
+            <Link
+              href="/user/verifikasi-paspor"
               className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2"
             >
               Verifikasi Sekarang
-            </a>
+            </Link>
           </div>
         </div>
         <ProfilMenu />
