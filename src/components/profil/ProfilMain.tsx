@@ -1,10 +1,12 @@
 import ProfilMenu from "@/components/profil/ProfilMenu";
 import { useLogout } from "@/hooks/useLogout";
+import { useSession } from "next-auth/react";
 import * as React from "react";
 
 export interface ProfilMainProps {}
 
 const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
+  const { data: dataSession } = useSession();
   const refModalLogout = React.useRef<HTMLDialogElement>(null);
   const { mutate: logout, isPending: isLoadingLogout } = useLogout();
 
@@ -26,8 +28,12 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
         <div className="flex items-center gap-4 px-[16px] mb-[25px] text-white">
           <img src="/icons/pray.svg" alt="Pray" className="w-[62px] h-[62px]" />
           <div>
-            <div className="text-[24px] font-bold">Carlos Sainz</div>
-            <div className="text-[12px]">carlos_sainz@gmail.com</div>
+            <div className="text-[24px] font-bold truncate">
+              {dataSession?.user?.fullName ?? "Kawal Haji"}
+            </div>
+            <div className="text-[12px]">
+              {dataSession?.user?.email ?? "Anda login sebagai tamu"}
+            </div>
           </div>
         </div>
         <div className="px-[16px] pt-[16px]">

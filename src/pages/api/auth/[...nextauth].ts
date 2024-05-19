@@ -87,6 +87,7 @@ export const authOptions: NextAuthOptions = {
           return {
             id: token,
             token: token,
+            user: loginResponse.data.data?.user,
           } as LoginResponseNextAuth;
         } catch (error) {
           if (error instanceof AxiosError && error.response?.data.alert) {
