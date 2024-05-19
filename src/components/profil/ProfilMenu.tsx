@@ -5,11 +5,13 @@ import * as React from "react";
 export interface ProfilMenuProps {}
 
 const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
+  const syaratRef = React.useRef<HTMLDialogElement>(null);
+
   return (
     <>
       <ul className="menu w-full p-[16px] [&_li>*]:rounded-none divide-y divide-[#EDF4E9]">
         <li>
-          <a href="#">
+          <a href="#" onClick={() => syaratRef.current?.showModal()}>
             <img
               src="/icons/clipboard.svg"
               alt="Clipbooard"
@@ -68,7 +70,7 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
           </a>
         </li>
       </ul>
-      <dialog id="syarat_ketentuan_modal" className="modal">
+      <dialog ref={syaratRef} className="modal">
         <div className="modal-box">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
@@ -80,7 +82,12 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             <SyaratKetentuanTeks />
           </div>
           <div className="modal-action">
-            <button className="btn bg-gray-100 text-primary">Tutup</button>
+            <button
+              className="btn bg-gray-100 text-primary"
+              onClick={() => syaratRef.current?.close()}
+            >
+              Tutup
+            </button>
           </div>
         </div>
       </dialog>
