@@ -1,39 +1,31 @@
+import { PaginationReportFilter } from "@/apis/user_report/getListUserReport";
 import LaporanList from "@/components/laporan/LaporanList";
+import RiwayatMenu from "@/components/riwayat/RiwayatMenu";
 import RiwayatTidakAda from "@/components/riwayat/RiwayatTidakAda";
 import * as React from "react";
 
 export interface RiwayatMainProps {}
 
 const RiwayatMain: React.FC<RiwayatMainProps> = ({}) => {
+  const [filter, setFilter] = React.useState<PaginationReportFilter>({
+    categoryId: "",
+    title: "",
+    statusId: "",
+    isOwned: false,
+  });
+
   return (
     <div className="h-screen relative">
       <div className="bg-white">
         <div className="px-[16px] py-[18px] text-[17px] font-medium">
           Riwayat
         </div>
-        <div role="tablist" className="tabs tabs-bordered overflow-x-auto">
-          <a role="tab" className="tab h-[44px] tab-active ">
-            <div className="flex items-center gap-2 p-[8px]">
-              <div className="text-primary truncate">Semua Laporan</div>
-            </div>
-          </a>
-          <a role="tab" className="tab h-[44px]">
-            <div className="flex items-center gap-2 p-[8px]">
-              <div className="text-[#999999] truncate">Laporan Aktif</div>
-            </div>
-          </a>
-          <a role="tab" className="tab h-[44px]">
-            <div className="flex items-center gap-2 p-[8px]">
-              <div className="text-[#999999] truncate">Laporan Ditutup</div>
-            </div>
-          </a>
-        </div>
+        <RiwayatMenu filter={filter} setFilter={setFilter} />
       </div>
       <div className="overflow-y-auto h-[calc(100vh-200px)]">
         <div className="pb-[32px]">
           <div className="py-[12px]">
-            <RiwayatTidakAda />
-            <LaporanList />
+            <LaporanList filter={filter} noReportJsx={<RiwayatTidakAda />} />
           </div>
         </div>
       </div>
