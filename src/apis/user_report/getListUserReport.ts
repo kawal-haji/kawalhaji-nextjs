@@ -29,7 +29,7 @@ export interface PaginationReportQueryParams {
 }
 
 export interface PaginationReportFilter {
-  categoryId: string;
+  categoryId: number | "";
   title: string;
   statusId: ReportStatusEnum | "";
   isOwned: boolean;

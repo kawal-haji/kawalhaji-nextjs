@@ -14,7 +14,11 @@ export const useListUserReport = (filterArgs: PaginationReportQueryParams) => {
   const [isLastUserReport, setIsLastUserReport] =
     React.useState<boolean>(false);
 
-  const { data, isPending: isLoading } = useQuery({
+  const {
+    data,
+    isPending: isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["/users/reports", parameters],
     queryFn: () => getListUserReport(parameters),
   });
@@ -40,5 +44,12 @@ export const useListUserReport = (filterArgs: PaginationReportQueryParams) => {
     }));
   };
 
-  return { listUserReport, isLoading, isLastUserReport, handleLoadMore };
+  return {
+    listUserReport,
+    isLoading,
+    isLastUserReport,
+    handleLoadMore,
+    refetch,
+    handleChangeParameter: setParameters,
+  };
 };

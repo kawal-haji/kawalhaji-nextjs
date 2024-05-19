@@ -1,14 +1,20 @@
+import { PaginationReportFilter } from "@/apis/user_report/getListUserReport";
 import { ReportCategory, reportCategories } from "@/types/report/category";
 import * as React from "react";
 
 export interface BerandaMenuProps {
-  category: ReportCategory | null;
-  setCategory: React.Dispatch<React.SetStateAction<ReportCategory | null>>;
+  filter: PaginationReportFilter;
+  setFilter: React.Dispatch<React.SetStateAction<PaginationReportFilter>>;
 }
 
-const BerandaMenu: React.FC<BerandaMenuProps> = ({ category, setCategory }) => {
+const BerandaMenu: React.FC<BerandaMenuProps> = ({ filter, setFilter }) => {
   const handleCategory = (category: ReportCategory | null) => {
-    setCategory(category);
+    setFilter((prev) => {
+      return {
+        ...prev,
+        categoryId: category?.id ?? "",
+      };
+    });
   };
 
   return (
@@ -20,7 +26,7 @@ const BerandaMenu: React.FC<BerandaMenuProps> = ({ category, setCategory }) => {
       <div className="flex items-center justify-between overflow-x-auto mt-2">
         <div
           className={`flex flex-col items-center justify-center gap-1 h-[56px] w-[56px] ${
-            !!category ? "" : "bg-primary text-white rounded-md"
+            !!filter?.categoryId ? "" : "bg-primary text-white rounded-md"
           }`}
           onClick={() => handleCategory(null)}
         >
@@ -29,31 +35,35 @@ const BerandaMenu: React.FC<BerandaMenuProps> = ({ category, setCategory }) => {
             alt="Semua Laporan"
             className="w-[24px] h-[24px]"
           />
-          <div className={`text-[9px] ${!!category ? "" : "font-medium"}`}>
+          <div
+            className={`text-[9px] ${
+              !!filter?.categoryId ? "" : "font-medium"
+            }`}
+          >
             Semua
           </div>
         </div>
-        {reportCategories.map((reportCategorie) => (
+        {reportCategories.map((reportCategory) => (
           <div
-            key={reportCategorie.id}
+            key={reportCategory.id}
             className={`flex flex-col items-center justify-center gap-1 h-[56px] w-[56px] ${
-              category?.id === reportCategorie.id
+              filter?.categoryId === reportCategory.id
                 ? "bg-primary text-white rounded-md"
                 : ""
             }`}
-            onClick={() => handleCategory(reportCategorie)}
+            onClick={() => handleCategory(reportCategory)}
           >
             <img
-              src={`/icons/beranda/${reportCategorie.iconText}`}
-              alt={reportCategorie.name}
+              src={`/icons/beranda/${reportCategory.iconText}`}
+              alt={reportCategory.name}
               className="w-[24px] h-[24px]"
             />
             <div
               className={`text-[9px] ${
-                category?.id === reportCategorie.id ? "font-medium" : ""
+                filter?.categoryId === reportCategory.id ? "font-medium" : ""
               }`}
             >
-              {reportCategorie.name}
+              {reportCategory.name}
             </div>
           </div>
         ))}

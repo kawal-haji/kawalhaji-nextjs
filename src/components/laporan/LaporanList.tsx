@@ -1,18 +1,18 @@
 import {
+  PaginationReportFilter,
   PaginationReportQueryParams,
   SortByUserReport,
 } from "@/apis/user_report/getListUserReport";
 import LaporanListDetail from "@/components/laporan/LaporanListDetail";
 import LaporanTidakAda from "@/components/laporan/LaporanTidakAda";
 import { useListUserReport } from "@/hooks/user_report/useListUserReport";
-import { ReportCategory } from "@/types/report/category";
 import { ReportStatusEnum } from "@/types/report/report";
 import * as React from "react";
 
 export interface LaporanListProps {
   title?: string;
   description?: string;
-  category?: ReportCategory | null;
+  filter?: PaginationReportFilter | null;
 }
 
 export const initiatePaginationReportFilter: PaginationReportQueryParams = {
@@ -30,20 +30,25 @@ export const initiatePaginationReportFilter: PaginationReportQueryParams = {
 const LaporanList: React.FC<LaporanListProps> = ({
   title,
   description,
-  category,
+  filter,
 }: LaporanListProps) => {
-  const [parameters, setParameters] =
-    React.useState<PaginationReportQueryParams>(initiatePaginationReportFilter);
-  const { listUserReport, isLoading, isLastUserReport, handleLoadMore } =
-    useListUserReport(initiatePaginationReportFilter);
+  const {
+    listUserReport,
+    isLoading,
+    isLastUserReport,
+    handleLoadMore,
+    handleChangeParameter,
+  } = useListUserReport(initiatePaginationReportFilter);
 
   React.useEffect(() => {
-    const temp = { ...parameters };
-    temp.filters.categoryId = `${category?.id ?? ""}`;
-    temp.skip = 0;
-    setParameters(temp);
+    if (!!filter) {
+      const temp = { ...initiatePaginationReportFilter };
+      temp.filters = filter;
+      temp.skip = 0;
+      handleChangeParameter(temp);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
+  }, [filter]);
 
   return (
     <>
