@@ -1,3 +1,4 @@
+import Version from "@/components/profil/components/Version";
 import SyaratKetentuanTeks from "@/components/syarat_ketentuan/SyaratKetentuanTeks";
 import * as React from "react";
 
@@ -50,7 +51,9 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             />
             <div className="flex flex-col">
               <span className="text-[12px] font-medium">Versi Aplikasi</span>
-              <span className="text-[10px]">4.1.1</span>
+              <span className="text-[10px]">
+                <Version />
+              </span>
             </div>
           </a>
         </li>
