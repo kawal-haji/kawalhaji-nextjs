@@ -1,4 +1,5 @@
 import ImagePreview from "@/components/image/ImagePreview";
+import StatusLaporanText from "@/components/laporan/components/StatusLaporanText";
 import VoteReport from "@/components/laporan/components/VoteReport";
 import { formatHumanDayTime } from "@/lib/datetime";
 import { reportCategories } from "@/types/report/category";
@@ -80,7 +81,10 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
                 {report.commentCount} Respon
               </button>
             </Link>
-            <VoteReport xid={report.xid} count={Number(report.upvoteCount)} />
+            <div className="mr-auto">
+              <VoteReport xid={report.xid} count={Number(report.upvoteCount)} />
+            </div>
+            <StatusLaporanText status={report.status} />
           </div>
         </div>
       </div>

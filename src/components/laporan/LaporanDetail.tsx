@@ -1,6 +1,7 @@
 import ImagePreview from "@/components/image/ImagePreview";
 import KirimKomentar from "@/components/laporan/components/KirimKomentar";
 import ListKomentar from "@/components/laporan/components/ListKomentar";
+import StatusLaporanText from "@/components/laporan/components/StatusLaporanText";
 import TutupLaporan from "@/components/laporan/components/TutupLaporan";
 import VoteReport from "@/components/laporan/components/VoteReport";
 import { useDetailReport } from "@/hooks/user_report/useDetailReport";
@@ -64,15 +65,7 @@ const LaporanDetail: React.FC<LaporanDetailProps> = ({ xid }) => {
               <div>{report.xid}</div>
             </div>
             <div className="mr-auto">
-              {report.status.name === "Active" ? (
-                <div className="bg-green-200 text-green-500 rounded-full px-2 py-1 text-[10px] font-bold">
-                  Laporan Aktif
-                </div>
-              ) : (
-                <div className="bg-gray-200 text-gray-500 rounded-full px-2 py-1 text-[10px] font-bold">
-                  Laporan Ditutup
-                </div>
-              )}
+              <StatusLaporanText status={report.status} />
             </div>
             {report.status.name === "Active" && (
               <TutupLaporan
