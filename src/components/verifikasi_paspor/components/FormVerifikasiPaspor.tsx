@@ -1,8 +1,32 @@
+import { useInquiryUserJamaah } from "@/hooks/user/useInquiryUserJamaah";
+import { Jamaah } from "@/types/jamaah";
+import Link from "next/link";
 import * as React from "react";
 
-export interface FormVerifikasiPasporProps {}
+export interface FormVerifikasiPasporProps {
+  setJamaah: React.Dispatch<React.SetStateAction<Jamaah | undefined>>;
+}
 
-const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({}) => {
+const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
+  setJamaah,
+}) => {
+  const [passportNumber, setPassportNumber] = React.useState<string>("");
+
+  const { mutate: inquiryUserJamaah, isPending: isLoading } =
+    useInquiryUserJamaah();
+  const handleInquiryUserJamaah = async () => {
+    await inquiryUserJamaah(
+      { passportNumber },
+      {
+        onSuccess: (data) => {
+          if (!!data?.jamaah) {
+            setJamaah(data.jamaah);
+          }
+        },
+      }
+    );
+  };
+
   return (
     <div className="h-screen bg-white relative">
       <div className="absolute top-0 w-full h-screen px-[16px] z-50">
@@ -19,16 +43,22 @@ const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({}) => {
             type="text"
             className="input input-bordered w-full text-[14px]"
             placeholder="Masukkan No. Paspor"
+            value={passportNumber}
+            onChange={(e) => setPassportNumber(e.target.value)}
           />
-          <a
-            href="/verifikasi-paspor/konfirmasi"
+          <button
             className="btn bg-primary text-white w-full"
+            onClick={handleInquiryUserJamaah}
+            disabled={isLoading}
           >
             Cek No. Paspor Saya
-          </a>
-          <button className="btn btn-outline text-primary w-full">
-            Lewati
           </button>
+          <Link
+            href="/menu/profil"
+            className="btn btn-outline text-primary w-full"
+          >
+            Lewati
+          </Link>
         </div>
         <div className="mt-[12px] rounded-md bg-blue-50 p-[10px]">
           <div className="text-[14px] font-medium text-blue-400">

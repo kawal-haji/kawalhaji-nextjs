@@ -1,6 +1,9 @@
+import { Jamaah } from "@/types/jamaah";
 import * as React from "react";
 
-export interface KonfirmasiProps {}
+export interface KonfirmasiProps {
+  jamaah: Jamaah;
+}
 
 const Konfirmasi: React.FC<KonfirmasiProps> = ({}) => {
   return (
