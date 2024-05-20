@@ -51,6 +51,7 @@ const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
             onClick={handleInquiryUserJamaah}
             disabled={isLoading}
           >
+            {isLoading && <span className="loading loading-spinner" />}
             Cek No. Paspor Saya
           </button>
           <Link

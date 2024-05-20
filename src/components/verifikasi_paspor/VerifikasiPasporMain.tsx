@@ -9,7 +9,7 @@ const VerifikasiPasporMain: React.FC<VerifikasiPasporMainProps> = ({}) => {
   const [jamaah, setJamaah] = React.useState<Jamaah>();
 
   if (!!jamaah) {
-    return <Konfirmasi jamaah={jamaah} />;
+    return <Konfirmasi jamaah={jamaah} setJamah={setJamaah} />;
   }
 
   return <FormVerifikasiPaspor setJamaah={setJamaah} />;
