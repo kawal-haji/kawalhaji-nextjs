@@ -42,27 +42,29 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
               )}
             </div>
             <div className="text-[12px]">
-              {dataSession?.user?.email ?? "Anda login sebagai tamu"}
+              {dataSession?.user?.xid ?? "Anda login sebagai tamu"}
             </div>
           </div>
         </div>
-        <div className="px-[16px] pt-[16px]">
-          <div className="rounded-md bg-blue-100 p-[10px]">
-            <div className="text-[14px] font-medium text-blue-500">
-              Verifikasi No. Paspor
+        {dataSession?.user?.xid && (
+          <div className="px-[16px] pt-[16px]">
+            <div className="rounded-md bg-blue-100 p-[10px]">
+              <div className="text-[14px] font-medium text-blue-500">
+                Verifikasi No. Paspor
+              </div>
+              <div className="text-[12px]">
+                Anda belum terverifikasi, silakan verifikasi untuk dapat
+                dikonfirmasi sebagai jemaah
+              </div>
+              <Link
+                href="/user/verifikasi-paspor"
+                className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2"
+              >
+                Verifikasi Sekarang
+              </Link>
             </div>
-            <div className="text-[12px]">
-              Anda belum terverifikasi, silakan verifikasi untuk dapat
-              dikonfirmasi sebagai jemaah
-            </div>
-            <Link
-              href="/user/verifikasi-paspor"
-              className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2"
-            >
-              Verifikasi Sekarang
-            </Link>
           </div>
-        </div>
+        )}
         <ProfilMenu />
         <div className="px-[16px]">
           <button
