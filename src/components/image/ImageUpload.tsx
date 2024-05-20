@@ -1,4 +1,5 @@
 import { useUploadFileURL } from "@/hooks/asset/useUploadFileURL";
+import { CAN_UPLOAD_VIDEO } from "@/lib/constants";
 import { AssetType, UploadAttachment } from "@/types/attachment";
 import Compressor from "compressorjs";
 import * as React from "react";
@@ -10,13 +11,16 @@ export interface ImageUploadProps {
   onErrorUploadFile: (error: string) => void;
 }
 
-const accept = {
+const acceptImageAndVideo = {
   "image/jpeg": [".jpg", ".jpeg"],
   "image/png": [".png"],
   "video/mp4": [".mp4"],
 };
 
-const maxSize = 20_000_000; // 2MB
+const acceptImageOnly = {
+  "image/jpeg": [".jpg", ".jpeg"],
+  "image/png": [".png"],
+};
 
 const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
   (props, _reference) => {
@@ -70,7 +74,7 @@ const ImageUpload = React.forwardRef<React.Reference, ImageUploadProps>(
     };
 
     const { getInputProps, getRootProps, fileRejections } = useDropzone({
-      accept,
+      accept: CAN_UPLOAD_VIDEO ? acceptImageAndVideo : acceptImageOnly,
       multiple: false,
       onDrop: (acceptedFiles) => {
         if (acceptedFiles.length > 0) {
