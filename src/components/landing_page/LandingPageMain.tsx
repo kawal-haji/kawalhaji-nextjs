@@ -29,8 +29,14 @@ export interface LandingPageMainProps {}
 const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
   const router = useRouter();
   const code = router.query.code as string;
+  const isLoadingGoogle = !!code;
+
+  const [isLoadingLoginAsGuest, setIsLoadingLoginAsGuest] =
+    React.useState<boolean>(false);
 
   const handleLoginAsGuest = async () => {
+    setIsLoadingLoginAsGuest(true);
+
     const response = await signIn("credentials", {
       loginAs: "guest",
     });
@@ -40,6 +46,8 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
     } else {
       location.href = "/menu/beranda";
     }
+
+    setIsLoadingLoginAsGuest(false);
   };
 
   React.useEffect(() => {
@@ -76,24 +84,41 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
               className="mx-auto"
               alt="logo"
             />
-            <div className="pt-16 pb-4 text-center font-bold">Masuk Akun</div>
-            <div className="flex flex-col gap-2">
-              <a
-                href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&state=kawalhaji&redirect_uri=${BASE_URL}/auth/callback/google&response_type=code&include_granted_scopes=true&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email`}
-                className="btn bg-white md:w-[350px] mx-auto"
-              >
-                Masuk dengan Google
-              </a>
-              <button
-                className="btn bg-black text-white md:w-[350px] mx-auto"
-                onClick={handleLoginAsGuest}
-              >
-                Masuk sebagai Tamu
-              </button>
-            </div>
-            <div className="text-center pt-8">
-              <a href="/syarat-dan-ketentuan">Syarat dan Ketentuan</a>
-            </div>
+            {isLoadingGoogle ? (
+              <div className="flex flex-col items-center gap-2 pt-16">
+                <span className="loading loading-spinner" />
+                <span className="text-[14px] ">
+                  Sedang memproses login google...
+                </span>
+              </div>
+            ) : (
+              <>
+                <div className="pt-16 pb-4 text-center font-bold">
+                  Masuk Akun
+                </div>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&state=kawalhaji&redirect_uri=${BASE_URL}/auth/callback/google&response_type=code&include_granted_scopes=true&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email`}
+                    className="btn bg-white md:w-[350px] mx-auto"
+                  >
+                    Masuk dengan Google
+                  </a>
+                  <button
+                    className="btn bg-black text-white md:w-[350px] mx-auto"
+                    onClick={handleLoginAsGuest}
+                    disabled={isLoadingLoginAsGuest}
+                  >
+                    {isLoadingLoginAsGuest && (
+                      <span className="loading loading-spinner mr-2" />
+                    )}
+                    Masuk sebagai Tamu
+                  </button>
+                </div>
+                <div className="text-center pt-8">
+                  <a href="/syarat-dan-ketentuan">Syarat dan Ketentuan</a>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
