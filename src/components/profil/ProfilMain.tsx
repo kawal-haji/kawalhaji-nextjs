@@ -29,8 +29,17 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
         <div className="flex items-center gap-4 px-[16px] mb-[25px] text-white">
           <img src="/icons/pray.svg" alt="Pray" className="w-[62px] h-[62px]" />
           <div>
-            <div className="text-[24px] font-bold truncate">
-              {dataSession?.user?.fullName ?? "Kawal Haji"}
+            <div className="flex items-center gap-2">
+              <div className="truncate text-[16px] font-medium text-white">
+                {dataSession?.user?.fullName ?? "Kawal Haji"}
+              </div>
+              {dataSession?.user?.verified && (
+                <img
+                  src="/icons/verified_flag.svg"
+                  alt="verified"
+                  className="w-[16px] h-[16px]"
+                />
+              )}
             </div>
             <div className="text-[12px]">
               {dataSession?.user?.email ?? "Anda login sebagai tamu"}
