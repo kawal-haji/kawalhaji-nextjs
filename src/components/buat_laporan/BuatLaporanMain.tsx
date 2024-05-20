@@ -1,12 +1,15 @@
 import BuatLaporanForm from "@/components/buat_laporan/BuatLaporanForm";
 import BuatLaporanPilihKategori from "@/components/buat_laporan/BuatLaporanPilihKategori";
+import BuatLaporanTamu from "@/components/buat_laporan/BuatLaporanTamu";
 import { ReportForm } from "@/types/report/report";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as React from "react";
 
 export interface BuatLaporanMainProps {}
 
 const BuatLaporanMain: React.FC<BuatLaporanMainProps> = ({}) => {
+  const { data: dataSession } = useSession();
   const router = useRouter();
   const [reportForm, setReportForm] = React.useState<ReportForm>();
 
@@ -33,7 +36,8 @@ const BuatLaporanMain: React.FC<BuatLaporanMainProps> = ({}) => {
         />
         <div className="text-[17px] font-medium">Buat Laporan Baru</div>
       </div>
-      {!reportForm?.category && (
+      {!dataSession?.user?.xid && <BuatLaporanTamu />}
+      {!!dataSession?.user?.xid && !reportForm?.category && (
         <BuatLaporanPilihKategori onReportFormChange={handleReportFormChange} />
       )}
       {!!reportForm?.category && (
