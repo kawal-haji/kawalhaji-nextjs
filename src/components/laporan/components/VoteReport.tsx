@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { useReportVote } from "@/hooks/user_report/useReportVote";
 import { useToogleReportVote } from "@/hooks/user_report/useToogleReportVote";
+import { useSession } from "next-auth/react";
 
 export interface VoteReportProps {
   xid: string;
@@ -9,6 +10,7 @@ export interface VoteReportProps {
 }
 
 const VoteReport: React.FC<VoteReportProps> = ({ xid, count }) => {
+  const { data: dataSession } = useSession();
   const [currentCount, setCurrentCount] = React.useState<number>(count);
   const [isVoted, setIsVoted] = React.useState<boolean>(false);
   const { data: vote, isLoading } = useReportVote({ xid });
@@ -34,6 +36,19 @@ const VoteReport: React.FC<VoteReportProps> = ({ xid, count }) => {
   React.useEffect(() => {
     setIsVoted(!!vote);
   }, [vote]);
+
+  if (!dataSession?.user?.xid) {
+    return (
+      <div className="flex items-center gap-2 text-[10px] text-gray-500">
+        <img
+          src="/icons/arrow_circle_up.svg"
+          alt="Dukungan"
+          className="w-[16px] h-[16px] text-neutral-500"
+        />
+        <div className="mt-1">{currentCount} Dukungan</div>
+      </div>
+    );
+  }
 
   return (
     <button
