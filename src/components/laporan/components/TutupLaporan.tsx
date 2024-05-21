@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { useChangeReportStatus } from "@/hooks/user_report/useChangeReportStatus";
+import { IS_PRODUCTION } from "@/lib/constants";
 import { ReportStatusEnum, StatusReport } from "@/types/report/report";
 
 export interface TutupLaporanProps {
@@ -31,6 +32,10 @@ const TutupLaporan: React.FC<TutupLaporanProps> = ({
       }
     );
   };
+
+  if (IS_PRODUCTION) {
+    return null;
+  }
 
   if (statusReport.name !== "Active") {
     return null;
