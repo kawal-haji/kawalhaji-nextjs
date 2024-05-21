@@ -1,12 +1,17 @@
 import { Response } from "@/types/Response";
 import { Alert } from "@/types/alert";
-import { LoginResponse, LoginResponseNextAuth } from "@/types/auth";
+import {
+  LoginResponse,
+  LoginResponseNextAuth,
+  LoginType,
+  UpdateUserData,
+} from "@/types/auth";
 import axios, { AxiosError } from "axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const loginAsGuest = async () => {
-  return await axios.post<Response<LoginResponse>>(
+  const result = await axios.post<Response<LoginResponse>>(
     `${process.env.NEXT_PUBLIC_API_URL}/users/anon/sessions`,
     {},
     {
@@ -16,11 +21,13 @@ const loginAsGuest = async () => {
       },
     }
   );
+
+  return result.data.data;
 };
 
 const loginAsGoogle = async (code: string) => {
   const getUserGuest = await loginAsGuest();
-  const token = getUserGuest.data.data?.session?.token ?? "";
+  const token = getUserGuest?.session?.token ?? "";
 
   const getToken = await axios.post("https://oauth2.googleapis.com/token", {
     code: code,
@@ -52,7 +59,11 @@ const loginAsGoogle = async (code: string) => {
     }
   );
 
-  return getSession;
+  return getSession.data.data;
+};
+
+const updateUserData = (data: string) => {
+  return JSON.parse(data) as UpdateUserData;
 };
 
 /**
@@ -71,23 +82,54 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         loginAs: {},
         code: {},
+        data: {},
       },
       async authorize(credentials) {
         try {
-          const loginResponse =
-            credentials?.loginAs == "guest"
-              ? await loginAsGuest()
-              : await loginAsGoogle(credentials?.code ?? "");
+          let loginResponse: LoginResponse | undefined;
+
+          switch (credentials?.loginAs as LoginType) {
+            case LoginType.Guest:
+              loginResponse = await loginAsGuest();
+              break;
+
+            case LoginType.Google:
+              loginResponse = await loginAsGoogle(credentials?.code ?? "");
+              break;
+
+            case LoginType.VerifyPasspor:
+              const result = await updateUserData(credentials?.data ?? "");
+              loginResponse = {
+                user: result.user,
+                session: {
+                  token: result.token,
+                  expiredAt: result.expiredAt,
+                },
+              };
+              break;
+
+            default:
+              break;
+          }
+
+          if (!loginResponse) {
+            throw new Error(
+              JSON.stringify({
+                error: { message: "Login failed", status: false, ok: false },
+              })
+            );
+          }
 
           const token =
-            loginResponse.data.data?.session?.token ??
-            loginResponse.data.data?.accessSession?.token ??
+            loginResponse.session?.token ??
+            loginResponse.accessSession?.token ??
             "";
 
           return {
             id: token,
             token: token,
-            user: loginResponse.data.data?.user,
+            expiredAt: loginResponse.session?.expiredAt ?? "",
+            user: loginResponse.user,
           } as LoginResponseNextAuth;
         } catch (error) {
           if (error instanceof AxiosError && error.response?.data.alert) {

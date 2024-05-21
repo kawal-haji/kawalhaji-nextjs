@@ -1,4 +1,5 @@
 import { BASE_URL, GOOGLE_CLIENT_ID } from "@/lib/constants";
+import { LoginType } from "@/types/auth";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -38,7 +39,7 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
     setIsLoadingLoginAsGuest(true);
 
     const response = await signIn("credentials", {
-      loginAs: "guest",
+      loginAs: LoginType.Guest,
     });
 
     if (response?.error) {
@@ -53,7 +54,7 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
   React.useEffect(() => {
     const handleLoginWithGoogle = async () => {
       const response = await signIn("credentials", {
-        loginAs: "google",
+        loginAs: LoginType.Google,
         code,
       });
 

@@ -13,7 +13,7 @@ export const useToast = () => {
     }
 
     const currentTimeout = setTimeout(() => {
-      toast(null);
+      // toast(null);
     }, 3000);
 
     setTimeoutToast(currentTimeout);

@@ -21,7 +21,7 @@ export const useInquiryUserJamaah = () => {
     onError: (data) => {
       showToast(
         ToastType.Error,
-        data.response?.data.debug?.message || "Terjadi kesalahan"
+        data.response?.data.debug?.message ?? "Terjadi kesalahan"
       );
     },
   });

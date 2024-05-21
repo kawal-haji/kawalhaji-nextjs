@@ -1,3 +1,5 @@
+import { Jamaah } from "@/types/jamaah";
+
 export interface Session {
   token: string;
   expiredAt: string;
@@ -14,6 +16,7 @@ export interface LoginResponse {
 export interface LoginResponseNextAuth {
   id: string;
   token: string;
+  expiredAt: string;
 }
 
 export interface LoginGoogleResponse {
@@ -54,6 +57,7 @@ export interface User {
   modifiedBy?: ModifiedBy;
   version?: string;
   role?: string;
+  jamaah?: Jamaah;
 }
 
 export interface Avatar {
@@ -75,4 +79,16 @@ export interface Preferences {
 export interface Status {
   id: number;
   name: string;
+}
+
+export enum LoginType {
+  Guest = "guest",
+  Google = "google",
+  VerifyPasspor = "verify-passport",
+}
+
+export interface UpdateUserData {
+  token: string;
+  expiredAt: string;
+  user: User;
 }
