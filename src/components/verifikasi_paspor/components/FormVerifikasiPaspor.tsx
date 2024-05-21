@@ -1,14 +1,16 @@
+import { InquiryJamaahResponse } from "@/apis/user/getInquiryUserJamaah";
 import { useInquiryUserJamaah } from "@/hooks/user/useInquiryUserJamaah";
-import { Jamaah } from "@/types/jamaah";
 import Link from "next/link";
 import * as React from "react";
 
 export interface FormVerifikasiPasporProps {
-  setJamaah: React.Dispatch<React.SetStateAction<Jamaah | undefined>>;
+  setInquiryJamaahResponse: React.Dispatch<
+    React.SetStateAction<InquiryJamaahResponse | undefined>
+  >;
 }
 
 const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
-  setJamaah,
+  setInquiryJamaahResponse,
 }) => {
   const [passportNumber, setPassportNumber] = React.useState<string>("");
 
@@ -19,8 +21,8 @@ const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
       { passportNumber },
       {
         onSuccess: (data) => {
-          if (!!data?.jamaah) {
-            setJamaah(data.jamaah);
+          if (!!data) {
+            setInquiryJamaahResponse(data);
           }
         },
       }

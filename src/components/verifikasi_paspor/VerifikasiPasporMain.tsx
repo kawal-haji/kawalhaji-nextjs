@@ -1,18 +1,26 @@
+import { InquiryJamaahResponse } from "@/apis/user/getInquiryUserJamaah";
 import FormVerifikasiPaspor from "@/components/verifikasi_paspor/components/FormVerifikasiPaspor";
 import Konfirmasi from "@/components/verifikasi_paspor/components/Konfirmasi";
-import { Jamaah } from "@/types/jamaah";
 import * as React from "react";
 
 export interface VerifikasiPasporMainProps {}
 
 const VerifikasiPasporMain: React.FC<VerifikasiPasporMainProps> = ({}) => {
-  const [jamaah, setJamaah] = React.useState<Jamaah>();
+  const [inquiryJamaahResponse, setInquiryJamaahResponse] =
+    React.useState<InquiryJamaahResponse>();
 
-  if (!!jamaah) {
-    return <Konfirmasi jamaah={jamaah} setJamah={setJamaah} />;
+  if (!!inquiryJamaahResponse) {
+    return (
+      <Konfirmasi
+        inquiryJamaahResponse={inquiryJamaahResponse}
+        setInquiryJamaahResponse={setInquiryJamaahResponse}
+      />
+    );
   }
 
-  return <FormVerifikasiPaspor setJamaah={setJamaah} />;
+  return (
+    <FormVerifikasiPaspor setInquiryJamaahResponse={setInquiryJamaahResponse} />
+  );
 };
 
 export default VerifikasiPasporMain;
