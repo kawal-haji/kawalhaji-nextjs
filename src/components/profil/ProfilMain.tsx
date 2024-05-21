@@ -1,4 +1,5 @@
 import ProfilMenu from "@/components/profil/ProfilMenu";
+import DetailJamaah from "@/components/profil/components/DetailJamaah";
 import { useLogout } from "@/hooks/useLogout";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -26,7 +27,7 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
         <div className="px-[16px] py-[18px] text-[17px] font-medium text-white">
           Profil
         </div>
-        <div className="flex items-center gap-4 px-[16px] mb-[25px] text-white">
+        <div className="flex items-center gap-4 px-[16px] mb-[18px] text-white">
           <img src="/icons/pray.svg" alt="Pray" className="w-[62px] h-[62px]" />
           <div>
             <div className="flex items-center gap-2">
@@ -42,12 +43,12 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
               )}
             </div>
             <div className="text-[12px]">
-              {dataSession?.user?.xid ?? "Anda login sebagai tamu"}
+              {dataSession?.user?.email ?? "Anda login sebagai tamu"}
             </div>
           </div>
         </div>
-        {dataSession?.user?.xid && (
-          <div className="px-[16px] pt-[16px]">
+        {!dataSession?.user?.verified && (
+          <div className="px-[16px] pt-[20px]">
             <div className="rounded-md bg-blue-100 p-[10px]">
               <div className="text-[14px] font-medium text-blue-500">
                 Verifikasi No. Paspor
@@ -64,6 +65,9 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
               </Link>
             </div>
           </div>
+        )}
+        {!!dataSession?.user?.jamaah && (
+          <DetailJamaah jamaah={dataSession?.user?.jamaah} />
         )}
         <ProfilMenu />
         <div className="px-[16px]">
