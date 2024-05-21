@@ -11,7 +11,7 @@ const RiwayatMain: React.FC<RiwayatMainProps> = ({}) => {
     categoryId: "",
     title: "",
     statusId: "",
-    isOwned: false,
+    isOwned: true,
   });
 
   return (
