@@ -47,40 +47,42 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
             </div>
           </div>
         </div>
-        {!dataSession?.user?.verified && (
-          <div className="px-[16px] pt-[20px]">
-            <div className="rounded-md bg-blue-100 p-[10px]">
-              <div className="text-[14px] font-medium text-blue-500">
-                Verifikasi No. Paspor
+        <div className="overflow-y-auto h-[calc(100vh-140px-80px)] pb-[50px]">
+          {!dataSession?.user?.verified && (
+            <div className="px-[16px] pt-[20px]">
+              <div className="rounded-md bg-blue-100 p-[10px]">
+                <div className="text-[14px] font-medium text-blue-500">
+                  Verifikasi No. Paspor
+                </div>
+                <div className="text-[12px]">
+                  Anda belum terverifikasi, silakan verifikasi untuk dapat
+                  dikonfirmasi sebagai jemaah
+                </div>
+                <Link
+                  href="/user/verifikasi-paspor"
+                  className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2"
+                >
+                  Verifikasi Sekarang
+                </Link>
               </div>
-              <div className="text-[12px]">
-                Anda belum terverifikasi, silakan verifikasi untuk dapat
-                dikonfirmasi sebagai jemaah
-              </div>
-              <Link
-                href="/user/verifikasi-paspor"
-                className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2"
-              >
-                Verifikasi Sekarang
-              </Link>
             </div>
+          )}
+          {!!dataSession?.user?.jamaah && (
+            <DetailJamaah jamaah={dataSession?.user?.jamaah} />
+          )}
+          <ProfilMenu />
+          <div className="px-[16px]">
+            <button
+              className="btn btn-outline w-full btn-sm text-[13px]"
+              onClick={() => refModalLogout.current?.showModal()}
+            >
+              {isLoadingLogout ? (
+                <span className="loading loading-spinner" />
+              ) : (
+                "Logout"
+              )}
+            </button>
           </div>
-        )}
-        {!!dataSession?.user?.jamaah && (
-          <DetailJamaah jamaah={dataSession?.user?.jamaah} />
-        )}
-        <ProfilMenu />
-        <div className="px-[16px]">
-          <button
-            className="btn btn-outline w-full btn-sm text-[13px]"
-            onClick={() => refModalLogout.current?.showModal()}
-          >
-            {isLoadingLogout ? (
-              <span className="loading loading-spinner" />
-            ) : (
-              "Logout"
-            )}
-          </button>
         </div>
         <dialog ref={refModalLogout} className="modal">
           <div className="modal-box">
