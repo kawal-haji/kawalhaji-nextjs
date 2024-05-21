@@ -1,15 +1,15 @@
 import { PaginationReportFilter } from "@/apis/user_report/getListUserReport";
 import BerandaMenu from "@/components/beranda/BerandaMenu";
+
 import LaporanList from "@/components/laporan/LaporanList";
 import LaporanSayaList from "@/components/laporan_saya/LaporanSayaList";
+import FullNameUser from "@/components/profil/components/FullNameUser";
 import { ReportStatusEnum } from "@/types/report/report";
-import { useSession } from "next-auth/react";
 import * as React from "react";
 
 export interface BerandaMainProps {}
 
 const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
-  const { data: dataSession } = useSession();
   const [filter, setFilter] = React.useState<PaginationReportFilter>({
     categoryId: "",
     title: "",
@@ -26,18 +26,7 @@ const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
       />
       <div className="absolute top-0 left-0 w-full">
         <div className="flex items-center justify-between gap-4 px-[24px] py-[8px] mt-[24px]">
-          <div className="flex items-center gap-2">
-            <div className="truncate text-[16px] font-medium text-white">
-              Hello, {dataSession?.user?.fullName ?? "Tamu"}
-            </div>
-            {dataSession?.user?.verified && (
-              <img
-                src="/icons/verified_flag.svg"
-                alt="verified"
-                className="w-[16px] h-[16px]"
-              />
-            )}
-          </div>
+          <FullNameUser sayHai={true} />
           <a href="/notifikasi">
             <img
               src="/icons/notification.svg"

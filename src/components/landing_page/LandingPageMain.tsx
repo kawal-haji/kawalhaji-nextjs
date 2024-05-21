@@ -1,35 +1,12 @@
 import LoginAsGoogle from "@/components/landing_page/components/LoginAsGoogle";
 import LoginAsGuest from "@/components/landing_page/components/LoginAsGuest";
-import { LoginType } from "@/types/auth";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useLoginGoogle } from "@/hooks/useLoginGoogle";
 import * as React from "react";
 
 export interface LandingPageMainProps {}
 
 const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
-  const router = useRouter();
-  const code = router.query.code as string;
-  const isLoadingGoogle = !!code;
-
-  React.useEffect(() => {
-    const handleLoginWithGoogle = async () => {
-      const response = await signIn("credentials", {
-        loginAs: LoginType.Google,
-        code,
-      });
-
-      if (response?.error) {
-        console.error(response.error);
-      } else {
-        location.href = "/menu/beranda";
-      }
-    };
-
-    if (!!code) {
-      handleLoginWithGoogle();
-    }
-  }, [code]);
+  const { isLoading: isLoadingGoogle } = useLoginGoogle();
 
   return (
     <>

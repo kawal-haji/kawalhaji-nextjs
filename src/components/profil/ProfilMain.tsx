@@ -1,5 +1,6 @@
 import ProfilMenu from "@/components/profil/ProfilMenu";
 import DetailJamaah from "@/components/profil/components/DetailJamaah";
+import FullNameUser from "@/components/profil/components/FullNameUser";
 import { useLogout } from "@/hooks/useLogout";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -30,25 +31,14 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
         <div className="flex items-center gap-4 px-[16px] mb-[18px] text-white">
           <img src="/icons/pray.svg" alt="Pray" className="w-[62px] h-[62px]" />
           <div>
-            <div className="flex items-center gap-2">
-              <div className="truncate text-[16px] font-medium text-white">
-                {dataSession?.user?.fullName ?? "Kawal Haji"}
-              </div>
-              {dataSession?.user?.verified && (
-                <img
-                  src="/icons/verified_flag.svg"
-                  alt="verified"
-                  className="w-[16px] h-[16px]"
-                />
-              )}
-            </div>
+            <FullNameUser />
             <div className="text-[12px]">
               {dataSession?.user?.email ?? "Anda login sebagai tamu"}
             </div>
           </div>
         </div>
         <div className="overflow-y-auto h-[calc(100vh-140px-80px)] pb-[50px]">
-          {!dataSession?.user?.verified && (
+          {!dataSession?.user?.verified && !dataSession?.user?.xid && (
             <div className="px-[16px] pt-[20px]">
               <div className="rounded-md bg-blue-100 p-[10px]">
                 <div className="text-[14px] font-medium text-blue-500">
