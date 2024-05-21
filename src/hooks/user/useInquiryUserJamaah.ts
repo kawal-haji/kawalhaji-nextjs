@@ -5,6 +5,7 @@ import {
   getInquiryUserJamaah,
 } from "@/apis/user/getInquiryUserJamaah";
 import { useToast } from "@/hooks/useToast";
+import { Response } from "@/types/Response";
 import { ToastType } from "@/types/toast";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -14,14 +15,14 @@ export const useInquiryUserJamaah = () => {
 
   return useMutation<
     InquiryJamaahResponse | undefined,
-    AxiosError<InquiryJamaahResponseError>,
+    AxiosError<Response<InquiryJamaahResponseError>>,
     GetInquiryUserJamaahArgs
   >({
     mutationFn: getInquiryUserJamaah,
     onError: (data) => {
       showToast(
         ToastType.Error,
-        data.response?.data.debug?.message ?? "Terjadi kesalahan"
+        data.response?.data.data?.debug?.message ?? "Terjadi kesalahan"
       );
     },
   });

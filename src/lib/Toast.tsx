@@ -34,10 +34,14 @@ const Toast: React.FC<ToastProps> = ({ children }) => {
   }, [toast]);
 
   return (
-    <div>
+    <div className="relative">
       {children}
       {toast && (
-        <div className="toast w-full p-0">
+        <div
+          className={`absolute bottom-0 transform -translate-x-1/2 transition-all duration-500 w-full p-0 ${
+            toast.message ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <div
             role="alert"
             className="alert alert-success rounded-none w-full border-none text-white"

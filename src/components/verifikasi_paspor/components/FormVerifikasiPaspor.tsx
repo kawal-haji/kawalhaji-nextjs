@@ -1,5 +1,7 @@
 import { InquiryJamaahResponse } from "@/apis/user/getInquiryUserJamaah";
+import { useToast } from "@/hooks/useToast";
 import { useInquiryUserJamaah } from "@/hooks/user/useInquiryUserJamaah";
+import { ToastType } from "@/types/toast";
 import Link from "next/link";
 import * as React from "react";
 
@@ -12,11 +14,17 @@ export interface FormVerifikasiPasporProps {
 const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
   setInquiryJamaahResponse,
 }) => {
+  const { showToast } = useToast();
   const [passportNumber, setPassportNumber] = React.useState<string>("");
 
   const { mutate: inquiryUserJamaah, isPending: isLoading } =
     useInquiryUserJamaah();
   const handleInquiryUserJamaah = async () => {
+    if (!passportNumber) {
+      showToast(ToastType.Error, "Nomor paspor tidak boleh kosong");
+      return;
+    }
+
     await inquiryUserJamaah(
       { passportNumber },
       {
