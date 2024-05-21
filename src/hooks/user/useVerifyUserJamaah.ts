@@ -4,17 +4,14 @@ import {
 } from "@/apis/user/getInquiryUserJamaah";
 import { patchVerifyUserJamaah } from "@/apis/user/patchVerifyUserJamaah";
 import { useToast } from "@/hooks/useToast";
+import { URL_SSO_GOOGLE } from "@/lib/constants";
 import { User } from "@/types/auth";
 import { ToastType } from "@/types/toast";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 
 export const useVerifyUserJamaah = () => {
   const { showToast } = useToast();
-  const { data: dataSession } = useSession();
-  const router = useRouter();
 
   return useMutation<
     User | undefined,
@@ -22,10 +19,12 @@ export const useVerifyUserJamaah = () => {
     InquiryJamaahResponse
   >({
     mutationFn: patchVerifyUserJamaah,
-    onSuccess: async (data) => {
-      if (data) {
-        showToast(ToastType.Success, "Berhasil verifikasi user");
-      }
+    onSuccess: async () => {
+      showToast(ToastType.Success, "Berhasil verifikasi user");
+
+      setTimeout(() => {
+        window.location.href = URL_SSO_GOOGLE;
+      }, 1500);
     },
     onError: (data) => {
       showToast(
