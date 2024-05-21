@@ -7,27 +7,6 @@ import * as React from "react";
 
 export interface LandingPageMainProps {}
 
-// export const getServerSideProps = async (
-//   context: GetServerSidePropsContext
-// ) => {
-//   const session = await getServerSession(context.req, context.res, authOptions);
-
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: "/menu/beranda",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {
-//       session,
-//     },
-//   };
-// };
-
 const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
   const router = useRouter();
   const code = router.query.code as string;
