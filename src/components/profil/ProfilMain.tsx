@@ -38,7 +38,7 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
           </div>
         </div>
         <div className="overflow-y-auto h-[calc(100vh-140px-80px)] pb-[50px]">
-          {!dataSession?.user?.verified && !dataSession?.user?.xid && (
+          {!dataSession?.user?.verified && !!dataSession?.user?.xid && (
             <div className="px-[16px] pt-[20px]">
               <div className="rounded-md bg-blue-100 p-[10px]">
                 <div className="text-[14px] font-medium text-blue-500">

@@ -1,5 +1,6 @@
 import { InquiryJamaahResponse } from "@/apis/user/getInquiryUserJamaah";
 import { useVerifyUserJamaah } from "@/hooks/user/useVerifyUserJamaah";
+import { URL_SSO_GOOGLE } from "@/lib/constants";
 import * as React from "react";
 
 export interface KonfirmasiProps {
@@ -17,7 +18,11 @@ const Konfirmasi: React.FC<KonfirmasiProps> = ({
 
   const { mutate: verify, isPending: isLoadingVerify } = useVerifyUserJamaah();
   const handleVerify = async () => {
-    await verify(inquiryJamaahResponse);
+    await verify(inquiryJamaahResponse, {
+      onSuccess: () => {
+        window.location.href = URL_SSO_GOOGLE;
+      },
+    });
   };
 
   return (
