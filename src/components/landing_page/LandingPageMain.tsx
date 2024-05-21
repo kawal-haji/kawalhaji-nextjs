@@ -1,5 +1,7 @@
 import LoginAsGoogle from "@/components/landing_page/components/LoginAsGoogle";
 import LoginAsGuest from "@/components/landing_page/components/LoginAsGuest";
+import { LoginType } from "@/types/auth";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -31,6 +33,25 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
   const code = router.query.code as string;
   const isLoadingGoogle = !!code;
 
+  React.useEffect(() => {
+    const handleLoginWithGoogle = async () => {
+      const response = await signIn("credentials", {
+        loginAs: LoginType.Google,
+        code,
+      });
+
+      if (response?.error) {
+        console.error(response.error);
+      } else {
+        location.href = "/menu/beranda";
+      }
+    };
+
+    if (!!code) {
+      handleLoginWithGoogle();
+    }
+  }, [code]);
+
   return (
     <>
       <div className="w-full h-screen bg-[#F9F6EA] relative">
@@ -59,7 +80,7 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
                   Masuk Akun
                 </div>
                 <div className="flex flex-col gap-2">
-                  <LoginAsGoogle code={code} />
+                  <LoginAsGoogle />
                   <LoginAsGuest />
                 </div>
                 <div className="text-center pt-8">
