@@ -30,12 +30,10 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
           className="relative rounded-md"
           onClick={() => videoModal.current?.showModal()}
         >
-          <img
-            src="/icons/background_video.svg"
-            alt="like"
-            className="w-full rounded-md object-cover"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center  rounded-md">
+          <video className="w-full rounded-md object-cover" controls>
+            <source src={attachment.file.url} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center  rounded-md">
             <img src="/icons/play.svg" alt="Play" />
           </div>
         </div>
@@ -48,17 +46,17 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
           <button>close</button>
         </div>
         <div className="modal-box p-0">
+          <img
+            src={attachment.file.url}
+            alt="like"
+            className="w-full rounded-md object-cover"
+          />
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             onClick={() => imageModal.current?.close()}
           >
             ✕
           </button>
-          <img
-            src={attachment.file.url}
-            alt="like"
-            className="w-full rounded-md object-cover"
-          />
         </div>
       </dialog>
       <dialog ref={videoModal} className="modal">
@@ -66,12 +64,6 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
           <button>close</button>
         </div>
         <div className="modal-box p-0">
-          <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            onClick={handleCloseVideoModal}
-          >
-            ✕
-          </button>
           <video
             ref={videoRef}
             className="w-full rounded-md object-cover"
@@ -79,6 +71,12 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ attachment }) => {
           >
             <source src={attachment.file.url} type="video/mp4" />
           </video>
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={handleCloseVideoModal}
+          >
+            ✕
+          </button>
         </div>
       </dialog>
     </>

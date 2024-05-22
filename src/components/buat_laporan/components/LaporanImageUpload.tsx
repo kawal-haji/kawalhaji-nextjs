@@ -37,11 +37,12 @@ const LaporanImageUpload: React.FC<LaporanImageUploadProps> = ({
           onErrorUploadFile={setErrorUploadFileMsg}
         />
         {fileUploaded.map((file, index) => (
-          <LaporanImageUploadDetail
-            key={index}
-            file={file}
-            onRemove={() => handleRemoveImage(index)}
-          />
+          <div key={index} className={`${file.isImage ? "" : "col-span-3"}`}>
+            <LaporanImageUploadDetail
+              file={file}
+              onRemove={() => handleRemoveImage(index)}
+            />
+          </div>
         ))}
         {fileUploaded.length === 0 && (
           <img src="/icons/no_image.svg" alt="image" />

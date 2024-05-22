@@ -27,11 +27,9 @@ const LaporanImageUploadDetail: React.FC<LaporanImageUploadDetailProps> = ({
               className="w-full object-cover rounded-md"
             />
           ) : (
-            <video
-              src={URL.createObjectURL(file.file)}
-              className="w-full object-cover rounded-md"
-              controls
-            />
+            <video className="w-full object-cover rounded-md" controls>
+              <source src={URL.createObjectURL(file.file)} />
+            </video>
           )}
         </>
       ) : (
