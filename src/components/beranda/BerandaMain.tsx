@@ -27,13 +27,13 @@ const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
       <div className="absolute top-0 left-0 w-full">
         <div className="flex items-center justify-between gap-4 px-[24px] py-[8px] mt-[24px]">
           <FullNameUser sayHai={true} />
-          <a href="/notifikasi">
+          {/* <a href="/notifikasi">
             <img
               src="/icons/notification.svg"
               alt="Notifikasi"
               className="w-[24px] h-[24px]"
             />
-          </a>
+          </a> */}
         </div>
         <BerandaMenu filter={filter} setFilter={setFilter} />
         <div className="overflow-y-auto h-[calc(100vh-260px)]">
