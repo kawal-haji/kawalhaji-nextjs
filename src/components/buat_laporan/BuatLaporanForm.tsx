@@ -2,6 +2,7 @@ import LaporanImageUpload from "@/components/buat_laporan/components/LaporanImag
 import Geolocation from "@/components/geolocation/Geolocation";
 import { useToast } from "@/hooks/useToast";
 import { useCreateUserReport } from "@/hooks/user_report/useCreateUserReport";
+import { isValidCoordinates } from "@/lib/validateCoordinate";
 import { Attachment, FileTypeEmum, UploadAttachment } from "@/types/attachment";
 import { Location } from "@/types/location";
 import { ReportForm } from "@/types/report/report";
@@ -39,6 +40,11 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
 
     if (!reportForm.location.lat || !reportForm.location.lng) {
       showToast(ToastType.Error, "Lokasi laporan tidak ditemukan");
+      return;
+    }
+
+    if (!isValidCoordinates(reportForm.location.lat, reportForm.location.lng)) {
+      showToast(ToastType.Error, "Lokasi laporan tidak berada di Arab Saudi");
       return;
     }
 
