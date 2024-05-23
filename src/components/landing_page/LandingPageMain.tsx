@@ -40,11 +40,18 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
                   <LoginAsGoogle />
                   <LoginAsGuest />
                 </div>
-                <div className="text-center pt-8">
-                  <Link href="/syarat-dan-ketentuan">Syarat dan Ketentuan</Link>
-                </div>
               </>
             )}
+          </div>
+        </div>
+        <div className="absolute bottom-0 bg-white bg-opacity-70 w-full px-4 py-2">
+          <div className="flex items-center justify-between gap-4 text-[12px]">
+            <Link href="/syarat-dan-ketentuan" className="z-50">
+              Syarat dan Ketentuan
+            </Link>
+            <Link href="/kebijakan-privasi" className="z-50">
+              Kebijakan Privasi
+            </Link>
           </div>
         </div>
       </div>

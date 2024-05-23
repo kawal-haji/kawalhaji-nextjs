@@ -5,7 +5,7 @@ export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     const url = request.nextUrl.clone();
     const pathname = url.pathname;
-    const publicURL = ["/", "/syarat-dan-ketentuan"];
+    const publicURL = ["/", "/syarat-dan-ketentuan", "/kebijakan-privasi"];
 
     if (publicURL.includes(pathname)) {
       return NextResponse.next();
