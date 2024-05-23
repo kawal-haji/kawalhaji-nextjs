@@ -5,6 +5,11 @@ export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     const url = request.nextUrl.clone();
     const pathname = url.pathname;
+    const publicURL = ["/", "/syarat-dan-ketentuan"];
+
+    if (publicURL.includes(pathname)) {
+      return NextResponse.next();
+    }
 
     if (pathname.startsWith("/auth/callback/google")) {
       url.pathname = "/menu/beranda";

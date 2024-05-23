@@ -5,29 +5,31 @@ export interface SyaratKetentuanTeksProps {}
 const SyaratKetentuanTeks: React.FC<SyaratKetentuanTeksProps> = ({}) => {
   return (
     <>
-      <h3 className="font-medium text-[16px]">1. Pengenalan</h3>
+      <h3 className="font-medium text-[16px]">Pendahuluan</h3>
       <p className="text-[14px]">
-        Aplikasi Kawal Haji adalah aplikasi yang membantu pengguna dalam
-        memantau dan mengatur perjalanan haji mereka. Dengan menggunakan
-        aplikasi ini, pengguna menyetujui syarat dan ketentuan berikut.
+        Aplikasi “Kawal Haji” ini disediakan untuk jamaah haji Indonesia sebagai
+        wadah pelaporan kelancaran dan penanganan permasalahan haji.
       </p>
-      <h3 className="font-medium text-[16px] mt-[8px]">
-        2. Penggunaan Aplikasi
-      </h3>
-      <ul className="text-[14px]">
-        <li>
-          Pengguna harus berusia minimal 18 tahun atau mendapatkan izin dari
-          orang tua atau wali jika berusia di bawah 18 tahun.
-        </li>
-        <li>
-          Pengguna bertanggung jawab atas penggunaan aplikasi ini sesuai dengan
-          hukum yang berlaku.
-        </li>
-        <li>
-          Pengguna hanya dapat menggunakan aplikasi ini untuk tujuan pribadi,
-          non-komersial, dan dalam batas-batas yang ditetapkan oleh pengembang.
-        </li>
-      </ul>
+      <h3 className="font-medium text-[16px] mt-[8px]">Definisi Pengguna</h3>
+
+      <p className="text-[14px]">
+        Aplikasi “Kawal Haji” ini bebas digunakan oleh jamaah haji Indonesia,
+        keluarga yang dikuasai oleh jamaah terdaftar, dan petugas haji.
+      </p>
+
+      <h2 className="font-medium text-[16px] mt-[8px]">Ketentuan Penggunaan</h2>
+
+      <p className="text-[14px]">
+        Aplikasi “Kawal Haji” ini semata-mata bertujuan melancarkan keperluan
+        jamaah haji Indonesia, memastikan kelancaran serta penanganan masalah
+        yang dihadapi. Aplikasi ini tidak untuk disalahgunakan di luar
+        kepentingan jamaah haji, tidak untuk hal-hal yang tidak sepatutnya
+        apalagi yang menyalahi ajaran agama Islam terutama kesantunan. Informasi
+        dan data yang disediakan di aplikasi ini tidak untuk disalahgunakan di
+        luar kepentingan jamaah haji Indonesia.
+      </p>
+
+      <p className="text-[14px]">+Location Tracking</p>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import LoginAsGoogle from "@/components/landing_page/components/LoginAsGoogle";
 import LoginAsGuest from "@/components/landing_page/components/LoginAsGuest";
 import { useLoginGoogle } from "@/hooks/useLoginGoogle";
+import Link from "next/link";
 import * as React from "react";
 
 export interface LandingPageMainProps {}
@@ -40,7 +41,7 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
                   <LoginAsGuest />
                 </div>
                 <div className="text-center pt-8">
-                  <a href="/syarat-dan-ketentuan">Syarat dan Ketentuan</a>
+                  <Link href="/syarat-dan-ketentuan">Syarat dan Ketentuan</Link>
                 </div>
               </>
             )}
