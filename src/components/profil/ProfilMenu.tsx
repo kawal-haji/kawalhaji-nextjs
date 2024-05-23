@@ -1,3 +1,4 @@
+import KebijakanPrivasiText from "@/components/kebijakan_privasi/KebijakanPrivasiText";
 import Version from "@/components/profil/components/Version";
 import SyaratKetentuanTeks from "@/components/syarat_ketentuan/SyaratKetentuanTeks";
 import * as React from "react";
@@ -6,6 +7,7 @@ export interface ProfilMenuProps {}
 
 const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
   const syaratRef = React.useRef<HTMLDialogElement>(null);
+  const kebijakanRef = React.useRef<HTMLDialogElement>(null);
 
   return (
     <>
@@ -27,8 +29,8 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             />
           </a>
         </li>
-        {/* <li>
-          <a>
+        <li>
+          <a href="#" onClick={() => kebijakanRef.current?.showModal()}>
             <img
               src="/icons/shield.svg"
               alt="Shield"
@@ -43,7 +45,7 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
               className="w-[16px] h-[16px]"
             />
           </a>
-        </li> */}
+        </li>
         <li>
           <a>
             <img
@@ -78,6 +80,30 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             <button
               className="btn bg-gray-100 text-primary"
               onClick={() => syaratRef.current?.close()}
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </dialog>
+      <dialog ref={kebijakanRef} className="modal">
+        <div className="modal-box">
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() => kebijakanRef.current?.close()}
+          >
+            ✕
+          </button>
+          <h3 className="font-bold text-lg">
+            Kebijakan Privasi Aplikasi Kawal Haji
+          </h3>
+          <div className="py-4">
+            <KebijakanPrivasiText />
+          </div>
+          <div className="modal-action">
+            <button
+              className="btn bg-gray-100 text-primary"
+              onClick={() => kebijakanRef.current?.close()}
             >
               Tutup
             </button>
