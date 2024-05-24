@@ -1,7 +1,13 @@
+import { REPORTS_ONLY_FROM_SAUDI_ARABIA } from "@/lib/constants";
+
 export const isValidCoordinates = (
   latitude: number,
   longitude: number
 ): boolean => {
+  if (!REPORTS_ONLY_FROM_SAUDI_ARABIA) {
+    return true;
+  }
+
   var saudiBounds = {
     minLat: 16.37,
     maxLat: 32.16,
