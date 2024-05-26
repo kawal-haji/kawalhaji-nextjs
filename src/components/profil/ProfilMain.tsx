@@ -22,17 +22,17 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
       <img
         src="/icons/background_header_profile.svg"
         alt="Background"
-        className="absolute top-0 left-0 w-full object-cover h-[150px]"
+        className="absolute top-0 left-0 w-full object-cover h-[150px] md:h-[180px]"
       />
       <div className="absolute top-0 left-0 w-full">
-        <div className="px-[16px] py-[18px] text-[17px] font-medium text-white">
+        <div className="px-[16px] py-[18px] text-[17px] md:text-[20px] font-medium text-white">
           Profil
         </div>
         <div className="flex items-center gap-4 px-[16px] mb-[18px] text-white">
           <img src="/icons/pray.svg" alt="Pray" className="w-[62px] h-[62px]" />
           <div>
             <FullNameUser />
-            <div className="text-[12px]">
+            <div className="text-[12px] md:text-[14px]">
               {dataSession?.user?.email ?? "Anda login sebagai tamu"}
             </div>
           </div>
@@ -40,17 +40,17 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
         <div className="overflow-y-auto h-[calc(100vh-140px-80px)] pb-[50px]">
           {!dataSession?.user?.verified && !!dataSession?.user?.xid && (
             <div className="px-[16px] pt-[20px]">
-              <div className="rounded-md bg-blue-100 p-[10px]">
-                <div className="text-[14px] font-medium text-blue-500">
+              <div className="rounded-md bg-blue-100 p-[10px] md:p-[18px]">
+                <div className="text-[14px] md:text-[16px] font-medium text-blue-500">
                   Verifikasi No. Paspor
                 </div>
-                <div className="text-[12px]">
+                <div className="text-[12px] md:text-[14px]">
                   Anda belum terverifikasi, silakan verifikasi untuk dapat
                   dikonfirmasi sebagai jemaah
                 </div>
                 <Link
                   href="/user/verifikasi-paspor"
-                  className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2"
+                  className="btn text-white bg-blue-500 border-blue-500 btn-sm mt-2 md:mt-3"
                 >
                   Verifikasi Sekarang
                 </Link>
@@ -63,7 +63,7 @@ const ProfilMain: React.FC<ProfilMainProps> = ({}) => {
           <ProfilMenu />
           <div className="px-[16px]">
             <button
-              className="btn btn-outline w-full btn-sm text-[13px]"
+              className="btn btn-outline w-full btn-sm md:btn-md text-[13px] md:text-[14px]"
               onClick={() => refModalLogout.current?.showModal()}
             >
               {isLoadingLogout ? (
