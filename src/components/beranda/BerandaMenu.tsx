@@ -21,10 +21,10 @@ const BerandaMenu: React.FC<BerandaMenuProps> = ({ filter, setFilter }) => {
     <div className="mx-[16px] p-[8px] md:px-[24px] md:py-[16px] bg-white rounded-md mt-[10px]">
       <div className="md:flex items-center gap-8">
         <div className="md:mr-auto">
-          <div className="font-medium text-[12px] md:text-lg">
+          <div className="font-medium text-[12px] md:text-[16px]">
             Telusuri Laporan
           </div>
-          <div className="text-[10px] md:text-base text-gray-500">
+          <div className="text-[10px] md:text-[12px] text-gray-500">
             Telusuri laporan berdasarkan kategori berikut
           </div>
         </div>
@@ -41,7 +41,7 @@ const BerandaMenu: React.FC<BerandaMenuProps> = ({ filter, setFilter }) => {
               className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
             />
             <div
-              className={`text-[9px] md:text-base ${
+              className={`text-[9px] md:text-[12px] ${
                 !!filter?.categoryId ? "" : "font-medium"
               }`}
             >
@@ -64,7 +64,7 @@ const BerandaMenu: React.FC<BerandaMenuProps> = ({ filter, setFilter }) => {
                 className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
               />
               <div
-                className={`text-[9px] md:text-base ${
+                className={`text-[9px] md:text-[12px] ${
                   filter?.categoryId === reportCategory.id ? "font-medium" : ""
                 } ${
                   reportCategory.id === 4
