@@ -32,6 +32,7 @@ const BuatLaporanMain: React.FC<BuatLaporanMainProps> = ({}) => {
           src="/icons/arrow_left.svg"
           alt="back"
           height="24"
+          className="cursor-pointer"
           onClick={handleBack}
         />
         <div className="text-[17px] font-medium">Buat Laporan Baru</div>

@@ -81,19 +81,19 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
   return (
     <>
       <div>
-        <div className="p-[16px] overflow-y-auto h-[calc(100vh-150px)]">
+        <div className="p-[16px] md:px-[32px] overflow-y-auto h-[calc(100vh-150px)]">
           <div className="text-[24px] font-medium">Detail Laporan</div>
           <div className="text-[14px] text-gray-500 mt-[8px]">
             Silakan isi detail laporan Anda
           </div>
           <div className="mt-[24px] space-y-2">
             <div className="bg-spot-pallate rounded-md">
-              <div className="space-y-2 px-[12px] py-[8px]">
-                <div className="flex items-center gap-2 justify-between px-[8px] py-[6px] bg-[#F2EBD0] rounded-xl">
-                  <div className="text-[12px] font-medium">
+              <div className="space-y-2 md:space-y-3 px-[12px] py-[8px] md:px-[18px] md:py-[12px]">
+                <div className="flex items-center gap-2 md:gap-4 justify-between px-[8px] md:px-[18px] py-[6px] bg-[#F2EBD0] rounded-xl">
+                  <div className="text-[12px] md:text-[14px] font-medium">
                     Kategori Laporan
                   </div>
-                  <div className="flex items-center gap-1 bg-white rounded-full px-[8px] py-[4px]">
+                  <div className="flex items-center gap-1 md:gap-2 bg-white rounded-full px-[8px] md:px-[12px] py-[4px]">
                     <img
                       src={`/icons/${reportForm.category.iconText}`}
                       alt="flag"
@@ -109,13 +109,15 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
             </div>
             <label className="form-control w-full">
               <div className="label">
-                <span className="label-text text-[12px]">Judul Laporan</span>
+                <span className="label-text text-[12px] md:text-[14px]">
+                  Judul Laporan
+                </span>
               </div>
               <input
                 type="text"
                 name="judul"
                 placeholder="Masukan judul laporan"
-                className="input input-bordered w-full text-[14px]"
+                className="input input-bordered w-full text-[14px] md:text-[16px]"
                 value={reportForm.content.title}
                 onChange={(e) =>
                   onReportFormChange({
@@ -130,14 +132,14 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
             </label>
             <label className="form-control w-full">
               <div className="label">
-                <span className="label-text text-[12px]">
+                <span className="label-text text-[12px] md:text-[14px]">
                   Tambahan Keterangan
                 </span>
               </div>
               <textarea
                 name="keterangan"
                 placeholder="Masukan tambahan keterangan"
-                className="textarea textarea-bordered w-full text-[14px]"
+                className="textarea textarea-bordered w-full text-[14px] md:text-[16px]"
                 value={reportForm.content.description}
                 onChange={(e) =>
                   onReportFormChange({
@@ -152,7 +154,9 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
             </label>
             <label className="form-control w-full">
               <div className="label">
-                <span className="label-text text-[12px]">Foto/Video</span>
+                <span className="label-text text-[12px] md:text-[14px]">
+                  Foto/Video
+                </span>
               </div>
               <LaporanImageUpload
                 fileUploaded={fileUploaded}
@@ -169,7 +173,7 @@ const BuatLaporanForm: React.FC<BuatLaporanFormProps> = ({
             disabled={isCreating}
           >
             {isCreating && (
-              <span className="loading loading-spinner loading-sm"></span>
+              <span className="loading loading-spinner loading-sm md:loading-md"></span>
             )}
             Kirim Laporan
           </button>
