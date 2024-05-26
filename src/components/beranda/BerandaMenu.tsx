@@ -18,55 +18,65 @@ const BerandaMenu: React.FC<BerandaMenuProps> = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="mx-[16px] p-[8px] bg-white rounded-md mt-[10px]">
-      <div className="font-medium text-[12px]">Telusuri Laporan</div>
-      <div className="text-[10px] text-gray-500">
-        Telusuri laporan berdasarkan kategori berikut
-      </div>
-      <div className="flex items-center justify-between overflow-x-auto mt-2">
-        <div
-          className={`flex flex-col items-center justify-center gap-1 h-[56px] w-[56px] ${
-            !!filter?.categoryId ? "" : "bg-primary text-white rounded-md"
-          }`}
-          onClick={() => handleCategory(null)}
-        >
-          <img
-            src="/icons/beranda/all_reporting_menu.svg"
-            alt="Semua Laporan"
-            className="w-[24px] h-[24px]"
-          />
-          <div
-            className={`text-[9px] ${
-              !!filter?.categoryId ? "" : "font-medium"
-            }`}
-          >
-            Semua
+    <div className="mx-[16px] p-[8px] md:px-[24px] md:py-[16px] bg-white rounded-md mt-[10px]">
+      <div className="md:flex items-center gap-8">
+        <div className="md:mr-auto">
+          <div className="font-medium text-[12px] md:text-lg">
+            Telusuri Laporan
+          </div>
+          <div className="text-[10px] md:text-base text-gray-500">
+            Telusuri laporan berdasarkan kategori berikut
           </div>
         </div>
-        {reportCategories.map((reportCategory) => (
+        <div className="flex items-center justify-between md:justify-around overflow-x-auto mt-2 md:mt-0 md:gap-4">
           <div
-            key={reportCategory.id}
-            className={`flex flex-col items-center justify-center gap-1 h-[56px] w-[56px] ${
-              filter?.categoryId === reportCategory.id
-                ? "bg-primary text-white rounded-md"
-                : ""
+            className={`flex flex-col items-center justify-center gap-1 h-[56px] w-[56px] md:h-auto md:w-auto md:px-[20px] md:py-[8px] cursor-pointer ${
+              !!filter?.categoryId ? "" : "bg-primary text-white rounded-md"
             }`}
-            onClick={() => handleCategory(reportCategory)}
+            onClick={() => handleCategory(null)}
           >
             <img
-              src={`/icons/beranda/${reportCategory.iconText}`}
-              alt={reportCategory.name}
-              className="w-[24px] h-[24px]"
+              src="/icons/beranda/all_reporting_menu.svg"
+              alt="Semua Laporan"
+              className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
             />
             <div
-              className={`text-[9px] ${
-                filter?.categoryId === reportCategory.id ? "font-medium" : ""
+              className={`text-[9px] md:text-base ${
+                !!filter?.categoryId ? "" : "font-medium"
               }`}
             >
-              {reportCategory.name}
+              Semua
             </div>
           </div>
-        ))}
+          {reportCategories.map((reportCategory) => (
+            <div
+              key={reportCategory.id}
+              className={`flex flex-col items-center justify-center gap-1 h-[56px] w-[56px] md:h-auto md:w-auto md:px-[20px] md:py-[8px] cursor-pointer ${
+                filter?.categoryId === reportCategory.id
+                  ? "bg-primary text-white rounded-md"
+                  : ""
+              }`}
+              onClick={() => handleCategory(reportCategory)}
+            >
+              <img
+                src={`/icons/beranda/${reportCategory.iconText}`}
+                alt={reportCategory.name}
+                className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
+              />
+              <div
+                className={`text-[9px] md:text-base ${
+                  filter?.categoryId === reportCategory.id ? "font-medium" : ""
+                } ${
+                  reportCategory.id === 4
+                    ? "w-[60px] md:w-[100px] text-center"
+                    : ""
+                }`}
+              >
+                {reportCategory.name}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
