@@ -14,7 +14,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
 
   return (
     <>
-      <div className="btm-nav btm-nav-lg border-t-2 max-w-xl mx-auto">
+      <div className="btm-nav btm-nav-lg border-t-2 mx-auto">
         <button
           className={isActive("/menu/beranda") ? "active" : ""}
           onClick={() => routeTo("/menu/beranda")}

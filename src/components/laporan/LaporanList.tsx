@@ -87,7 +87,7 @@ const LaporanList: React.FC<LaporanListProps> = ({
             <LaporanListDetail report={report} key={report.xid} />
           ))}
           {!isLoading && !isLastUserReport && (
-            <div className="flex justify-center p-5">
+            <div className="flex justify-center p-5 mb-4">
               <button
                 onClick={handleLoadMore}
                 className="btn bg-primary btn-sm md:btn-md text-white"
