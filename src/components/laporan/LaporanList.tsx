@@ -71,14 +71,18 @@ const LaporanList: React.FC<LaporanListProps> = ({
         {(title || description) && (
           <>
             <div className="mb-2">
-              {title && <div className="font-medium text-[14px]">{title}</div>}
+              {title && (
+                <div className="font-medium text-[14px] md:text-[16px]">
+                  {title}
+                </div>
+              )}
               {description && (
-                <div className="text-[14px] text-gray-500">{description}</div>
+                <div className="text-[12px] text-gray-500">{description}</div>
               )}
             </div>
           </>
         )}
-        <div className="pb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="pb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
           {listUserReport?.map((report) => (
             <LaporanListDetail report={report} key={report.xid} />
           ))}
@@ -86,7 +90,7 @@ const LaporanList: React.FC<LaporanListProps> = ({
             <div className="flex justify-center p-5">
               <button
                 onClick={handleLoadMore}
-                className="btn bg-primary btn-sm text-white"
+                className="btn bg-primary btn-sm md:btn-md text-white"
               >
                 Load More
               </button>

@@ -41,7 +41,7 @@ const LaporanSayaList: React.FC<LaporanSayaListProps> = ({}) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <div className="flex items-center justify-start gap-2">
+          <div className="flex items-center justify-start gap-2 md:gap-4">
             {listUserReport?.map((report) => (
               <LaporanSayaListDetail report={report} key={report.xid} />
             ))}

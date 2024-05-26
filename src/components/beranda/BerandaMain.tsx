@@ -38,7 +38,7 @@ const BerandaMain: React.FC<BerandaMainProps> = ({}) => {
         <BerandaMenu filter={filter} setFilter={setFilter} />
         <div className="overflow-y-auto h-[calc(100vh-260px)]">
           <div className="pt-[12px] pb-[0px] flex flex-col gap-4">
-            <LaporanSayaList />
+            {filter.categoryId === "" && <LaporanSayaList />}
             <LaporanList
               title="Laporan Teratas"
               description="Permasalahan yang populer"
