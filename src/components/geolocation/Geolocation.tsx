@@ -88,7 +88,7 @@ const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
   };
 
   return (
-    <div className="flex items-start gap-2 justify-between pb-[2px]">
+    <div className="flex items-start gap-2 md:gap-4 justify-between pb-[2px]">
       {isLoading && (
         <span className="loading loading-spinner loading-lg text-primary"></span>
       )}
@@ -99,8 +99,10 @@ const Geolocation: React.FC<GeolocationProps> = ({ onLocationChange }) => {
         <img src="/icons/location_disabled.svg" alt="location is not found" />
       )}
       <div className="w-full">
-        <div className="text-[12px] font-medium">Lokasi Anda</div>
-        <div className="text-[12px]">
+        <div className="text-[12px] md:text-[14px] font-medium">
+          Lokasi Anda
+        </div>
+        <div className="text-[12px] md:text-[14px]">
           {isLoading
             ? "Sedang mengecek posisi Anda..."
             : location?.description ?? errorGetCurrentLocation}

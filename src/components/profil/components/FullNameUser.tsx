@@ -15,14 +15,14 @@ const FullNameUser: React.FC<FullNameUserProps> = ({ sayHai }) => {
   if (!!dataSession?.user?.xid) {
     return (
       <div className="flex items-center gap-2">
-        <div className="truncate text-[16px] font-medium text-white">
+        <div className="truncate text-[16px] md:text-xl font-medium text-white">
           {sayHai ? "Hai," : ""} {dataSession?.user?.fullName ?? "Tamu"}
         </div>
         {dataSession?.user?.verified && (
           <img
             src="/icons/verified_flag.svg"
             alt="verified"
-            className="w-[16px] h-[16px]"
+            className="w-[16px] h-[16px] md:w-[20px] md:h-[20px]"
           />
         )}
       </div>
@@ -36,7 +36,7 @@ const FullNameUser: React.FC<FullNameUserProps> = ({ sayHai }) => {
   return (
     <a
       href={URL_SSO_GOOGLE}
-      className="truncate text-[16px] font-medium text-white"
+      className="truncate text-[16px] md:text-xl font-medium text-white"
     >
       Silahkan login disini
     </a>

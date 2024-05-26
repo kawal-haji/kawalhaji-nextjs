@@ -17,15 +17,15 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             <img
               src="/icons/clipboard.svg"
               alt="Clipbooard"
-              className="w-[16px] h-[16px]"
+              className="w-[16px] h-[16px] md:w-[20px] md:h-[20px] mr-3 md:my-2"
             />
-            <span className="text-[12px] font-medium mr-auto">
+            <span className="text-[12px] md:text-[14px] font-medium mr-auto">
               Syarat & Ketentuan
             </span>
             <img
               src="/icons/arrow_right_circle.svg"
               alt="Arrow Right"
-              className="w-[16px] h-[16px]"
+              className="w-[16px] h-[16px] md:w-[20px] md:h-[20px]"
             />
           </a>
         </li>
@@ -34,15 +34,15 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             <img
               src="/icons/shield.svg"
               alt="Shield"
-              className="w-[16px] h-[16px]"
+              className="w-[16px] h-[16px] md:w-[20px] md:h-[20px] mr-3 md:my-2"
             />
-            <span className="text-[12px] font-medium mr-auto">
+            <span className="text-[12px] md:text-[14px] font-medium mr-auto">
               Kebijakan Privasi
             </span>
             <img
               src="/icons/arrow_right_circle.svg"
               alt="Arrow Right"
-              className="w-[16px] h-[16px]"
+              className="w-[16px] h-[16px] md:w-[20px] md:h-[20px]"
             />
           </a>
         </li>
@@ -51,10 +51,12 @@ const ProfilMenu: React.FC<ProfilMenuProps> = ({}) => {
             <img
               src="/icons/mobile.svg"
               alt="Mobile"
-              className="w-[16px] h-[16px]"
+              className="w-[16px] h-[16px] md:w-[20px] md:h-[20px] mr-3 md:my-2"
             />
             <div className="flex flex-col">
-              <span className="text-[12px] font-medium">Versi Aplikasi</span>
+              <span className="text-[12px] md:text-[14px] font-medium">
+                Versi Aplikasi
+              </span>
               <span className="text-[10px]">
                 <Version />
               </span>

@@ -47,7 +47,7 @@ const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
         </div>
       </div>
       <div className="absolute top-0 mt-[calc(35vh)] w-full px-[16px] z-50">
-        <div className="rounded-md bg-white border border-gray-200 shadow-md w-full p-[12px] space-y-2">
+        <div className="rounded-md bg-white border border-gray-200 shadow-md w-full p-[12px] md:p-[24px] space-y-2 md:space-y-4">
           <div className="text-[12px]">No. Paspor</div>
           <input
             type="text"
@@ -71,7 +71,7 @@ const FormVerifikasiPaspor: React.FC<FormVerifikasiPasporProps> = ({
             Lewati
           </Link>
         </div>
-        <div className="mt-[12px] rounded-md bg-blue-50 p-[10px]">
+        <div className="mt-[12px] rounded-md bg-blue-50 p-[10px] md:p-[24px] md:space-y-2">
           <div className="text-[14px] font-medium text-blue-400">
             Bukan jamaah haji?
           </div>

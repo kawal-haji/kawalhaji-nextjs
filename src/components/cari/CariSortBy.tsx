@@ -21,7 +21,7 @@ const CariSortBy: React.FC<CariSortByProps> = ({ sortBy, setSortBy }) => {
       <img
         src="/icons/sort.svg"
         alt="Filter"
-        className="w-[24px] h-[24px]"
+        className="w-[24px] h-[24px] cursor-pointer"
         onClick={() => pencarianModalRef.current?.showModal()}
       />
       <dialog ref={pencarianModalRef} className="modal">

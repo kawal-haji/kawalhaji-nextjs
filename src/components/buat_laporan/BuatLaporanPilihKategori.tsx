@@ -23,7 +23,7 @@ const BuatLaporanPilihKategori: React.FC<BuatLaporanPilihKategoriProps> = ({
 
   return (
     <>
-      <div className="p-[16px]">
+      <div className="p-[16px] md:px-[32px]">
         <div className="text-[24px] font-medium">Pilih Kategori</div>
         <div className="text-[14px] text-gray-500 mt-[8px]">
           Silakan pilih kategori laporan Anda
@@ -32,11 +32,11 @@ const BuatLaporanPilihKategori: React.FC<BuatLaporanPilihKategoriProps> = ({
           {reportCategories.map((category) => (
             <div
               key={category.id}
-              className="rounded-md bg-[#00B29126]"
+              className="rounded-md bg-[#00B29126] cursor-pointer"
               onClick={() => handleCategoryClick(category)}
             >
-              <div className="flex items-center gap-3 justify-between p-[10px]">
-                <div className="flex items-center gap-1 bg-white rounded-full px-[8px] py-[4px]">
+              <div className="flex items-center gap-3 justify-between p-[10px] md:px-[14px]">
+                <div className="flex items-center gap-1 md:gap-2 bg-white rounded-full px-[8px] py-[4px] md:px-[12px]">
                   <img
                     src={`/icons/${category.iconText}`}
                     alt="flag"

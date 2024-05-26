@@ -17,12 +17,12 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
   )?.iconText;
 
   return (
-    <>
+    <div>
       <div className="bg-white rounded-md px-[12px] pt-[12px]">
         <div className="flex items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-1">
-              <div className="text-[10px] font-medium truncate">
+              <div className="text-[10px] md:text-[12px] font-medium truncate">
                 {report.user?.fullName ?? "Anonim"}
               </div>
               {report.user?.verified && (
@@ -33,18 +33,18 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
                 />
               )}
             </div>
-            <div className="text-[10px] text-gray-500">
+            <div className="text-[10px] md:text-[12px] text-gray-500">
               {formatHumanDayTime(parseInt(report.createdAt))}
             </div>
           </div>
-          <div className="rounded-full bg-green-100  px-2 py-1">
-            <div className="flex items-center gap-1">
+          <div className="rounded-full bg-green-100  px-2 md:px-3 py-1">
+            <div className="flex items-center gap-1 md:gap-2">
               <img
                 src={`/icons/${iconCategory}`}
                 alt="more"
-                className="w-[16px] h-[16px]"
+                className="w-[16px] h-[16px] md:w-[20px] md:h-[20px]"
               />
-              <div className="text-[10px] text-green-500">
+              <div className="text-[10px] md:text-[12px] text-green-500">
                 {report.category.name}
               </div>
             </div>
@@ -53,26 +53,26 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
         <Link href={`/laporan/${report.xid}`}>
           <div className="cursor-pointer">
             <div className="mt-[8px]">
-              <div className="text-[14px] font-semibold hover:underline hover:text-blue-600">
+              <div className="text-[14px] md:text-[16px] font-semibold hover:underline hover:text-blue-600">
                 {report.content.title}
               </div>
-              <div className="text-[12px] text-gray-500">
+              <div className="text-[12px] md:text-[14px] text-gray-500">
                 {report.content.description}
               </div>
             </div>
           </div>
         </Link>
         <div className="mt-[8px]">
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-2">
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
             {report.content.attachments.slice(0, 3).map((attachment, index) => (
               <ImagePreview key={index} attachment={attachment} />
             ))}
           </div>
         </div>
         <div className="mt-[8px]">
-          <div className="flex items-center">
+          <div className="flex items-center md:gap-2">
             <Link href={`/laporan/${report.xid}`}>
-              <button className="btn btn-ghost text-[10px]">
+              <button className="btn btn-ghost text-[10px] md:text-[12px]">
                 <img
                   src="/icons/comment.svg"
                   alt="Komentar"
@@ -88,7 +88,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

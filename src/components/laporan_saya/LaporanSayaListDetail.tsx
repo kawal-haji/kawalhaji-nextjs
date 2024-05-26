@@ -18,15 +18,15 @@ const LaporanSayaListDetail: React.FC<LaporanSayaListDetailProps> = ({
 
   return (
     <>
-      <div className="w-[275px]">
-        <div className="bg-white rounded-md px-[12px] pt-[12px] w-[275px]">
+      <div className="w-[275px] md:w-[350px]">
+        <div className="bg-white rounded-md px-[12px] pt-[12px] w-[275px] md:w-[350px]">
           <Link href={`/laporan/${report.xid}`}>
             <div className="flex items-center justify-between gap-4">
               <div>
-                <div className="text-[10px] text-gray-500">
+                <div className="text-[10px] md:text-[12px] text-gray-500">
                   {formatHumanDayTime(parseInt(report.createdAt))}
                 </div>
-                <div className="text-[12px] font-medium mt-[4px]">
+                <div className="text-[12px] md:text-[14px] font-medium mt-[4px] md:mt[8px]">
                   {report.content.title}
                 </div>
               </div>
@@ -39,7 +39,7 @@ const LaporanSayaListDetail: React.FC<LaporanSayaListDetailProps> = ({
           </Link>
           <div className="flex items-center">
             <Link href={`/laporan/${report.xid}`}>
-              <button className="btn btn-ghost text-[10px]">
+              <button className="btn btn-ghost text-[10px] md:text-[12px]">
                 <img
                   src="/icons/comment.svg"
                   alt="Komentar"

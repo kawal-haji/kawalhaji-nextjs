@@ -39,7 +39,7 @@ const VoteReport: React.FC<VoteReportProps> = ({ xid, count }) => {
 
   if (!dataSession?.user?.xid) {
     return (
-      <div className="flex items-center gap-2 text-[10px] text-gray-500">
+      <div className="flex items-center gap-2 text-[10px] md:text-[12px] text-gray-500">
         <img
           src="/icons/arrow_circle_up.svg"
           alt="Dukungan"
@@ -52,7 +52,7 @@ const VoteReport: React.FC<VoteReportProps> = ({ xid, count }) => {
 
   return (
     <button
-      className={`btn btn-sm text-[10px] ${
+      className={`btn btn-sm text-[10px] md:text-[12px] ${
         isVoted
           ? "btn-outline btn-success text-green-600"
           : " bg-white text-gray-500"

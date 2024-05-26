@@ -31,55 +31,61 @@ const Konfirmasi: React.FC<KonfirmasiProps> = ({
           benar sebelum melanjutkan.
         </div>
       </div>
-      <div className="absolute top-0 mt-[calc(30vh)] w-full px-[16px] pb-[100px] z-50">
-        <div className="rounded-md bg-white border border-gray-200 shadow-md w-full p-[12px] space-y-2">
-          <div className="text-[18px] font-bold">{jamaah?.namaPaspor}</div>
-          <div className="grid grid-cols-3 gap-2 text-[12px]">
+      <div className="absolute top-0 mt-[calc(30vh)] w-full px-[16px] md:px-[24px] pb-[100px] z-50">
+        <div className="rounded-md bg-white border border-gray-200 shadow-md w-full p-[12px] space-y-2 md:space-y-4">
+          <div className="text-[18px] md:text-[20px] font-bold">
+            {jamaah?.namaPaspor}
+          </div>
+          <div className="grid grid-cols-3 gap-2 md:gap-4 text-[12px] md:text-[14px]">
             <div>
               <div className="font-medium">No. Paspor</div>
-              <div>{jamaah?.noPaspor || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.noPaspor || "-"}</div>
             </div>
             <div>
               <div className="font-medium">No. Porsi</div>
-              <div>{jamaah?.noPorsi || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.noPorsi || "-"}</div>
             </div>
             <div>
               <div className="font-medium">EMB</div>
-              <div>{jamaah?.emb || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.emb || "-"}</div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-[12px]">
+          <div className="grid grid-cols-2 gap-2 md:gap-4 text-[12px] md:text-[14px]">
             <div>
               <div className="font-medium">Kloter</div>
-              <div>{jamaah?.kloter || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.kloter || "-"}</div>
             </div>
             <div>
               <div className="font-medium">No. Maktab</div>
-              <div>{jamaah?.noMaktab || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.noMaktab || "-"}</div>
             </div>
             <div>
               <div className="font-medium">Wilayah Makkah</div>
-              <div>{jamaah?.wilayahMakkah || "-"}</div>
+              <div className="md:text-[16px]">
+                {jamaah?.wilayahMakkah || "-"}
+              </div>
             </div>
             <div>
               <div className="font-medium">No. Rumah Makkah</div>
-              <div>{jamaah?.noRumahMakkah || "-"}</div>
+              <div className="md:text-[16px]">
+                {jamaah?.noRumahMakkah || "-"}
+              </div>
             </div>
             <div>
               <div className="font-medium">Gedung</div>
-              <div>{jamaah?.gedung || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.gedung || "-"}</div>
             </div>
             <div>
               <div className="font-medium">No. Lantai</div>
-              <div>{jamaah?.nomorLantai || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.nomorLantai || "-"}</div>
             </div>
             <div>
               <div className="font-medium">No. Kamar</div>
-              <div>{jamaah?.nomorKamar || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.nomorKamar || "-"}</div>
             </div>
             <div>
               <div className="font-medium">Nama Hotel</div>
-              <div>{jamaah?.namaHotel || "-"}</div>
+              <div className="md:text-[16px]">{jamaah?.namaHotel || "-"}</div>
             </div>
           </div>
           <div className="pt-2">

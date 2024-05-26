@@ -14,7 +14,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
 
   return (
     <>
-      <div className="btm-nav btm-nav-lg border-t-2 max-w-xl mx-auto">
+      <div className="btm-nav btm-nav-lg border-t-2 mx-auto">
         <button
           className={isActive("/menu/beranda") ? "active" : ""}
           onClick={() => routeTo("/menu/beranda")}
@@ -35,7 +35,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             />
           </svg>
           <span
-            className={`text-xs ${
+            className={`text-xs md:text-[13px] ${
               isActive("/menu/beranda") ? "text-primary" : "text-[#999999]"
             }`}
           >
@@ -63,7 +63,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
           </svg>
 
           <span
-            className={`text-xs ${
+            className={`text-xs md:text-[13px] ${
               isActive("/menu/cari") ? "text-primary" : "text-[#999999]"
             }`}
           >
@@ -78,7 +78,9 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             <img src="/icons/create_laporan.svg" alt="plus" />
           </div>
           ✚
-          <span className="text-xs truncate text-[#999999] ">Buat Laporan</span>
+          <span className="text-xs md:text-[13px] truncate text-[#999999] ">
+            Buat Laporan
+          </span>
         </button>
         <button
           className={isActive("/menu/riwayat") ? "active" : ""}
@@ -104,7 +106,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             />
           </svg>
           <span
-            className={`text-xs ${
+            className={`text-xs md:text-[13px] ${
               isActive("/menu/riwayat") ? "text-primary" : "text-[#999999]"
             }`}
           >
@@ -135,7 +137,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             />
           </svg>
           <span
-            className={`text-xs ${
+            className={`text-xs md:text-[13px] ${
               isActive("/menu/profil") ? "text-primary" : "text-[#999999]"
             }`}
           >
