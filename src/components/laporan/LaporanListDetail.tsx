@@ -63,7 +63,7 @@ const LaporanListDetail: React.FC<LaporanListDetailProps> = ({ report }) => {
           </div>
         </Link>
         <div className="mt-[8px]">
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-2">
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
             {report.content.attachments.slice(0, 3).map((attachment, index) => (
               <ImagePreview key={index} attachment={attachment} />
             ))}
