@@ -1,3 +1,4 @@
+import { CONTACT_MAIL, CONTACT_PHONE_NUMBER } from "@/lib/constants";
 import * as React from "react";
 
 export interface KontakTextProps {}
@@ -11,7 +12,7 @@ const KontakText: React.FC<KontakTextProps> = ({}) => {
       <div>
         Phone :{" "}
         <a href="phone:+6281210841382" className="underline text-blue-500">
-          +6281210841382
+          {CONTACT_PHONE_NUMBER}
         </a>{" "}
       </div>
       <div>
@@ -20,7 +21,7 @@ const KontakText: React.FC<KontakTextProps> = ({}) => {
           href="mailto:petugas@kawalhaji.com"
           className="underline text-blue-500"
         >
-          petugas@kawalhaji.com
+          {CONTACT_MAIL}
         </a>
       </div>
     </>
