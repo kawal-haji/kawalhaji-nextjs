@@ -12,6 +12,7 @@ export const CAN_UPLOAD_VIDEO =
 export const REPORTS_ONLY_FROM_SAUDI_ARABIA =
   process.env.NEXT_PUBLIC_REPORTS_ONLY_FROM_SAUDI_ARABIA === "true";
 
+export const CONTACT_NAME = process.env.NEXT_PUBLIC_CONTACT_NAME;
 export const CONTACT_PHONE_NUMBER =
   process.env.NEXT_PUBLIC_CONTACT_PHONE_NUMBER;
 export const CONTACT_MAIL = process.env.NEXT_PUBLIC_CONTACT_MAIL;

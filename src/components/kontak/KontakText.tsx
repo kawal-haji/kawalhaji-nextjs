@@ -1,4 +1,8 @@
-import { CONTACT_MAIL, CONTACT_PHONE_NUMBER } from "@/lib/constants";
+import {
+  CONTACT_MAIL,
+  CONTACT_NAME,
+  CONTACT_PHONE_NUMBER,
+} from "@/lib/constants";
 import * as React from "react";
 
 export interface KontakTextProps {}
@@ -7,7 +11,7 @@ const KontakText: React.FC<KontakTextProps> = ({}) => {
   return (
     <>
       <div>
-        Person in Charge : <strong>Sidiq Permana</strong>
+        Person in Charge : <strong>{CONTACT_NAME}</strong>
       </div>
       <div>
         Phone :{" "}
