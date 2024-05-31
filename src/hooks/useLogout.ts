@@ -13,7 +13,7 @@ export const useLogout = () => {
     mutationFn: dataSession?.user?.xid
       ? deleteUserSession
       : () => Promise.resolve(true),
-    onSuccess: async () => {
+    onSettled: async () => {
       await signOut();
       showToast(ToastType.Success, "Anda berhasil logout");
     },

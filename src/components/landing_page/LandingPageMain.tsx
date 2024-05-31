@@ -45,7 +45,10 @@ const LandingPageMain: React.FC<LandingPageMainProps> = ({}) => {
           </div>
         </div>
         <div className="absolute bottom-0 bg-white bg-opacity-70 w-full px-4 py-2">
-          <div className="flex items-center justify-between gap-4 text-[12px]">
+          <div className="flex items-center gap-4 text-[12px]">
+            <Link href="/contact" className="z-50 mr-auto">
+              Kontak Kami
+            </Link>
             <Link href="/terms-conditions" className="z-50">
               Syarat dan Ketentuan
             </Link>
