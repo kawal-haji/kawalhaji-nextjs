@@ -16,14 +16,6 @@ export default class Document extends NextDocument {
       <Html lang="id" translate="no" data-theme="light">
         <Head />
         <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                      console.table(${JSON.stringify(nextPublicENV)});
-											window.process = window.process || {};
-											window.process.env = window.process.env || {};
-											Object.assign(window.process.env, ${JSON.stringify(nextPublicENV)});
-                  `,
-          }}
         ></script>
         <body>
           <Main />
