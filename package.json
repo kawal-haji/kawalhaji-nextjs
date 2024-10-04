@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start -p 8080",
     "lint": "next lint",
-    "prod:up": "docker-compose up --build --force-recreate"
+    "prod:up": "docker-compose up --build --force-recreate",
+    "docker:build-arm": "docker build -t kawalhaji/web-app:arm64 --platform linux/arm64 .",
+    "docker:build": "docker build -t kawalhaji/web-app ."
   },
   "dependencies": {
     "@tanstack/react-query": "^5.36.0",
