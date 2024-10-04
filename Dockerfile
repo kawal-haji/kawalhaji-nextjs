@@ -11,7 +11,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json .npmrc pnpm-lock.yaml* ./
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
 
